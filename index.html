@@ -539,12 +539,12 @@ td.w, th.w { text-align:left; }
   #cta a:hover { background:#0B7A45; }
   #cta .sub { margin-top:10px; font-size:11px; letter-spacing:.12em; color:#6B7873; text-transform:uppercase; font-weight:700; }
 
-  .eyebrowTop { position:absolute; top:24px; left:0; right:0; text-align:center;
-    opacity:0; transition:opacity .6s ease; }
+  .eyebrowTop { position:absolute; top:20px; left:50%; transform:translateX(-50%); text-align:center;
+    background:#0A0F0C; padding:10px 24px 12px; border-radius:2px; opacity:0; transition:opacity .6s ease; }
   .eyebrowTop .et-1 { display:block; font-family:'Archivo Black',sans-serif; font-weight:400;
-    font-size:36px; line-height:1; color:#FFFFFF; text-shadow:0 2px 12px rgba(0,0,0,.5); }
-  .eyebrowTop .et-2 { display:block; font-family:'Oswald',sans-serif; font-weight:800; font-size:15px;
-    letter-spacing:.14em; color:#FFFFFF; margin-top:5px; text-shadow:0 1px 6px rgba(0,0,0,.45); }
+    font-size:32px; line-height:1; color:#FFFFFF; white-space:nowrap; }
+  .eyebrowTop .et-2 { display:block; font-family:'Oswald',sans-serif; font-weight:800; font-size:13px;
+    letter-spacing:.14em; color:#0B8F4E; margin-top:5px; white-space:nowrap; }
   .stage.walked .eyebrowTop, .stage.folderOut .eyebrowTop, .stage.bubbleOn .eyebrowTop, .stage.ctaOn .eyebrowTop { opacity:1; }
 
   @media screen and (max-width:480px) {
@@ -617,7 +617,6 @@ td.w, th.w { text-align:left; }
 
   <div id="cta">
     <a href="#p1" id="ctaLink">CLICK HERE TO VIEW &rarr;</a>
-    <div class="sub">Opens the full draft recap</div>
   </div>
 
   <div id="startOverlay">
@@ -687,34 +686,17 @@ function playSnare(ctx, dest, t) {
   osc.connect(oEnv); oEnv.connect(dest);
   osc.start(t); osc.stop(t + 0.12);
 }
-function playStab(ctx, dest, t) {
-  const freqs = [130.81, 164.81, 196.00, 261.63]; // C3 E3 G3 C4
-  const filt = ctx.createBiquadFilter();
-  filt.type = 'lowpass'; filt.frequency.value = 2200; filt.Q.value = 1;
-  const env = ctx.createGain();
-  env.gain.setValueAtTime(0, t);
-  env.gain.linearRampToValueAtTime(0.7, t + 0.012);
-  env.gain.exponentialRampToValueAtTime(0.001, t + 0.5);
-  filt.connect(env); env.connect(dest);
-  freqs.forEach((f) => {
-    const osc = ctx.createOscillator();
-    osc.type = 'sawtooth'; osc.frequency.value = f;
-    osc.connect(filt);
-    osc.start(t); osc.stop(t + 0.52);
-  });
-}
 function startJingle() {
   try {
     jingleCtx = new (window.AudioContext || window.webkitAudioContext)();
     jingleNoiseBuf = makeNoiseBuffer(jingleCtx);
     jingleGain = jingleCtx.createGain();
-    jingleGain.gain.value = 0.32;
+    jingleGain.gain.value = 0.4;
     jingleGain.connect(jingleCtx.destination);
     const stepDur = 0.234; // eighth note, ~128bpm
     function scheduleBar() {
       if (!jingleCtx) return;
       const s = jingleCtx.currentTime + 0.02;
-      playStab(jingleCtx, jingleGain, s);
       playKick(jingleCtx, jingleGain, s);
       playHat(jingleCtx, jingleGain, s, false);
       playHat(jingleCtx, jingleGain, s + stepDur, false);
