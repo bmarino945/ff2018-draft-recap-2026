@@ -448,7 +448,7 @@ td.w, th.w { text-align:left; }
     cursor:pointer; transition:opacity .5s ease; }
   #startOverlay.hidden { opacity:0; pointer-events:none; }
   #startOverlay .eyebrow { color:#0B8F4E; font-size:14px; letter-spacing:.32em; font-weight:700; margin-bottom:18px; }
-  #startOverlay h1 { font-family:'Archivo Black',sans-serif; font-weight:400; font-size:clamp(32px,5vw,58px);
+  #startOverlay h1 { font-family:'Archivo Black',sans-serif; font-weight:400; font-size:clamp(42px,10vw,58px);
     color:#FFFFFF; text-align:center; line-height:1.05; margin-bottom:34px; }
   #startOverlay h1 .y { color:#0B8F4E; }
   .playBtn { width:84px; height:84px; border-radius:50%; background:#0B8F4E; display:flex;
@@ -462,7 +462,7 @@ td.w, th.w { text-align:left; }
   .floor { position:absolute; left:0; right:0; bottom:16%; height:3px; background:rgba(255,255,255,.85); }
   .doorframe { position:absolute; left:8%; top:16%; bottom:16%; width:110px; }
   .doorframe .frame { position:absolute; inset:0; border:6px solid #0A0F0C; border-bottom:none; }
-  .doorleaf { position:absolute; top:0; left:0; width:100%; height:100%; background:#0B7A45;
+  .doorleaf { position:absolute; top:0; left:0; width:100%; height:100%; background:#0A0F0C;
     transform-origin:left center; transition:transform .8s cubic-bezier(.3,.9,.4,1); transform:rotateY(0deg); }
   .stage.opening .doorleaf { transform:rotateY(-108deg); }
   .doorframe { perspective:600px; z-index:3; }
@@ -500,12 +500,11 @@ td.w, th.w { text-align:left; }
     opacity:0; transform:translateY(14px) scale(.85) rotate(-4deg); z-index:8;
     transition:opacity .5s ease, transform .5s cubic-bezier(.3,1.4,.4,1); transform-origin:bottom left; }
   .stage.folderOut #folderWrap { opacity:1; transform:translateY(0) scale(1) rotate(-4deg); }
-  .stage.ctaOn #folderWrap { opacity:.22; transform:translateY(0) scale(.94) rotate(-4deg); }
   .folder-back { position:absolute; inset:0; background:#0A0F0C; border-radius:3px; }
   .folder-inner { position:absolute; left:6px; right:6px; top:6px; bottom:6px; background:#FFFFFF;
     border-radius:2px; padding:9px 10px; opacity:0; transition:opacity .4s ease .35s; overflow:hidden; }
   .stage.folderOpen .folder-inner { opacity:1; }
-  .folder-front { position:absolute; inset:0; background:#0B7A45; border-radius:3px; transform-origin:bottom center;
+  .folder-front { position:absolute; inset:0; background:#0A0F0C; border-radius:3px; transform-origin:bottom center;
     transition:transform .6s cubic-bezier(.4,1.6,.4,1); }
   .stage.folderOpen .folder-front { transform:rotateX(-118deg); }
   .fi-eyebrow { font-size:6px; letter-spacing:.12em; font-weight:700; color:#0B8F4E; text-transform:uppercase; }
@@ -552,6 +551,8 @@ td.w, th.w { text-align:left; }
     #bubble:after, #bubble:before { display:none; }
 
     .building { width:150px; left:calc(8% - 43px); }
+    .buildingSignBand { height:20px; border-bottom-width:2px; }
+    .buildingSignBand span { font-size:7px; }
     .doorframe { width:64px; }
     #guy { width:80px; height:153px; }
     .stage.walked #guy { left:calc(50% - 40px); }
@@ -641,18 +642,18 @@ function runSequence() {
   setTimeout(() => { addClass('walked'); addClass('stepping'); }, 350);
   setTimeout(() => { stage.classList.remove('stepping'); addClass('bobbing'); }, 2600);
   setTimeout(() => addClass('folderOut'), 2750);
-  setTimeout(() => addClass('folderOpen'), 3300);
+  setTimeout(() => addClass('folderOpen'), 3000);
   setTimeout(() => {
     addClass('bubbleOn');
     vo1.currentTime = 0;
     vo1.play().catch(()=>{});
-  }, 3750);
+  }, 3150);
   setTimeout(() => {
     addClass('ctaOn');
     document.body.classList.remove('intro-lock');
     vo2.currentTime = 0;
     vo2.play().catch(()=>{});
-  }, 6500);
+  }, 3700);
 }
 
 let started = false;
@@ -662,10 +663,12 @@ function startShow(e) {
   if (e && e.preventDefault) e.preventDefault();
   overlay.classList.add('hidden');
   // unlock audio playback on mobile: a play() call must happen inside the
-  // user-gesture handler itself, so prime both clips here even though the
-  // audible playback for each happens later in the sequence.
-  vo1.play().then(() => { vo1.pause(); vo1.currentTime = 0; }).catch(()=>{});
-  vo2.play().then(() => { vo2.pause(); vo2.currentTime = 0; }).catch(()=>{});
+  // user-gesture handler itself, so prime both clips here (muted, so the
+  // priming play is silent) even though the audible playback for each
+  // happens later in the sequence.
+  vo1.muted = true; vo2.muted = true;
+  vo1.play().then(() => { vo1.pause(); vo1.currentTime = 0; vo1.muted = false; }).catch(()=>{ vo1.muted = false; });
+  vo2.play().then(() => { vo2.pause(); vo2.currentTime = 0; vo2.muted = false; }).catch(()=>{ vo2.muted = false; });
   runSequence();
 }
 overlay.addEventListener('pointerup', startShow);
