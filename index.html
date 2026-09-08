@@ -23,8 +23,6 @@ b, strong { font-weight:700; }
 
 .hdr { display:flex; justify-content:space-between; align-items:baseline; position:relative;
   border-bottom:2px solid #0A0F0C; padding-bottom:9px; margin-bottom:14px; }
-.hdr::after { content:""; position:absolute; left:0; right:0; bottom:-5px; height:5px;
-  background-image:repeating-linear-gradient(90deg,#0A0F0C 0 2px,transparent 2px 17px); }
 .hdr .sn { color:#0B8F4E; font-size:9.4px; letter-spacing:.28em; font-weight:700; }
 .hdr .st { font-family:'Oswald',sans-serif; font-weight:800; font-size:23px; letter-spacing:-.01em; margin-top:3px; color:#0A0F0C; }
 .hdr .ss { color:#1C2B23; font-size:10px; margin-top:2px; }
@@ -91,12 +89,6 @@ td.w, th.w { text-align:left; }
   padding-top:5px; padding-bottom:5px; }
 .rtotal td:first-child { text-align:left; text-transform:uppercase; font-size:8.4px; letter-spacing:.08em; font-weight:700; color:#1C2B23; }
 .rtot-note { font-size:7.4px; font-weight:600; color:#8A968F; text-transform:none; letter-spacing:0; }
-.rcallout { display:flex; align-items:center; justify-content:space-between; gap:20px;
-  margin-top:14px; padding:14px 18px; background:#0A0F0C; text-decoration:none; cursor:pointer; }
-.rcallout-h { color:#FFFFFF; font-family:'Oswald',sans-serif; font-weight:700; font-size:14px; letter-spacing:-.005em; }
-.rcallout-s { color:#C7D3CC; font-size:10px; margin-top:3px; max-width:5.6in; }
-.rcallout-r { flex-shrink:0; color:#0A0F0C; background:#FFFFFF; font-weight:800; font-size:11px;
-  letter-spacing:.03em; padding:8px 16px; white-space:nowrap; }
 .note { color:#20302A; font-size:10px; line-height:1.5; margin:9px 0 0 0; font-style:italic; font-weight:500; }
 .note ul { margin:4px 0 0 0; padding-left:15px; }
 .note li { margin-bottom:4px; }
@@ -225,8 +217,8 @@ td.w, th.w { text-align:left; }
 .ocard.r .oc-grade { background:#B4392E; }
 .poscomp { display:flex; height:6px; border-radius:2px; overflow:hidden; margin:9px 0 10px 0; }
 .poscomp i { display:block; height:100%; }
-.p-rb { background:#0B8F4E; } .p-wr { background:#1B5E96; } .p-qb { background:#B5860F; }
-.p-te { background:#6B4E8A; } .p-dst { background:#263831; } .p-k { background:#B7C2BC; }
+.p-rb { background:#0A0F0C; } .p-wr { background:#263831; } .p-qb { background:#33443C; }
+.p-te { background:#6B7873; } .p-dst { background:#8A968F; } .p-k { background:#B7C2BC; }
 .oc-factors { display:grid; grid-template-columns:1fr; gap:4px; margin-bottom:10px; }
 .oc-f { display:grid; grid-template-columns:50px 1fr 20px; align-items:center; gap:6px; }
 .oc-f span { font-size:7.2px; font-weight:700; letter-spacing:.04em; color:#33443C; text-transform:uppercase; }
@@ -319,6 +311,22 @@ td.w, th.w { text-align:left; }
 .award .awho { font-family:'Oswald',sans-serif; font-weight:800; font-size:14.5px; margin:1px 0 4px 0; color:#0A0F0C; }
 .award p { margin:0; font-size:10px; line-height:1.44; color:#151E19; }
 
+/* week 1 matchup predictions */
+.mu-grid { display:flex; flex-direction:column; gap:12px; }
+.mu-card { border:1px solid #D8E2DC; background:#FFFFFF; padding:12px 14px; }
+.mu-teams { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:10px; }
+.mu-team { display:flex; flex-direction:column; }
+.mu-team.b { align-items:flex-end; text-align:right; }
+.mu-team b { font-family:'Oswald',sans-serif; font-weight:800; font-size:13.5px; color:#0A0F0C; }
+.mu-team i { font-style:normal; font-weight:500; color:#6B7873; font-size:9px; margin-top:1px; }
+.mu-team .mu-pct { font-family:'Oswald',sans-serif; font-weight:800; font-size:15px; margin-top:3px; color:#0B7A45; }
+.mu-team.fade .mu-pct { color:#8A968F; }
+.mu-vs { color:#8A968F; font-size:9px; font-weight:700; letter-spacing:.1em; }
+.mu-bar { display:flex; height:6px; border-radius:3px; overflow:hidden; margin-top:10px; background:#E6EDE9; }
+.mu-bar i { display:block; height:100%; background:#0B8F4E; }
+.mu-bar i.b { background:#B7C2BC; }
+.mu-pick { margin:9px 0 0 0; font-size:9.8px; line-height:1.44; color:#151E19; }
+
 /* cover */
 .cover { padding:0.68in 0.66in 0.45in 0.66in; display:flex; flex-direction:column;
   background:repeating-linear-gradient(115deg, rgba(11,143,78,0.05) 0px, rgba(11,143,78,0.05) 42px, transparent 42px, transparent 84px),
@@ -367,8 +375,11 @@ td.w, th.w { text-align:left; }
 @media screen and (max-width:820px) {
   .page { width:100%; padding:22px 16px 26px 16px; overflow:visible; border-bottom:none; margin-bottom:0; }
   .two, .cards, .ag, .figs, .lens-row, .pwr-row, .vbar-row, .awards { min-width:0; }
-  .tw { min-width:0; max-width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:2px; }
+  .tw { min-width:0; max-width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:2px;
+    position:relative; }
   .tw table { min-width:640px; }
+  .tw::after { content:""; position:absolute; top:0; right:0; bottom:6px; width:22px;
+    background:linear-gradient(to right, transparent, rgba(255,255,255,.92)); pointer-events:none; }
   .hdr { flex-direction:column; align-items:flex-start; gap:4px; }
   .hdr .rt { text-align:left; }
   .cover h1 { font-size:40px; }
@@ -385,6 +396,34 @@ td.w, th.w { text-align:left; }
   .pnum { display:none; }
   .toc-row:hover { background:#F0F6F2; }
   .toc-row:hover .toc-t { color:#0B8F4E; }
+  .mu-teams { grid-template-columns:1fr auto 1fr; gap:6px; }
+  .mu-team b { font-size:11.5px; }
+  .mu-team i { font-size:8px; }
+  .mu-team .mu-pct { font-size:13px; }
+  .mu-card { padding:10px 11px; }
+}
+
+/* extra squeeze for wide .tw data tables (Final Grades) on phone-width screens - shrinks the
+   sticky Rank/Team columns and all cell/sub-text sizes so more columns show before the user has
+   to scroll; the ::after fade above stays as the scroll affordance at this width too.
+   Full Draft Board (.rgrid/.rtable, p14/p14a/p14b) doesn't use .tw and isn't fixed-width, so it
+   already reflows to one column with wrapping text at these breakpoints - no scroll fix needed there. */
+@media screen and (max-width:480px) {
+  .tw table { min-width:560px; font-size:10px; }
+  .tw th { padding:0 3px 6px 3px; font-size:7.4px; }
+  .tw td { padding:6px 3px; }
+  .tw td.w { font-size:10px; }
+  .tw .big { font-size:11px; }
+  .tw .sup { font-size:7px; margin-top:2px; }
+  .tw .rk { font-size:8px; margin-top:3px; }
+  .tw .cst-sub { font-size:7.6px; }
+  .tw .cst-tag { font-size:7.6px; }
+  .tw th:first-child, .tw td:first-child { width:26px; min-width:26px; max-width:26px; }
+  .tw th:nth-child(2), .tw td:nth-child(2) { left:26px; }
+  .tw .grade .gl, .tw .grade .gm { font-size:14px; }
+  .tw .grade-final .gl, .tw .grade-final .gm { font-size:20px; }
+  .tw .grade-final .grade-chip { width:36px; }
+  .tw .oc-fbar { width:26px !important; }
 }
 
 
@@ -393,8 +432,9 @@ td.w, th.w { text-align:left; }
   .stage, .stage * { box-sizing:border-box; margin:0; padding:0; }
   body.intro-lock { overflow:hidden; height:100dvh; }
   .stage { position:relative; width:100vw; height:100vh; height:100dvh; min-height:480px;
-    background:repeating-linear-gradient(115deg, rgba(11,143,78,0.06) 0px, rgba(11,143,78,0.06) 46px, transparent 46px, transparent 92px),
-      linear-gradient(160deg, #EAF5EE 0%, #FFFFFF 55%);
+    background:repeating-linear-gradient(90deg, rgba(255,255,255,.9) 0 4px, transparent 4px 92px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.06) 0 46px, rgba(0,0,0,.05) 46px 92px),
+      linear-gradient(160deg, #1F6E39 0%, #2C8347 55%, #1B5C2E 100%);
     overflow:hidden; display:flex; align-items:center; justify-content:center;
     font-family:'Inter',"Segoe UI",Helvetica,Arial,sans-serif; touch-action:manipulation;
     -webkit-tap-highlight-color:transparent; -webkit-touch-callout:none;
@@ -419,11 +459,11 @@ td.w, th.w { text-align:left; }
   #startOverlay .tap { margin-top:20px; font-size:12px; letter-spacing:.14em; color:#8A968F; text-transform:uppercase; font-weight:700; }
 
   /* ---- scene stage ---- */
-  .floor { position:absolute; left:0; right:0; bottom:16%; height:2px; background:#D6E3DA; }
+  .floor { position:absolute; left:0; right:0; bottom:16%; height:3px; background:rgba(255,255,255,.85); }
   .doorframe { position:absolute; left:8%; top:16%; bottom:16%; width:110px; }
   .doorframe .frame { position:absolute; inset:0; border:6px solid #0A0F0C; border-bottom:none; }
   .doorleaf { position:absolute; top:0; left:0; width:100%; height:100%; background:#0B7A45;
-    transform-origin:left center; transition:transform 1.1s cubic-bezier(.3,.9,.4,1); transform:rotateY(0deg); }
+    transform-origin:left center; transition:transform .8s cubic-bezier(.3,.9,.4,1); transform:rotateY(0deg); }
   .stage.opening .doorleaf { transform:rotateY(-108deg); }
   .doorframe { perspective:600px; z-index:3; }
   .building { position:absolute; left:calc(8% - 75px); top:8%; bottom:16%; width:260px;
@@ -441,7 +481,7 @@ td.w, th.w { text-align:left; }
 
   /* ---- character ---- */
   #guy { position:absolute; bottom:16%; left:14%; width:120px; height:230px; z-index:4;
-    transform:translateX(0); transition:left 3.6s cubic-bezier(.45,.05,.35,1); }
+    transform:translateX(0); transition:left 2.2s cubic-bezier(.45,.05,.35,1); }
   .stage.walked #guy { left:calc(50% - 60px); }
   .guy-svg { width:100%; height:100%; display:block; }
   .leg { transform-origin:60px 150px; }
@@ -477,7 +517,7 @@ td.w, th.w { text-align:left; }
     opacity:.85; text-transform:uppercase; }
 
   /* ---- speech bubble ---- */
-  #bubble { position:absolute; bottom:52%; left:calc(50% - 210px); width:230px;
+  #bubble { position:absolute; bottom:52%; left:calc(50% - 210px); width:230px; z-index:9;
     background:#FFFFFF; border:2px solid #0A0F0C; border-radius:6px; padding:12px 14px;
     opacity:0; transform:translateY(10px) scale(.92); transform-origin:bottom right;
     transition:opacity .4s ease, transform .4s ease; }
@@ -501,8 +541,26 @@ td.w, th.w { text-align:left; }
   #cta .sub { margin-top:10px; font-size:11px; letter-spacing:.12em; color:#6B7873; text-transform:uppercase; font-weight:700; }
 
   .eyebrowTop { position:absolute; top:26px; left:0; right:0; text-align:center; font-size:13px;
-    letter-spacing:.28em; color:#0B8F4E; font-weight:700; opacity:0; transition:opacity .6s ease; }
+    letter-spacing:.28em; color:#FFFFFF; font-weight:700; opacity:0; transition:opacity .6s ease;
+    text-shadow:0 1px 4px rgba(0,0,0,.35); }
   .stage.walked .eyebrowTop, .stage.folderOut .eyebrowTop, .stage.bubbleOn .eyebrowTop, .stage.ctaOn .eyebrowTop { opacity:1; }
+
+  @media screen and (max-width:480px) {
+    #bubble { left:50%; bottom:57%; width:min(220px,78vw);
+      transform:translateX(-50%) translateY(10px) scale(.92); transform-origin:bottom center; }
+    .stage.bubbleOn #bubble { transform:translateX(-50%) translateY(0) scale(1); }
+    #bubble:after, #bubble:before { display:none; }
+
+    .building { width:150px; left:calc(8% - 43px); }
+    .doorframe { width:64px; }
+    #guy { width:80px; height:153px; }
+    .stage.walked #guy { left:calc(50% - 40px); }
+    #folderWrap { width:100px; height:75px; left:calc(50% + 70px); }
+    .fi-eyebrow { font-size:5px; }
+    .fi-cover-title { font-size:10px; }
+    .fi-stamp { font-size:7px; padding:2px 0; }
+    .folder-inner { padding:6px 7px; }
+  }
 </style></head><body class="intro-lock">
 
 <div class="stage" id="stage">
@@ -580,21 +638,21 @@ function addClass(c) { stage.classList.add(c); }
 
 function runSequence() {
   setTimeout(() => addClass('opening'), 100);
-  setTimeout(() => { addClass('walked'); addClass('stepping'); }, 500);
-  setTimeout(() => { stage.classList.remove('stepping'); addClass('bobbing'); }, 4100);
-  setTimeout(() => addClass('folderOut'), 4250);
-  setTimeout(() => addClass('folderOpen'), 4800);
+  setTimeout(() => { addClass('walked'); addClass('stepping'); }, 350);
+  setTimeout(() => { stage.classList.remove('stepping'); addClass('bobbing'); }, 2600);
+  setTimeout(() => addClass('folderOut'), 2750);
+  setTimeout(() => addClass('folderOpen'), 3300);
   setTimeout(() => {
     addClass('bubbleOn');
     vo1.currentTime = 0;
     vo1.play().catch(()=>{});
-  }, 5250);
+  }, 3750);
   setTimeout(() => {
     addClass('ctaOn');
     document.body.classList.remove('intro-lock');
     vo2.currentTime = 0;
     vo2.play().catch(()=>{});
-  }, 9700);
+  }, 6500);
 }
 
 let started = false;
@@ -644,6 +702,7 @@ overlay.addEventListener('touchend', startShow);
     <a class="toc-row" href="#p11"><span class="toc-n">08</span><span class="toc-t">Steals and Reaches<em>The best values and the costliest misses</em></span><span class="toc-p">18</span></a>
     <a class="toc-row" href="#p12"><span class="toc-n">09</span><span class="toc-t">The Rookie Class<em>All ten 2026 rookies drafted</em></span><span class="toc-p">19</span></a>
     <a class="toc-row" href="#p13"><span class="toc-n">10</span><span class="toc-t">Superlatives<em>The awards nobody asked for</em></span><span class="toc-p">20</span></a>
+    <a class="toc-row" href="#pwk1"><span class="toc-n">11</span><span class="toc-t">Week 1 Preview<em>Matchups and model predictions</em></span><span class="toc-p">21</span></a>
   </div>
   <div class="cv-foot">DRAFT NIGHT &middot; SUNDAY 6 SEPTEMBER 2026 &middot; 8:00 PM ET &middot; 10 TEAMS
     &middot; SNAKE &middot; FULL PPR &middot; 1 QB / 2 RB / 2 WR / 1 TE / 1 FLEX / 1 DST / 1 K / 7 BENCH</div>
@@ -655,7 +714,7 @@ overlay.addEventListener('touchend', startShow);
   <div class="two" style="margin-top:20px; gap:36px;">
     <div>
       <div class="roll-h">TEAM STRENGTH RANKING</div>
-      <div style="border-top:1px solid #E6EDE9; margin-bottom:10px;">
+      <div style="border-top:2px solid #0A0F0C; margin-bottom:10px;">
         <div class="pr-row"><span class="pr-rank">1</span><span class="pr-team">Rippin Darts<i>Anthony Simon</i></span><span class="pr-val">+387.6</span></div>
         <div class="pr-row"><span class="pr-rank">2</span><span class="pr-team">Underground Railroaders<i>Matt Bavaro</i></span><span class="pr-val">+381.7</span></div>
         <div class="pr-row"><span class="pr-rank">3</span><span class="pr-team">Team Soyboys<i>Mike Comparetto</i></span><span class="pr-val">+373.1</span></div>
@@ -673,7 +732,7 @@ overlay.addEventListener('touchend', startShow);
     </div>
     <div>
       <div class="roll-h">FINAL DRAFT GRADES, RANKED</div>
-      <div style="border-top:1px solid #E6EDE9; margin-bottom:10px;">
+      <div style="border-top:2px solid #0A0F0C; margin-bottom:10px;">
         <div class="pr-row"><span class="pr-rank">1</span><span class="pr-team">Name TBD<i>Brandon Marino</i></span><span class="pr-val">A-</span></div>
         <div class="pr-row"><span class="pr-rank">2</span><span class="pr-team">Rippin Darts<i>Anthony Simon</i></span><span class="pr-val">B+</span></div>
         <div class="pr-row"><span class="pr-rank">3</span><span class="pr-team">Underground Railroaders<i>Matt Bavaro</i></span><span class="pr-val">B+</span></div>
@@ -831,29 +890,16 @@ overlay.addEventListener('touchend', startShow);
   <div class="tw"><table>
     <tr><th>Rank</th><th>Team</th><th class="num">Opportunity Cost<br/>(30%)</th><th class="num">Construction<br/>(25%)</th><th class="num">Team Strength<br/>(25%)<br/><span style="font-weight:500;text-transform:none;letter-spacing:0;font-size:8px;color:#6B7873">Starters VOR</span></th><th class="num">Market Value<br/>(15%)<br/><span style="font-weight:500;text-transform:none;letter-spacing:0;font-size:8px;color:#6B7873">vs. ADP</span></th><th class="num">Identity<br/>(5%)</th><th>Final Grade</th></tr><tr><td class="big">1</td><td class="w">Name TBD<span class="cst-tag">(Team Marino)</span><span class="cst-sub">Brandon Marino &middot; Zero waste, one bad bye</span></td><td class="grade g"><span class="grade-chip"><span class="gl">A</span><span class="gm">-</span></span><span class="rk">2nd of 10</span><span class="sup">Smart, no real reaches</span></td><td class="grade g"><span class="grade-chip"><span class="gl">A</span><span class="gm"></span></span><span class="rk rk-1">1st of 10</span><span class="sup">0</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="g" style="width:100%"></i></span></td><td class="grade mid"><span class="grade-chip"><span class="gl">C</span><span class="gm">+</span></span><span class="rk">6th of 10</span><span class="sup">VOR +326.9</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="mid" style="width:50%"></i></span></td><td class="grade mid"><span class="grade-chip"><span class="gl">B</span><span class="gm">-</span></span><span class="rk">5th of 10</span><span class="sup">ADP +8</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="mid" style="width:60%"></i></span></td><td class="grade g"><span class="grade-chip"><span class="gl">A</span><span class="gm">-</span></span><span class="rk rk-1">1st of 10</span><span class="sup">One clear, disciplined build</span></td><td class="grade grade-final g"><span class="grade-chip"><span class="gl">A</span><span class="gm">-</span></span></td></tr><tr><td class="big">2</td><td class="w">Rippin Darts<span class="cst-sub">Anthony Simon &middot; 8 WR is a lot, thin RB</span></td><td class="grade mid"><span class="grade-chip"><span class="gl">C</span><span class="gm">+</span></span><span class="rk">7th of 10</span><span class="sup">Mixed, QB flaw</span></td><td class="grade mid"><span class="grade-chip"><span class="gl">B</span><span class="gm">-</span></span><span class="rk">5th of 10</span><span class="sup">-122</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="mid" style="width:60%"></i></span></td><td class="grade g"><span class="grade-chip"><span class="gl">A</span><span class="gm"></span></span><span class="rk rk-1">1st of 10</span><span class="sup">VOR +387.6</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="g" style="width:100%"></i></span></td><td class="grade g"><span class="grade-chip"><span class="gl">B</span><span class="gm">+</span></span><span class="rk">3rd of 10</span><span class="sup">ADP +23</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="g" style="width:80%"></i></span></td><td class="grade g"><span class="grade-chip"><span class="gl">B</span><span class="gm"></span></span><span class="rk">4th of 10</span><span class="sup">WR-heavy, stayed on plan</span></td><td class="grade grade-final g"><span class="grade-chip"><span class="gl">B</span><span class="gm">+</span></span></td></tr><tr><td class="big">3</td><td class="w">Underground Railroaders<span class="cst-sub">Matt Bavaro &middot; Best bye structure in the league</span></td><td class="grade mid"><span class="grade-chip"><span class="gl">B</span><span class="gm">-</span></span><span class="rk">6th of 10</span><span class="sup">Solid value, no reaches</span></td><td class="grade mid"><span class="grade-chip"><span class="gl">C</span><span class="gm">+</span></span><span class="rk">6th of 10</span><span class="sup">-132</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="mid" style="width:50%"></i></span></td><td class="grade g"><span class="grade-chip"><span class="gl">A</span><span class="gm">-</span></span><span class="rk">2nd of 10</span><span class="sup">VOR +381.7</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="g" style="width:90%"></i></span></td><td class="grade r"><span class="grade-chip"><span class="gl">D</span><span class="gm">+</span></span><span class="rk">9th of 10</span><span class="sup">ADP -47</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="r" style="width:20%"></i></span></td><td class="grade g"><span class="grade-chip"><span class="gl">B</span><span class="gm"></span></span><span class="rk">5th of 10</span><span class="sup">RB-first, stayed the course</span></td><td class="grade grade-final g"><span class="grade-chip"><span class="gl">B</span><span class="gm">+</span></span></td></tr><tr><td class="big">4</td><td class="w">Sunday Skaries<span class="cst-sub">Marko Skarica &middot; Deep starters, thin bench</span></td><td class="grade g"><span class="grade-chip"><span class="gl">B</span><span class="gm">+</span></span><span class="rk">3rd of 10</span><span class="sup">Good, one reach</span></td><td class="grade r"><span class="grade-chip"><span class="gl">C</span><span class="gm"></span></span><span class="rk">7th of 10</span><span class="sup">-141</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="r" style="width:40%"></i></span></td><td class="grade mid"><span class="grade-chip"><span class="gl">B</span><span class="gm">-</span></span><span class="rk">5th of 10</span><span class="sup">VOR +332.8</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="mid" style="width:60%"></i></span></td><td class="grade g"><span class="grade-chip"><span class="gl">B</span><span class="gm"></span></span><span class="rk">4th of 10</span><span class="sup">ADP +15</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="g" style="width:70%"></i></span></td><td class="grade g"><span class="grade-chip"><span class="gl">B</span><span class="gm">+</span></span><span class="rk">2nd of 10</span><span class="sup">Consistent, WR-first build</span></td><td class="grade grade-final g"><span class="grade-chip"><span class="gl">B</span><span class="gm">+</span></span></td></tr><tr><td class="big">5</td><td class="w">Name TBD<span class="cst-tag">(Team Melnyczuk)</span><span class="cst-sub">Alex Melnyczuk &middot; Only 3 RBs rostered</span></td><td class="grade g"><span class="grade-chip"><span class="gl">A</span><span class="gm"></span></span><span class="rk rk-1">1st of 10</span><span class="sup">Every pick maximized</span></td><td class="grade g"><span class="grade-chip"><span class="gl">A</span><span class="gm">-</span></span><span class="rk">2nd of 10</span><span class="sup">-83</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="g" style="width:90%"></i></span></td><td class="grade g"><span class="grade-chip"><span class="gl">B</span><span class="gm"></span></span><span class="rk">4th of 10</span><span class="sup">VOR +349.5</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="g" style="width:70%"></i></span></td><td class="grade r"><span class="grade-chip"><span class="gl">C</span><span class="gm">-</span></span><span class="rk">8th of 10</span><span class="sup">ADP +1</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="r" style="width:30%"></i></span></td><td class="grade g"><span class="grade-chip"><span class="gl">B</span><span class="gm">+</span></span><span class="rk">3rd of 10</span><span class="sup">RB-light, by design</span></td><td class="grade grade-final mid"><span class="grade-chip"><span class="gl">B</span><span class="gm">-</span></span></td></tr><tr><td class="big">6</td><td class="w">OTM<span class="cst-sub">Bryan Pouria &middot; One TE, and it&rsquo;s thin behind him</span></td><td class="grade r"><span class="grade-chip"><span class="gl">C</span><span class="gm"></span></span><span class="rk">8th of 10</span><span class="sup">Fair value, no real steal</span></td><td class="grade g"><span class="grade-chip"><span class="gl">B</span><span class="gm">+</span></span><span class="rk">3rd of 10</span><span class="sup">-97</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="g" style="width:80%"></i></span></td><td class="grade r"><span class="grade-chip"><span class="gl">C</span><span class="gm"></span></span><span class="rk">7th of 10</span><span class="sup">VOR +299.2</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="r" style="width:40%"></i></span></td><td class="grade r"><span class="grade-chip"><span class="gl">C</span><span class="gm"></span></span><span class="rk">7th of 10</span><span class="sup">ADP +3</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="r" style="width:40%"></i></span></td><td class="grade mid"><span class="grade-chip"><span class="gl">B</span><span class="gm">-</span></span><span class="rk">7th of 10</span><span class="sup">Two stars, no plan B</span></td><td class="grade grade-final mid"><span class="grade-chip"><span class="gl">C</span><span class="gm">+</span></span></td></tr><tr><td class="big">7</td><td class="w">Team Soyboys<span class="cst-sub">Mike Comparetto &middot; 3 QB, 3 TE - 2 dead roster spots</span></td><td class="grade g"><span class="grade-chip"><span class="gl">B</span><span class="gm">+</span></span><span class="rk">4th of 10</span><span class="sup">Good value, wrong bets</span></td><td class="grade r"><span class="grade-chip"><span class="gl">D</span><span class="gm"></span></span><span class="rk rk-10">10th of 10</span><span class="sup">-330</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="r" style="width:10%"></i></span></td><td class="grade g"><span class="grade-chip"><span class="gl">B</span><span class="gm">+</span></span><span class="rk">3rd of 10</span><span class="sup">VOR +373.1<span class="fn">&dagger;</span></span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="g" style="width:80%"></i></span></td><td class="grade g"><span class="grade-chip"><span class="gl">A</span><span class="gm"></span></span><span class="rk rk-1">1st of 10</span><span class="sup">ADP +52</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="g" style="width:100%"></i></span></td><td class="grade r"><span class="grade-chip"><span class="gl">D</span><span class="gm"></span></span><span class="rk rk-10">10th of 10</span><span class="sup">Scattershot, no plan</span></td><td class="grade grade-final r"><span class="grade-chip"><span class="gl">C</span><span class="gm"></span></span></td></tr><tr><td class="big">8</td><td class="w">Brick Johnson<span class="cst-sub">Matt Chan &middot; Shape&rsquo;s fine, byes collide</span></td><td class="grade r"><span class="grade-chip"><span class="gl">D</span><span class="gm">+</span></span><span class="rk">9th of 10</span><span class="sup">Weak, doubled up at QB for no gain</span></td><td class="grade g"><span class="grade-chip"><span class="gl">B</span><span class="gm"></span></span><span class="rk">4th of 10</span><span class="sup">-100</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="g" style="width:70%"></i></span></td><td class="grade r"><span class="grade-chip"><span class="gl">D</span><span class="gm">+</span></span><span class="rk">9th of 10</span><span class="sup">VOR +251.7</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="r" style="width:20%"></i></span></td><td class="grade g"><span class="grade-chip"><span class="gl">A</span><span class="gm">-</span></span><span class="rk">2nd of 10</span><span class="sup">ADP +33</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="g" style="width:90%"></i></span></td><td class="grade r"><span class="grade-chip"><span class="gl">C</span><span class="gm"></span></span><span class="rk">8th of 10</span><span class="sup">Undercut by QB flip</span></td><td class="grade grade-final r"><span class="grade-chip"><span class="gl">C</span><span class="gm">-</span></span></td></tr><tr><td class="big">9</td><td class="w">I Wrote Back<span class="cst-sub">Ryan Walsh &middot; Elite starters, no bench margin</span></td><td class="grade g"><span class="grade-chip"><span class="gl">B</span><span class="gm"></span></span><span class="rk">5th of 10</span><span class="sup">Good, no TE plan</span></td><td class="grade r"><span class="grade-chip"><span class="gl">C</span><span class="gm">-</span></span><span class="rk">8th of 10</span><span class="sup">-144</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="r" style="width:30%"></i></span></td><td class="grade r"><span class="grade-chip"><span class="gl">D</span><span class="gm"></span></span><span class="rk rk-10">10th of 10</span><span class="sup">VOR +229.1</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="r" style="width:10%"></i></span></td><td class="grade mid"><span class="grade-chip"><span class="gl">C</span><span class="gm">+</span></span><span class="rk">6th of 10</span><span class="sup">ADP +6</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="mid" style="width:50%"></i></span></td><td class="grade mid"><span class="grade-chip"><span class="gl">B</span><span class="gm">-</span></span><span class="rk">6th of 10</span><span class="sup">No depth plan, thin margins</span></td><td class="grade grade-final r"><span class="grade-chip"><span class="gl">C</span><span class="gm">-</span></span></td></tr><tr><td class="big">10</td><td class="w">Bakers Trash<span class="cst-sub">Peter Feingold &middot; No bench value at any position</span></td><td class="grade r"><span class="grade-chip"><span class="gl">D</span><span class="gm"></span></span><span class="rk rk-10">10th of 10</span><span class="sup">Weakest in the draft</span></td><td class="grade r"><span class="grade-chip"><span class="gl">D</span><span class="gm">+</span></span><span class="rk">9th of 10</span><span class="sup">-178</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="r" style="width:20%"></i></span></td><td class="grade r"><span class="grade-chip"><span class="gl">C</span><span class="gm">-</span></span><span class="rk">8th of 10</span><span class="sup">VOR +264.5</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="r" style="width:30%"></i></span></td><td class="grade r"><span class="grade-chip"><span class="gl">D</span><span class="gm"></span></span><span class="rk rk-10">10th of 10</span><span class="sup">ADP -67</span><span class="oc-fbar" style="display:block;width:38px;margin:3px auto 0 auto;"><i class="r" style="width:10%"></i></span></td><td class="grade r"><span class="grade-chip"><span class="gl">C</span><span class="gm">-</span></span><span class="rk">9th of 10</span><span class="sup">No clear throughline</span></td><td class="grade grade-final r"><span class="grade-chip"><span class="gl">D</span><span class="gm">+</span></span></td></tr></table></div>
   <div class="fnotes">&dagger; Team Soyboys' +373.1 Team Strength is 3rd-best in the league, but its Construction score is worst by nearly 150 points (see below) - that gap is what caps the grade at a C.</div>
-  <div class="note">
-    <b>Every column below reads the same way: a letter grade first, its rank among the ten teams
-      under that, and the underlying number or note under that.</b> These five columns are the
-    exact factors and weights from p2 - they don't literally sum to a score.
-    <ul>
-      <li><b>Construction, Team Strength, and Market Value (65% combined)</b> are fully measured -
-        each team's real number is ranked 1st-to-10th against the other nine, then that rank is
-        converted to a letter on a standard curve (1st = A, 2nd = A-, 3rd = B+, down to 10th = D).
-        The real number stays visible under the rank so nothing is hidden behind the letter.</li>
-      <li><b>Opportunity Cost (30%)</b> and <b>Identity (5%)</b> are editorial - whether each notable
-        pick was smart given real 2026 news and team need, and whether the draft reads as one
-        coherent plan. No formula can grade "was this smart," so their letter and rank are a
-        football judgment call, not a calculation - shown in the same grade-then-rank format as the
-        measured columns for readability, not because they're computed the same way.</li>
-    </ul>
-    The Final Grade is that same judgment, weighing all five columns roughly as shown - not an
-    arithmetic total of the letters above.
+  <div class="ph" style="margin-top:12px;">How to read every column</div>
+  <div class="ag" style="grid-template-columns:1fr 1fr;">
+    <div><b>Letter &middot; rank &middot; number</b><p>Every column: a grade, that team's rank of 10, then the real underlying number - nothing hidden behind the letter.</p></div>
+    <div><b>Not an arithmetic sum</b><p>Final Grade weighs all five per the p2 weights - it isn't a literal average of the five letters shown.</p></div>
   </div>
-  <a class="rcallout" href="#p14">
-    <div class="rcallout-l"><div class="rcallout-h">Want the receipts?</div>
-      <div class="rcallout-s">Every one of the 160 picks in the draft, graded on real ADP value alone - see how each team got here, pick by pick.</div></div>
-    <div class="rcallout-r">Every Pick, Graded &rarr;</div>
-  </a>
+  <div class="flag" style="margin-top:10px;"><b class="lbl">Measured vs. editorial columns</b>
+  <ul>
+    <li><b>Construction, Team Strength, Market Value (65% combined)</b> - fully measured: each team's real number ranked 1st-10th against the other nine, converted to a letter on a standard curve (1st=A down to 10th=D).</li>
+    <li><b>Opportunity Cost (30%), Identity (5%)</b> - editorial: a football judgment call on whether each notable pick was smart given real 2026 news and team need, and whether the draft reads as one plan. Shown in the same grade-then-rank format for readability, not because it's computed the same way.</li>
+  </ul></div>
   <div class="pnum">05</div>
 </div>
 
@@ -920,9 +966,9 @@ overlay.addEventListener('touchend', startShow);
 <div id="p6" class="page"><div class="hdr"><div><div class="sn">SECTION 03</div><div class="st disp">Team Overviews</div><div class="ss">All ten rosters, ranked by final grade.</div></div><div class="rt">FF2018<br/>2026 DRAFT RECAP</div></div>
   <div class="poslegend">
     <span class="pl-label">Roster composition, all 16 picks by position:</span>
-    <span><i style="background:#0B8F4E"></i>RB</span><span><i style="background:#1B5E96"></i>WR</span>
-    <span><i style="background:#B5860F"></i>QB</span><span><i style="background:#6B4E8A"></i>TE</span>
-    <span><i style="background:#263831"></i>DST</span><span><i style="background:#B7C2BC"></i>K</span>
+    <span><i style="background:#0A0F0C"></i>RB</span><span><i style="background:#263831"></i>WR</span>
+    <span><i style="background:#33443C"></i>QB</span><span><i style="background:#6B7873"></i>TE</span>
+    <span><i style="background:#8A968F"></i>DST</span><span><i style="background:#B7C2BC"></i>K</span>
   </div>
   <div class="ov-grid">
     <div class="ocard"><div class="oc-top"><div class="oc-rk">1</div><div class="oc-id"><div class="oc-tag">BEST GRADE, LEAGUE-AVERAGE HITS</div><div class="oc-name">Name TBD<span>(Team Marino)</span></div><div class="oc-meta">Brandon Marino &middot; Draft slot 6</div></div><div class="oc-grade">A-</div></div><div class="poscomp"><i class="p-wr" style="width:43.75%"></i><i class="p-rb" style="width:31.25%"></i><i class="p-qb" style="width:6.25%"></i><i class="p-te" style="width:6.25%"></i><i class="p-dst" style="width:6.25%"></i><i class="p-k" style="width:6.25%"></i></div><div class="oc-factors"><div class="oc-f"><span>OPP COST</span><div class="oc-fbar"><i class="g" style="width:90%"></i></div><b class="g">A-</b></div><div class="oc-f"><span>CONSTR</span><div class="oc-fbar"><i class="g" style="width:100%"></i></div><b class="g">A</b></div><div class="oc-f"><span>STRENGTH</span><div class="oc-fbar"><i class="mid" style="width:50%"></i></div><b class="mid">C+</b></div><div class="oc-f"><span>MKT VAL</span><div class="oc-fbar"><i class="mid" style="width:60%"></i></div><b class="mid">B-</b></div><div class="oc-f"><span>IDENTITY</span><div class="oc-fbar"><i class="g" style="width:100%"></i></div><b class="g">A-</b></div></div><div class="oc-chips"><div class="oc-chip best"><span>BEST PICK</span>Javonte Williams, RB &mdash; starting-caliber RB2 at market price</div><div class="oc-chip risk"><span>BIGGEST RISK</span>7 of 14 skill picks project below replacement &mdash; the league-average rate</div></div><div class="oc-verdict">Zero reaches, an A- grade, and a hit rate no better than the other nine teams' average. The construction was clean; the players still have to hit.</div></div>
@@ -936,9 +982,9 @@ overlay.addEventListener('touchend', startShow);
 <div id="p7" class="page"><div class="hdr"><div><div class="sn">SECTION 03</div><div class="st disp">Team Overviews</div><div class="ss">Continued.</div></div><div class="rt">FF2018<br/>2026 DRAFT RECAP</div></div>
   <div class="poslegend">
     <span class="pl-label">Roster composition, all 16 picks by position:</span>
-    <span><i style="background:#0B8F4E"></i>RB</span><span><i style="background:#1B5E96"></i>WR</span>
-    <span><i style="background:#B5860F"></i>QB</span><span><i style="background:#6B4E8A"></i>TE</span>
-    <span><i style="background:#263831"></i>DST</span><span><i style="background:#B7C2BC"></i>K</span>
+    <span><i style="background:#0A0F0C"></i>RB</span><span><i style="background:#263831"></i>WR</span>
+    <span><i style="background:#33443C"></i>QB</span><span><i style="background:#6B7873"></i>TE</span>
+    <span><i style="background:#8A968F"></i>DST</span><span><i style="background:#B7C2BC"></i>K</span>
   </div>
   <div class="ov-grid">
     <div class="ocard mid"><div class="oc-top"><div class="oc-rk">5</div><div class="oc-id"><div class="oc-tag">STRONG ROSTER, ONE THIN SPOT</div><div class="oc-name">Name TBD<span>(Team Melnyczuk)</span></div><div class="oc-meta">Alex Melnyczuk &middot; Draft slot 3</div></div><div class="oc-grade">B-</div></div><div class="poscomp"><i class="p-wr" style="width:43.75%"></i><i class="p-rb" style="width:18.75%"></i><i class="p-qb" style="width:12.5%"></i><i class="p-te" style="width:12.5%"></i><i class="p-dst" style="width:6.25%"></i><i class="p-k" style="width:6.25%"></i></div><div class="oc-factors"><div class="oc-f"><span>OPP COST</span><div class="oc-fbar"><i class="g" style="width:100%"></i></div><b class="g">A</b></div><div class="oc-f"><span>CONSTR</span><div class="oc-fbar"><i class="g" style="width:90%"></i></div><b class="g">A-</b></div><div class="oc-f"><span>STRENGTH</span><div class="oc-fbar"><i class="g" style="width:70%"></i></div><b class="g">B</b></div><div class="oc-f"><span>MKT VAL</span><div class="oc-fbar"><i class="r" style="width:30%"></i></div><b class="r">C-</b></div><div class="oc-f"><span>IDENTITY</span><div class="oc-fbar"><i class="g" style="width:80%"></i></div><b class="g">B+</b></div></div><div class="oc-chips"><div class="oc-chip best"><span>BEST PICK</span>Derrick Henry, RB &mdash; a clear bell cow, +57.1 VOR at 18</div><div class="oc-chip risk"><span>BIGGEST RISK</span>Only 3 RBs rostered &mdash; zero depth behind an aging bell cow</div></div><div class="oc-verdict">An A-grade draft process, held back by a single fixable flaw: zero running back depth.</div></div>
@@ -952,9 +998,9 @@ overlay.addEventListener('touchend', startShow);
 <div id="p8" class="page"><div class="hdr"><div><div class="sn">SECTION 03</div><div class="st disp">Team Overviews</div><div class="ss">Continued.</div></div><div class="rt">FF2018<br/>2026 DRAFT RECAP</div></div>
   <div class="poslegend">
     <span class="pl-label">Roster composition, all 16 picks by position:</span>
-    <span><i style="background:#0B8F4E"></i>RB</span><span><i style="background:#1B5E96"></i>WR</span>
-    <span><i style="background:#B5860F"></i>QB</span><span><i style="background:#6B4E8A"></i>TE</span>
-    <span><i style="background:#263831"></i>DST</span><span><i style="background:#B7C2BC"></i>K</span>
+    <span><i style="background:#0A0F0C"></i>RB</span><span><i style="background:#263831"></i>WR</span>
+    <span><i style="background:#33443C"></i>QB</span><span><i style="background:#6B7873"></i>TE</span>
+    <span><i style="background:#8A968F"></i>DST</span><span><i style="background:#B7C2BC"></i>K</span>
   </div>
   <div class="ov-grid">
     <div class="ocard r"><div class="oc-top"><div class="oc-rk">9</div><div class="oc-id"><div class="oc-tag">FRAGILE STARTERS, BAD CALENDAR</div><div class="oc-name">I Wrote Back</div><div class="oc-meta">Ryan Walsh &middot; Draft slot 7</div></div><div class="oc-grade">C-</div></div><div class="poscomp"><i class="p-wr" style="width:31.25%"></i><i class="p-rb" style="width:37.5%"></i><i class="p-qb" style="width:12.5%"></i><i class="p-dst" style="width:6.25%"></i><i class="p-te" style="width:6.25%"></i><i class="p-k" style="width:6.25%"></i></div><div class="oc-factors"><div class="oc-f"><span>OPP COST</span><div class="oc-fbar"><i class="g" style="width:60%"></i></div><b class="g">B</b></div><div class="oc-f"><span>CONSTR</span><div class="oc-fbar"><i class="r" style="width:30%"></i></div><b class="r">C-</b></div><div class="oc-f"><span>STRENGTH</span><div class="oc-fbar"><i class="r" style="width:10%"></i></div><b class="r">D</b></div><div class="oc-f"><span>MKT VAL</span><div class="oc-fbar"><i class="mid" style="width:50%"></i></div><b class="mid">C+</b></div><div class="oc-f"><span>IDENTITY</span><div class="oc-fbar"><i class="mid" style="width:50%"></i></div><b class="mid">B-</b></div></div><div class="oc-chips"><div class="oc-chip best"><span>BEST PICK</span>Amon-Ra St. Brown, WR &mdash; +122.4 VOR at a fair price</div><div class="oc-chip risk"><span>BIGGEST RISK</span>7 players share the Week 11 bye &mdash; including their only tight end</div></div><div class="oc-verdict">The most fragile roster in the league, and it isn't close.</div></div>
@@ -1323,6 +1369,72 @@ overlay.addEventListener('touchend', startShow);
   <div class="note">Superlatives are for entertainment. The grades on page 2 are the ones that count, and
     none of them are impressed by anybody's kicker pick.</div>
   <div class="pnum">20</div>
+</div>
+
+<div id="pwk1" class="page">
+  <div class="hdr"><div><div class="sn">SECTION 11</div><div class="st disp">Week 1 Preview</div><div class="ss">All five matchups, with a lean from this report's own power score.</div></div><div class="rt">FF2018<br/>2026 DRAFT RECAP</div></div>
+
+  <div class="flag" style="margin-top:2px;">The lean below blends each team's Team Strength rank (page 2, starters-weighted
+    VOR) with its Power Score rank (page 16, draft grade + win history + roster risk) into one pre-season number, then
+    turns the gap between opponents into a percentage. It knows nothing about injuries, byes, or actual Week 1 news -
+    treat it as a starting point for the group chat, not a lock.</div>
+
+  <div class="mu-grid" style="margin-top:16px;">
+    <div class="mu-card">
+      <div class="mu-teams">
+        <div class="mu-team"><b>Brandon Marino</b><i>Name TBD</i><span class="mu-pct">55%</span></div>
+        <div class="mu-vs">VS</div>
+        <div class="mu-team b fade"><b>Marko Skarica</b><i>Sunday Skaries</i><span class="mu-pct">45%</span></div>
+      </div>
+      <div class="mu-bar"><i style="width:55%"></i><i class="b" style="width:45%"></i></div>
+      <p class="mu-pick"><b>Model pick: Marino.</b> The league's best-built roster (A-, #1 power score) against a Skaries
+        team whose CMC/Jefferson top end is real but backed by a thin Tony Pollard RB2 plan. Closest game on the board.</p>
+    </div>
+    <div class="mu-card">
+      <div class="mu-teams">
+        <div class="mu-team fade"><b>Peter Feingold</b><i>Bakers Trash</i><span class="mu-pct">42%</span></div>
+        <div class="mu-vs">VS</div>
+        <div class="mu-team b"><b>Matt Chan</b><i>Brick Johnson</i><span class="mu-pct">58%</span></div>
+      </div>
+      <div class="mu-bar"><i style="width:42%"></i><i class="b" style="width:58%"></i></div>
+      <p class="mu-pick"><b>Model pick: Chan.</b> Brick Johnson's grade is a full letter better than Bakers Trash's D+,
+        and eight straight years of playoff berths buys some benefit of the doubt in Week 1.</p>
+    </div>
+    <div class="mu-card">
+      <div class="mu-teams">
+        <div class="mu-team fade"><b>Ryan Walsh</b><i>I Wrote Back</i><span class="mu-pct">40%</span></div>
+        <div class="mu-vs">VS</div>
+        <div class="mu-team b"><b>Bryan Pouria</b><i>OTM</i><span class="mu-pct">60%</span></div>
+      </div>
+      <div class="mu-bar"><i style="width:40%"></i><i class="b" style="width:60%"></i></div>
+      <p class="mu-pick"><b>Model pick: Pouria.</b> OTM's Collins/Olave duo outweighs I Wrote Back's thinner overall
+        roster (10th in Team Strength) - Walsh's real problem is a Week 11 bye pileup, not Week 1.</p>
+    </div>
+    <div class="mu-card">
+      <div class="mu-teams">
+        <div class="mu-team"><b>Matt Bavaro</b><i>Underground Railroaders</i><span class="mu-pct">65%</span></div>
+        <div class="mu-vs">VS</div>
+        <div class="mu-team b fade"><b>Mike Comparetto</b><i>Team Soyboys</i><span class="mu-pct">35%</span></div>
+      </div>
+      <div class="mu-bar"><i style="width:65%"></i><i class="b" style="width:35%"></i></div>
+      <p class="mu-pick"><b>Model pick: Bavaro.</b> Two of the top three rosters in the league, but Underground
+        Railroaders' floor (the best pure RB room this exercise has seen) beats Soyboys' ceiling-heavy build with four
+        bench quarterbacks that will never see the field. Biggest gap on the board.</p>
+    </div>
+    <div class="mu-card">
+      <div class="mu-teams">
+        <div class="mu-team fade"><b>Alex Melnyczuk</b><i>Name TBD</i><span class="mu-pct">48%</span></div>
+        <div class="mu-vs">VS</div>
+        <div class="mu-team b"><b>Anthony Simon</b><i>Rippin Darts</i><span class="mu-pct">52%</span></div>
+      </div>
+      <div class="mu-bar"><i style="width:48%"></i><i class="b" style="width:52%"></i></div>
+      <p class="mu-pick"><b>Model pick: Simon.</b> Both A-/B+ rosters near the top of Team Strength; Trey McBride's
+        edge for Rippin Darts is razor-thin over the reigning champ's Nacua-led attack. Basically a coin flip.</p>
+    </div>
+  </div>
+  <div class="note">Model note: three of five games lean within 8 percentage points either way. This is a league where
+    the draft grade and the actual season have disagreed before - see page 16.</div>
+  <div class="pnum">21</div>
 </div>
 
 <script>
