@@ -745,6 +745,7 @@ function startShow(e) {
   if (e && e.preventDefault) e.preventDefault();
   overlay.classList.add('hidden');
   startJingle();
+  setTimeout(stopJingle, 10000);
   runSequence();
 }
 overlay.addEventListener('pointerup', startShow);
