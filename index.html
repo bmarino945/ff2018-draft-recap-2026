@@ -382,7 +382,9 @@ td.w, th.w { text-align:left; }
     position:relative; }
   .tw table { min-width:640px; }
   .tw::after { content:""; position:absolute; top:0; right:0; bottom:6px; width:22px;
-    background:linear-gradient(to right, transparent, rgba(255,255,255,.92)); pointer-events:none; }
+    background:linear-gradient(to right, transparent, rgba(255,255,255,.92)); pointer-events:none;
+    opacity:1; transition:opacity .2s ease; }
+  .tw.tw-end::after, .tw.tw-noscroll::after { opacity:0; }
   .hdr { flex-direction:column; align-items:flex-start; gap:4px; }
   .hdr .rt { text-align:left; }
   .cover h1 { font-size:40px; }
@@ -1537,5 +1539,22 @@ document.addEventListener('click', function(e) {
   e.preventDefault();
   target.scrollIntoView({ behavior: 'auto', block: 'start' });
 });
+
+// scroll-hint fade on wide tables: only show the right-edge shadow while
+// there's actually more table to scroll to, and hide it once scrolled to the end.
+(function() {
+  var tws = document.querySelectorAll('.tw');
+  function updateTw(el) {
+    var hasOverflow = el.scrollWidth > el.clientWidth + 2;
+    el.classList.toggle('tw-noscroll', !hasOverflow);
+    var atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 4;
+    el.classList.toggle('tw-end', atEnd);
+  }
+  tws.forEach(function(el) {
+    updateTw(el);
+    el.addEventListener('scroll', function() { updateTw(el); }, { passive: true });
+  });
+  window.addEventListener('resize', function() { tws.forEach(updateTw); });
+})();
 </script>
 </body></html>
