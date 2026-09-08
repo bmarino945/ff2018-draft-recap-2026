@@ -386,6 +386,14 @@ td.w, th.w { text-align:left; }
   .cv-stats { grid-template-columns:repeat(2,1fr); }
   .roll-g { grid-template-columns:repeat(2,1fr); }
   .two, .cards, .ag, .figs, .awards, .rgrid, .ov-grid, .story-grid { grid-template-columns:1fr !important; gap:14px; }
+  .two.compact { grid-template-columns:1fr 1fr !important; gap:10px !important; }
+  .two.compact .roll-h { font-size:7.6px; letter-spacing:.08em; margin-bottom:5px; }
+  .two.compact .pr-row { gap:6px; padding:8px 0; }
+  .two.compact .pr-rank { min-width:20px; height:20px; line-height:20px; font-size:10px; border-radius:4px; }
+  .two.compact .pr-team { font-size:9.2px; line-height:1.2; }
+  .two.compact .pr-team i { font-size:7px; margin-top:1px; }
+  .two.compact .pr-val { font-size:11px; min-width:auto; }
+  .two.compact .tsp-cap { font-size:7.4px; line-height:1.32; padding-left:7px; margin-top:8px; }
   .lens-row { grid-template-columns:1fr; gap:4px; }
   .lens-wt { text-align:left; }
   .pwr-row, .vbar-row { grid-template-columns:0.95in 1fr 0.5in; }
@@ -789,7 +797,7 @@ document.getElementById('ctaLink').addEventListener('click', stopJingle);
 <div id="pranks" class="page">
   <div class="hdr"><div><div class="sn">TWO RANKINGS, TWO QUESTIONS</div><div class="st disp">Where Every Team Stands</div><div class="ss">This is not the whole report - just the two headline numbers, side by side, before the full breakdown starts.</div></div><div class="rt">FF2018<br/>2026 DRAFT RECAP</div></div>
 
-  <div class="two" style="margin-top:20px; gap:36px;">
+  <div class="two compact" style="margin-top:20px; gap:36px;">
     <div>
       <div class="roll-h">TEAM STRENGTH RANKING</div>
       <div style="border-top:2px solid #0A0F0C; margin-bottom:10px;">
