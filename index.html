@@ -148,6 +148,9 @@ td.w, th.w { text-align:left; }
 .pr-val { font-family:'Oswald',sans-serif; font-weight:800; font-size:22px; color:#0B7A45; line-height:1; text-align:right; min-width:64px; }
 .pr-val.mid { color:#8A6408; }
 .pr-val.low { color:#B4392E; }
+.pr-val.gr { display:inline-flex; align-items:baseline; justify-content:flex-start; text-align:left; min-width:44px; }
+.pr-val.gr .pv-l { display:inline-block; width:20px; text-align:left; }
+.pr-val.gr .pv-m { display:inline-block; width:14px; text-align:left; }
 
 /* storylines - visual stat cards */
 .story-grid { display:grid; grid-template-columns:1fr 1fr; gap:11px 18px; }
@@ -659,7 +662,8 @@ function playKick(ctx, dest, t) {
   osc.type = 'sine';
   osc.frequency.setValueAtTime(140, t);
   osc.frequency.exponentialRampToValueAtTime(45, t + 0.15);
-  env.gain.setValueAtTime(0.75, t);
+  env.gain.setValueAtTime(0, t);
+  env.gain.linearRampToValueAtTime(0.75, t + 0.005);
   env.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
   osc.connect(env); env.connect(dest);
   osc.start(t); osc.stop(t + 0.24);
@@ -671,7 +675,8 @@ function playHat(ctx, dest, t, open) {
   filt.type = 'highpass'; filt.frequency.value = 6000;
   const env = ctx.createGain();
   const dur = open ? 0.16 : 0.04;
-  env.gain.setValueAtTime(0.28, t);
+  env.gain.setValueAtTime(0, t);
+  env.gain.linearRampToValueAtTime(0.28, t + 0.003);
   env.gain.exponentialRampToValueAtTime(0.001, t + dur);
   src.connect(filt); filt.connect(env); env.connect(dest);
   src.start(t); src.stop(t + dur + 0.02);
@@ -682,14 +687,16 @@ function playSnare(ctx, dest, t) {
   const filt = ctx.createBiquadFilter();
   filt.type = 'bandpass'; filt.frequency.value = 1600; filt.Q.value = 0.8;
   const nEnv = ctx.createGain();
-  nEnv.gain.setValueAtTime(0.4, t);
+  nEnv.gain.setValueAtTime(0, t);
+  nEnv.gain.linearRampToValueAtTime(0.4, t + 0.003);
   nEnv.gain.exponentialRampToValueAtTime(0.001, t + 0.15);
   src.connect(filt); filt.connect(nEnv); nEnv.connect(dest);
   src.start(t); src.stop(t + 0.17);
   const osc = ctx.createOscillator();
   osc.type = 'triangle'; osc.frequency.value = 190;
   const oEnv = ctx.createGain();
-  oEnv.gain.setValueAtTime(0.25, t);
+  oEnv.gain.setValueAtTime(0, t);
+  oEnv.gain.linearRampToValueAtTime(0.25, t + 0.003);
   oEnv.gain.exponentialRampToValueAtTime(0.001, t + 0.1);
   osc.connect(oEnv); oEnv.connect(dest);
   osc.start(t); osc.stop(t + 0.12);
@@ -819,16 +826,16 @@ document.getElementById('ctaLink').addEventListener('click', stopJingle);
     <div>
       <div class="roll-h">FINAL DRAFT GRADES, RANKED</div>
       <div style="border-top:2px solid #0A0F0C; margin-bottom:10px;">
-        <div class="pr-row"><span class="pr-rank">1</span><span class="pr-team">Name TBD<i>Brandon Marino</i></span><span class="pr-val">A-</span></div>
-        <div class="pr-row"><span class="pr-rank">2</span><span class="pr-team">Rippin Darts<i>Anthony Simon</i></span><span class="pr-val">B+</span></div>
-        <div class="pr-row"><span class="pr-rank">3</span><span class="pr-team">Underground Railroaders<i>Matt Bavaro</i></span><span class="pr-val">B+</span></div>
-        <div class="pr-row"><span class="pr-rank">4</span><span class="pr-team">Sunday Skaries<i>Marko Skarica</i></span><span class="pr-val">B+</span></div>
-        <div class="pr-row"><span class="pr-rank mid">5</span><span class="pr-team">Name TBD<i>Alex Melnyczuk</i></span><span class="pr-val mid">B-</span></div>
-        <div class="pr-row"><span class="pr-rank mid">6</span><span class="pr-team">OTM<i>Bryan Pouria</i></span><span class="pr-val mid">C+</span></div>
-        <div class="pr-row"><span class="pr-rank low">7</span><span class="pr-team">Team Soyboys<i>Mike Comparetto</i></span><span class="pr-val low">C</span></div>
-        <div class="pr-row"><span class="pr-rank low">8</span><span class="pr-team">Brick Johnson<i>Matt Chan</i></span><span class="pr-val low">C-</span></div>
-        <div class="pr-row"><span class="pr-rank low">9</span><span class="pr-team">I Wrote Back<i>Ryan Walsh</i></span><span class="pr-val low">C-</span></div>
-        <div class="pr-row" style="border-bottom:none;"><span class="pr-rank low">10</span><span class="pr-team">Bakers Trash<i>Peter Feingold</i></span><span class="pr-val low">D+</span></div>
+        <div class="pr-row"><span class="pr-rank">1</span><span class="pr-team">Name TBD<i>Brandon Marino</i></span><span class="pr-val gr"><span class="pv-l">A</span><span class="pv-m">-</span></span></div>
+        <div class="pr-row"><span class="pr-rank">2</span><span class="pr-team">Rippin Darts<i>Anthony Simon</i></span><span class="pr-val gr"><span class="pv-l">B</span><span class="pv-m">+</span></span></div>
+        <div class="pr-row"><span class="pr-rank">3</span><span class="pr-team">Underground Railroaders<i>Matt Bavaro</i></span><span class="pr-val gr"><span class="pv-l">B</span><span class="pv-m">+</span></span></div>
+        <div class="pr-row"><span class="pr-rank">4</span><span class="pr-team">Sunday Skaries<i>Marko Skarica</i></span><span class="pr-val gr"><span class="pv-l">B</span><span class="pv-m">+</span></span></div>
+        <div class="pr-row"><span class="pr-rank mid">5</span><span class="pr-team">Name TBD<i>Alex Melnyczuk</i></span><span class="pr-val gr mid"><span class="pv-l">B</span><span class="pv-m">-</span></span></div>
+        <div class="pr-row"><span class="pr-rank mid">6</span><span class="pr-team">OTM<i>Bryan Pouria</i></span><span class="pr-val gr mid"><span class="pv-l">C</span><span class="pv-m">+</span></span></div>
+        <div class="pr-row"><span class="pr-rank low">7</span><span class="pr-team">Team Soyboys<i>Mike Comparetto</i></span><span class="pr-val gr low"><span class="pv-l">C</span><span class="pv-m"></span></span></div>
+        <div class="pr-row"><span class="pr-rank low">8</span><span class="pr-team">Brick Johnson<i>Matt Chan</i></span><span class="pr-val gr low"><span class="pv-l">C</span><span class="pv-m">-</span></span></div>
+        <div class="pr-row"><span class="pr-rank low">9</span><span class="pr-team">I Wrote Back<i>Ryan Walsh</i></span><span class="pr-val gr low"><span class="pv-l">C</span><span class="pv-m">-</span></span></div>
+        <div class="pr-row" style="border-bottom:none;"><span class="pr-rank low">10</span><span class="pr-team">Bakers Trash<i>Peter Feingold</i></span><span class="pr-val gr low"><span class="pv-l">D</span><span class="pv-m">+</span></span></div>
       </div>
       <div class="tsp-cap">Who drafted best with what was actually available - five weighted factors,
       one letter grade per team. This is the number the rest of this report explains. Full
