@@ -696,13 +696,12 @@ overlay.addEventListener('touchend', startShow);
 <div id="pts" class="page">
   <div class="hdr"><div><div class="sn">ROSTER QUALITY ALONE</div><div class="st disp">Team Strength Ranking Overview</div><div class="ss">What's actually driving each team's roster-strength rank, player by player.</div></div><div class="rt">FF2018<br/>2026 DRAFT RECAP</div></div>
 
-  <div class="flag blk" style="margin-top:10px;"><b class="lbl">This is not the Draft Recap grade</b>
-  <p>The Team Strength Ranking on the previous page asks one question only: who has the best roster,
-  full stop - no credit for a good price, no penalty for a bad process. The <b>Draft Recap grade</b>
-  (also previous page) asks a completely different question: who drafted best with what was actually
-  available on draft night. A team can win one of these and lose the other, and several teams here
-  do exactly that - see the "Team Strength vs. the Draft Grade" writeup on page 4 for the full
-  breakdown of why.</p></div>
+  <div class="ag" style="margin-top:10px;grid-template-columns:1fr 1fr;">
+    <div><b>Roster quality</b><p>Best legal starting lineup, full stop. No credit for price, no penalty for process.</p></div>
+    <div><b>Draft grade</b><p>Who drafted best with what was actually available on draft night.</p></div>
+  </div>
+  <div class="flag blk" style="margin-top:10px;"><b class="lbl">Not the same ranking</b>
+  <p>A team can win one and lose the other &mdash; several do. Full breakdown on page 4.</p></div>
 
   <div class="flag" style="margin-top:14px;"><b class="lbl">What's actually driving this order</b>
   <ul>
@@ -745,19 +744,12 @@ overlay.addEventListener('touchend', startShow);
 
 <div id="p2" class="page"><div class="hdr"><div><div class="sn">SECTION 01</div><div class="st disp">Team Strength vs. the Draft Grade</div><div class="ss">Two different questions, two different answers - and how the Draft Recap grade is actually built.</div></div><div class="rt">FF2018<br/>2026 DRAFT RECAP</div></div>
 
-  <div class="flag blk" style="margin-top:0;"><b class="lbl">These are not the same ranking</b>
-  <p>The <a href="#pranks" style="color:#0A0F0C;">Team Strength Ranking</a> (page 2) asks one question
-  only: who has the best roster, full stop - no credit for a good price, no penalty for a bad
-  process. The <b>Draft Recap grade</b> below asks a completely different question: who drafted best
-  with what was actually available on draft night, in real time, against real news and real roster
-  need. A team can win one of these and lose the other, and several teams do exactly that - see the
-  <a href="#pts" style="color:#0A0F0C;">Team Strength Ranking Overview</a> (page 3) for the full
-  breakdown of what's driving each team's roster-strength rank.</p></div>
-
-  <p class="body-p" style="margin-top:16px;">From here on, this report is about the <b>Draft Recap
-  grade</b>, not the Team Strength Ranking. Every roster gets scored on the five factors below. They
-  don't get averaged blindly - when two of them disagree about a team, this report says which one
-  should win the argument and why, the same way a real analyst would.</p>
+  <div class="flag blk" style="margin-top:0;"><b class="lbl">One more reminder, then we move on</b>
+  <p><a href="#pranks" style="color:#0A0F0C;">Team Strength</a> (page 2) = best roster, full stop.
+  <b>Draft Recap grade</b> below = best process, given what was on the board. See
+  <a href="#pts" style="color:#0A0F0C;">page 3</a> for why several teams split the two.
+  Everything from here on is the grade, scored on five weighted factors &mdash; when two disagree
+  about a team, this report says which one wins the argument, and why.</p></div>
 
   <div class="ph" style="margin-top:16px;">How the five draft-grade factors are weighted</div>
   <div class="lenses">
@@ -780,47 +772,41 @@ overlay.addEventListener('touchend', startShow);
   </ul></div>
 
   <div class="flag blk"><b class="lbl">What "VOR" actually means</b>
-  <ul>
-    <li><b>VOR (Value Over Replacement)</b> = a player's projected 2026 value minus what a
-      freely-available, replacement-level starter at his position would score instead. Answers:
-      how much better is this guy than a waiver-wire fill-in at his spot.</li>
-    <li><b>Built from real, played 2025 production - not a guess:</b>
-      <ul>
-        <li>Real 2025 points (re-scored under this league's exact scoring) &divide; games actually
-          played = a real points-per-game rate.</li>
-        <li>That rate &times; 17 games = a full-season projection, assuming 2026 health.</li>
-      </ul></li>
-    <li><b>An injury-risk discount is then applied</b> based on 2025 games missed - a durability
-      penalty a naive "if healthy" number would ignore. <i>The tiers are a judgment call, not
-      derived from injury data</i> - they stop an 8-game hot streak from grading as a top-3 player
-      with zero risk attached:
-      <ul>
-        <li>0-1 games missed: no discount</li>
-        <li>2-4 missed: 5%</li>
-        <li>5-8 missed: 12%</li>
-        <li>9+ missed: 20%</li>
-      </ul></li>
-    <li><b>That real 2025 rate-and-discount table is then used as a comp bank:</b> each drafted
-      player's real <b>2026</b> positional rank (ESPN's Mike Clay, Sept 2026) is matched to whoever
-      held that exact rank in the real 2025 table, and that player's adjusted projection is what
-      actually gets applied. That's how a real 2026 role change - a 2025 backup who's now a real
-      starter, or the reverse - gets priced in, instead of just last year's box score.</li>
-    <li><b>Replacement baseline:</b> 304.8 pts for QB (real NFL QB10) - and, split by position
-      rather than one shared number, 206.2 for RB (real NFL RB25), 201.6 for WR (real NFL WR25),
-      188.1 for TE (real NFL TE10), reflecting this league's 2 RB/2 WR/1 TE/1 FLEX starting lineup.
-      Above the line = adds real value; below it = doesn't.</li>
-    <li><b>Example - team scale:</b> Rippin Darts' starting seven carries +387.6 combined VOR, best
-      in the league. I Wrote Back's +229.1 is the lowest of the ten - still positive, just the
-      smallest edge.</li>
-    <li><b>Example - one player:</b> Lamar Jackson (drafted 33rd) and Patrick Mahomes (108th) show
-      the rank-proxy step at work. ESPN's Sept 2026 rank has Lamar as the better real 2026 QB, so he
-      comps to a stronger real-2025 producer and projects at <b>+45.6 VOR</b>. Mahomes' lower 2026
-      rank comps to a weaker real-2025 producer and projects at <b>-32.9</b> - below replacement.
-      That's the opposite of what a pure "last year's healthy-season rate" read would say about
-      either player on its own - which is exactly why the model reads real 2026 rank, not just last
-      year's stat line, and it's what "the model rates him ahead/behind" means throughout this
-      report.</li>
-  </ul></div>
+  <p><b>VOR (Value Over Replacement)</b> = a player's projected 2026 value minus what a
+    freely-available, replacement-level starter at his position would score instead &mdash; how
+    much better is this guy than a waiver-wire fill-in at his spot.</p></div>
+
+  <div class="ph" style="margin-top:14px;">How it's built, step by step</div>
+  <div class="ag" style="grid-template-columns:repeat(4,1fr);">
+    <div><b>1</b><p>Real 2025 points (this league's exact scoring) &divide; games played = a real
+      points-per-game rate.</p></div>
+    <div><b>2</b><p>That rate &times; 17 games = a full-season projection, assuming 2026 health.</p></div>
+    <div><b>3</b><p>An injury-risk discount by 2025 games missed: 0-1 none &middot; 2-4 &minus;5%
+      &middot; 5-8 &minus;12% &middot; 9+ &minus;20%. A judgment call, not derived from injury
+      data &mdash; stops an 8-game hot streak from grading as a top-3 player with zero risk.</p></div>
+    <div><b>4</b><p>Matched to whoever held that player's real <b>2026</b> rank (ESPN's Mike Clay,
+      Sept 2026) in the real 2025 table &mdash; prices in a role change instead of just last
+      year's box score.</p></div>
+  </div>
+
+  <div class="figs" style="grid-template-columns:repeat(4,1fr);margin-top:14px;">
+    <div><b>304.8</b><span>QB baseline &middot; NFL QB10</span></div>
+    <div><b>206.2</b><span>RB baseline &middot; NFL RB25</span></div>
+    <div><b>201.6</b><span>WR baseline &middot; NFL WR25</span></div>
+    <div><b>188.1</b><span>TE baseline &middot; NFL TE10</span></div>
+  </div>
+  <div class="tsp-cap" style="margin-top:8px;">Replacement level, split by position to match this
+    league's 2 RB/2 WR/1 TE/1 FLEX lineup. Above the line adds real value; below it doesn't.</div>
+
+  <div class="ph" style="margin-top:16px;">Why rank-matching matters &mdash; one real example</div>
+  <div class="vbars">
+    <div class="vbar-row"><div class="vbar-name">Lamar Jackson <i>QB, pick 33</i></div><div class="vbar-track"><div class="vbar-fill g" style="width:100%"></div></div><div class="vbar-val g">+45.6</div></div>
+    <div class="vbar-row" style="border-bottom:none;"><div class="vbar-name">Patrick Mahomes <i>QB, pick 108</i></div><div class="vbar-track"><div class="vbar-fill r" style="width:72%"></div></div><div class="vbar-val r">-32.9</div></div>
+  </div>
+  <div class="tsp-cap" style="margin-top:6px;">ESPN's Sept 2026 rank has Lamar as the better real
+    2026 QB, so he comps to a stronger real-2025 producer; Mahomes' lower rank comps to a weaker
+    one &mdash; the opposite of a pure "last year's healthy rate" read. This is what "the model
+    rates him ahead/behind" means throughout this report.</div>
 
   <div class="flag blk" style="margin-top:12px"><b class="lbl">Where the numbers come from</b>
   <ul>
@@ -1115,17 +1101,24 @@ overlay.addEventListener('touchend', startShow);
       <div class="dbt-n">02</div>
       <div class="dbt-body">
         <div class="dbt-vs"><span class="dbt-tag">THE PICK-61 CLIFF</span><span class="dbt-team">Every team</span></div>
-        <p>Before pick 61, the model's own math misses on a player just 5% of the time (3 of 60).
-        From 61 to 90 that jumps to 73%. Past 90 it's 90%. The board doesn't fade - it drops off a
-        ledge at pick 61, and all ten rosters walked off it more than once. Is that the model
-        admitting its limits, or the market's, once the obvious plays are gone?</p></div></div>
+        <div class="figs" style="grid-template-columns:repeat(3,1fr);margin:2px 0 8px 0;">
+          <div><b>5%</b><span>picks 1-60 miss (3/60)</span></div>
+          <div><b>73%</b><span>picks 61-90 miss</span></div>
+          <div><b>90%</b><span>picks 91+ miss</span></div>
+        </div>
+        <p>The board doesn't fade - it drops off a ledge at pick 61, and all ten rosters walked off
+        it more than once. Is that the model admitting its limits, or the market's, once the
+        obvious plays are gone?</p></div></div>
     <div class="dbt">
       <div class="dbt-n">03</div>
       <div class="dbt-body">
         <div class="dbt-vs"><span class="dbt-team">Wide receivers</span><span class="dbt-vsbadge">VS</span><span class="dbt-team">QBs &amp; TEs</span></div>
-        <p>League-wide, a receiver pick misses the replacement bar 58% of the time (35 of 60). A
-        quarterback or tight end pick misses 38% (6 of 16, both positions). Running backs sit
-        between the two at 47%. Ten draft rooms, same gap every time - is a mid-round WR just a
+        <div class="figs" style="grid-template-columns:repeat(3,1fr);margin:2px 0 8px 0;">
+          <div><b>58%</b><span>WR picks miss (35/60)</span></div>
+          <div><b>47%</b><span>RB picks miss</span></div>
+          <div><b>38%</b><span>QB/TE picks miss (6/16)</span></div>
+        </div>
+        <p>Ten draft rooms, same gap every time - is a mid-round WR just a
         worse bet in this format, or did 2026 happen to be a bad year for the position?</p></div></div>
     <div class="dbt">
       <div class="dbt-n">04</div>
