@@ -148,9 +148,9 @@ td.w, th.w { text-align:left; }
 .pr-val { font-family:'Oswald',sans-serif; font-weight:800; font-size:22px; color:#0B7A45; line-height:1; text-align:right; min-width:64px; }
 .pr-val.mid { color:#8A6408; }
 .pr-val.low { color:#B4392E; }
-.pr-val.gr { display:inline-flex; align-items:baseline; justify-content:flex-start; text-align:left; min-width:44px; }
-.pr-val.gr .pv-l { display:inline-block; width:20px; text-align:left; }
-.pr-val.gr .pv-m { display:inline-block; width:14px; text-align:left; }
+.pr-val.gr { display:inline-flex; align-items:baseline; justify-content:flex-start; text-align:left; min-width:38px; }
+.pr-val.gr .pv-l { display:inline-block; width:14px; text-align:left; }
+.pr-val.gr .pv-m { display:inline-block; width:11px; text-align:left; }
 
 /* storylines - visual stat cards */
 .story-grid { display:grid; grid-template-columns:1fr 1fr; gap:11px 18px; }
@@ -394,7 +394,7 @@ td.w, th.w { text-align:left; }
   .two, .cards, .ag, .figs, .awards, .rgrid, .ov-grid, .story-grid { grid-template-columns:1fr !important; gap:14px; }
   .two.compact { grid-template-columns:1fr 1fr !important; gap:18px !important; }
   .two.compact .roll-h { font-size:7.6px; letter-spacing:.08em; margin-bottom:5px; }
-  .two.compact .pr-row { gap:6px; padding:8px 0; }
+  .two.compact .pr-row { gap:6px; padding:8px 0; min-height:49px; box-sizing:border-box; }
   .two.compact .pr-rank { min-width:20px; height:20px; line-height:20px; font-size:10px; border-radius:4px; }
   .two.compact .pr-team { font-size:9.2px; line-height:1.2; }
   .two.compact .pr-team i { font-size:7px; margin-top:1px; }
@@ -713,6 +713,7 @@ function playSnare(ctx, dest, t) {
 function startJingle() {
   try {
     jingleCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (jingleCtx.state === 'suspended') { jingleCtx.resume().catch(()=>{}); }
     jingleNoiseBuf = makeNoiseBuffer(jingleCtx);
     jingleGain = jingleCtx.createGain();
     jingleGain.gain.value = 0.22;
@@ -735,7 +736,10 @@ function startJingle() {
       playHat(jingleCtx, jingleGain, s + stepDur * 7, true);
       jingleTimerId = setTimeout(scheduleBar, stepDur * 8 * 1000);
     }
-    scheduleBar();
+    // small warm-up delay so the very first hit isn't scheduled before the
+    // freshly-created AudioContext's render thread is actually up, which is
+    // what caused an audible skip/glitch on the first note only.
+    jingleTimerId = setTimeout(scheduleBar, 130);
   } catch(e) {}
 }
 function stopJingle() {
