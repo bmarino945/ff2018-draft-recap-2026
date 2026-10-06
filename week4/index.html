@@ -70,7 +70,7 @@ table.data tr:hover td{background:var(--wash)}
 .st td,.st th{padding-left:5px;padding-right:5px}
 .st td{padding-top:7px;padding-bottom:7px}
 .st td.team b{display:block;font-weight:700;line-height:1.25}
-.st td.team span{display:block;font-size:14px;line-height:1.25}
+.st td.team .ow{display:block;font-size:14px;line-height:1.25}
 .st td.pos{color:var(--green);font-weight:700}
 .st td.neg{font-weight:700}
 .st td.last i{display:inline-block;width:18px;font-style:normal;font-weight:800}
@@ -80,10 +80,10 @@ table.data tr:hover td{background:var(--wash)}
 .st td.odds .trk i{display:block;height:14px;background:var(--green)}
 .st td.odds .trk i.dim{background:var(--black)}
 .st td.odds b{display:inline-block;width:46px;text-align:right;font-weight:800;font-size:16px}
-.st td.pw{font-weight:700;padding-left:14px}
+.st td.pw{font-weight:700;text-align:center;white-space:nowrap}
 .st td.pw b{display:inline-block;width:22px;text-align:right;font-weight:700}
-.st td.pw i{display:inline-block;width:32px;margin-left:7px;font-style:normal;font-size:12.5px;font-weight:800}
-.st th:last-child{padding-left:14px}
+.st td.pw i{display:inline-block;width:30px;margin-left:6px;text-align:left;font-style:normal;font-size:12.5px;font-weight:800}
+.st th.pwh{text-align:center}
 .st td.pw .up{color:var(--green)}
 .st td.pw .dn{color:#C8102E}
 .st tr.cut td{padding:0}
@@ -266,20 +266,35 @@ footer{margin-top:64px;background:var(--black);color:var(--white);padding:22px 0
 }
 @media (max-width:480px){.tcs{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:640px){
-  table.data{font-size:14.5px}
-  table.data th{font-size:11.5px;padding:0 4px 8px}
-  .st .hm,.st td.team span,.st td.odds .trk{display:none}
-  table.data.st td,table.data.st th{padding:7px 3px}
-  table.data.st{font-size:13.5px}
-  table.data.st td.team{white-space:normal;min-width:88px}
-  .st td.team b{font-size:13.5px}
-  .st td.seed{font-size:16px;width:auto}
+  body{font-size:14.5px}
+  .ch h2{font-size:22px}
+  .ch .sn{font-size:15px}
+  .ch p{font-size:14px}
+  .ch p.take{font-size:15.5px}
+  .card h3{font-size:15px}
+  .note{font-size:13px}
+  ul.bl{font-size:13.5px}
+  .hstats p{font-size:13.5px}
+  .tl b{font-size:15px}
+  .tl span,.tug p{font-size:13px}
+  ol.tp b{font-size:14.5px}
+  ol.tp span{font-size:13px}
+  ol.tp strong{font-size:20px}
+  .sup strong{font-size:14.5px}
+  .sup p{font-size:13px}
+  .sup span{font-size:11.5px}
+  table.data{font-size:13px}
+  table.data th{font-size:10px;padding:0 4px 8px}
+  .st .hm,.st td.team .ow,.st td.odds .trk{display:none}
+  table.data.st td,table.data.st th{padding:8px 3px}
+  table.data.st{font-size:12.5px}
+  table.data.st td.team{white-space:nowrap}
+  .st td.team b{font-size:12.5px}
+  .st td.seed{font-size:13.5px;width:auto}
   .st td.odds{min-width:0}
-  .st td.odds b{width:auto;font-size:15px}
-  table.data.st td.pw,table.data.st th:last-child{padding-left:5px}
-  .st td.pw b{width:auto}
-  .st td.pw i{width:auto;margin-left:3px}
-  .st th:last-child{padding-left:6px}
+  .st td.odds b{width:auto;font-size:12.5px}
+  .st td.pw b{width:14px}
+  .st td.pw i{width:22px;margin-left:3px;font-size:10.5px}
   .fn{display:none}
   .ab{display:inline}
   table.data.h2h{font-size:13px}
@@ -336,18 +351,18 @@ footer{margin-top:64px;background:var(--black);color:var(--white);padding:22px 0
 <section class="card" id="standings">
   <div class="ch"><span class="sn">01</span><h2>Standings</h2><p>Playoff odds from 40,000 simulations of Weeks 5&ndash;14.</p></div>
   <div class="tw"><table class="data st">
-    <tr><th>#</th><th class="l">Team</th><th>W&ndash;L</th><th>PF</th><th class="hm">PA</th><th class="hm">All-play</th><th>Luck</th><th class="l"><span class="fn">Playoffs</span><span class="ab">Odds</span></th><th class="hm">Proj. W</th><th class="l">Power</th></tr>
-<tr><td class="seed in">1</td><td class="l team"><b>Toolman Allen</b><span>Alex</span></td><td>3&ndash;1</td><td>537.3</td><td class="hm">437.7</td><td class="hm">24&ndash;12</td><td class="pos">+0.3</td><td class="l odds"><div class="trk"><i style="width:95%"></i></div><b>95%</b></td><td class="hm">9.0</td><td class="l pw"><b>2</b></td></tr>
-<tr><td class="seed in">2</td><td class="l team"><b>Relegation Bois</b><span>Brandon</span></td><td>3&ndash;1</td><td>517.9</td><td class="hm">482.7</td><td class="hm">25&ndash;11</td><td class="pos">+0.2</td><td class="l odds"><div class="trk"><i style="width:92%"></i></div><b>92%</b></td><td class="hm">8.7</td><td class="l pw"><b>3</b></td></tr>
-<tr><td class="seed in">3</td><td class="l team"><b>OTM</b><span>Bryan</span></td><td>3&ndash;1</td><td>514.6</td><td class="hm">479.4</td><td class="hm">23&ndash;13</td><td class="pos">+0.4</td><td class="l odds"><div class="trk"><i style="width:82%"></i></div><b>82%</b></td><td class="hm">8.0</td><td class="l pw"><b>6</b><i class="dn">&#9660;1</i></td></tr>
-<tr><td class="seed in">4</td><td class="l team"><b>Bakers Trash</b><span>Peter</span></td><td>3&ndash;1</td><td>511.1</td><td class="hm">412.4</td><td class="hm">23&ndash;13</td><td class="pos">+0.4</td><td class="l odds"><div class="trk"><i style="width:92%"></i></div><b>92%</b></td><td class="hm">8.7</td><td class="l pw"><b>1</b></td></tr>
-<tr><td class="seed in">5</td><td class="l team"><b>Underground Railroaders</b><span>Matt B.</span></td><td>2&ndash;2</td><td>482.2</td><td class="hm">592.2</td><td class="hm">17&ndash;19</td><td class="pos">+0.1</td><td class="l odds"><div class="trk"><i style="width:52%"></i></div><b>52%</b></td><td class="hm">6.7</td><td class="l pw"><b>7</b><i class="up">&#9650;1</i></td></tr>
-<tr><td class="seed in">6</td><td class="l team"><b>RIP Dart</b><span>Anthony</span></td><td>2&ndash;2</td><td>475.6</td><td class="hm">443.9</td><td class="hm">17&ndash;19</td><td class="pos">+0.1</td><td class="l odds"><div class="trk"><i style="width:64%"></i></div><b>64%</b></td><td class="hm">7.1</td><td class="l pw"><b>5</b><i class="up">&#9650;2</i></td></tr>
+    <tr><th>#</th><th class="l">Team</th><th>W&ndash;L</th><th>PF</th><th class="hm">PA</th><th class="hm">All-play</th><th>Luck</th><th class="l"><span class="fn">Playoffs</span><span class="ab">Odds</span></th><th class="hm">Proj. W</th><th class="pwh">Power</th></tr>
+<tr><td class="seed in">1</td><td class="l team"><b><span class="fn">Toolman Allen</span><span class="ab">Toolman</span></b><span class="ow">Alex</span></td><td>3&ndash;1</td><td>537.3</td><td class="hm">437.7</td><td class="hm">24&ndash;12</td><td class="pos">+0.3</td><td class="l odds"><div class="trk"><i style="width:95%"></i></div><b>95%</b></td><td class="hm">9.0</td><td class="pw"><b>2</b><i></i></td></tr>
+<tr><td class="seed in">2</td><td class="l team"><b><span class="fn">Relegation Bois</span><span class="ab">Bois</span></b><span class="ow">Brandon</span></td><td>3&ndash;1</td><td>517.9</td><td class="hm">482.7</td><td class="hm">25&ndash;11</td><td class="pos">+0.2</td><td class="l odds"><div class="trk"><i style="width:92%"></i></div><b>92%</b></td><td class="hm">8.7</td><td class="pw"><b>3</b><i></i></td></tr>
+<tr><td class="seed in">3</td><td class="l team"><b><span class="fn">OTM</span><span class="ab">OTM</span></b><span class="ow">Bryan</span></td><td>3&ndash;1</td><td>514.6</td><td class="hm">479.4</td><td class="hm">23&ndash;13</td><td class="pos">+0.4</td><td class="l odds"><div class="trk"><i style="width:82%"></i></div><b>82%</b></td><td class="hm">8.0</td><td class="pw"><b>6</b><i class="dn">&#9660;1</i></td></tr>
+<tr><td class="seed in">4</td><td class="l team"><b><span class="fn">Bakers Trash</span><span class="ab">Bakers</span></b><span class="ow">Peter</span></td><td>3&ndash;1</td><td>511.1</td><td class="hm">412.4</td><td class="hm">23&ndash;13</td><td class="pos">+0.4</td><td class="l odds"><div class="trk"><i style="width:92%"></i></div><b>92%</b></td><td class="hm">8.7</td><td class="pw"><b>1</b><i></i></td></tr>
+<tr><td class="seed in">5</td><td class="l team"><b><span class="fn">Underground Railroaders</span><span class="ab">Railroaders</span></b><span class="ow">Matt B.</span></td><td>2&ndash;2</td><td>482.2</td><td class="hm">592.2</td><td class="hm">17&ndash;19</td><td class="pos">+0.1</td><td class="l odds"><div class="trk"><i style="width:52%"></i></div><b>52%</b></td><td class="hm">6.7</td><td class="pw"><b>7</b><i class="up">&#9650;1</i></td></tr>
+<tr><td class="seed in">6</td><td class="l team"><b><span class="fn">RIP Dart</span><span class="ab">RIP Dart</span></b><span class="ow">Anthony</span></td><td>2&ndash;2</td><td>475.6</td><td class="hm">443.9</td><td class="hm">17&ndash;19</td><td class="pos">+0.1</td><td class="l odds"><div class="trk"><i style="width:64%"></i></div><b>64%</b></td><td class="hm">7.1</td><td class="pw"><b>5</b><i class="up">&#9650;2</i></td></tr>
 <tr class="cut"><td colspan="10"><span>Playoff line</span></td></tr>
-<tr><td class="seed">7</td><td class="l team"><b>Team Soyboys</b><span>Mike</span></td><td>2&ndash;2</td><td>473.8</td><td class="hm">408.3</td><td class="hm">15&ndash;21</td><td class="pos">+0.3</td><td class="l odds"><div class="trk"><i style="width:82%"></i></div><b>82%</b></td><td class="hm">7.9</td><td class="l pw"><b>4</b></td></tr>
-<tr><td class="seed">8</td><td class="l team"><b>I Wrote Back</b><span>Ryan</span></td><td>2&ndash;2</td><td>434.8</td><td class="hm">479.7</td><td class="hm">14&ndash;22</td><td class="pos">+0.4</td><td class="l odds"><div class="trk"><i style="width:31%" class="dim"></i></div><b>31%</b></td><td class="hm">6.1</td><td class="l pw"><b>8</b><i class="up">&#9650;1</i></td></tr>
-<tr><td class="seed">9</td><td class="l team"><b>Brick Johnson</b><span>Matt C.</span></td><td>0&ndash;4</td><td>434.6</td><td class="hm">610.8</td><td class="hm">15&ndash;21</td><td class="neg">&minus;1.7</td><td class="l odds"><div class="trk"><i style="width:5%" class="dim"></i></div><b>5%</b></td><td class="hm">3.9</td><td class="l pw"><b>9</b><i class="dn">&#9660;3</i></td></tr>
-<tr><td class="seed">10</td><td class="l team"><b>Sunday Skaries</b><span>Marko</span></td><td>0&ndash;4</td><td>414.6</td><td class="hm">449.4</td><td class="hm">7&ndash;29</td><td class="neg">&minus;0.8</td><td class="l odds"><div class="trk"><i style="width:4%" class="dim"></i></div><b>4%</b></td><td class="hm">3.8</td><td class="l pw"><b>10</b></td></tr>
+<tr><td class="seed">7</td><td class="l team"><b><span class="fn">Team Soyboys</span><span class="ab">Soyboys</span></b><span class="ow">Mike</span></td><td>2&ndash;2</td><td>473.8</td><td class="hm">408.3</td><td class="hm">15&ndash;21</td><td class="pos">+0.3</td><td class="l odds"><div class="trk"><i style="width:82%"></i></div><b>82%</b></td><td class="hm">7.9</td><td class="pw"><b>4</b><i></i></td></tr>
+<tr><td class="seed">8</td><td class="l team"><b><span class="fn">I Wrote Back</span><span class="ab">Wrote Back</span></b><span class="ow">Ryan</span></td><td>2&ndash;2</td><td>434.8</td><td class="hm">479.7</td><td class="hm">14&ndash;22</td><td class="pos">+0.4</td><td class="l odds"><div class="trk"><i style="width:31%" class="dim"></i></div><b>31%</b></td><td class="hm">6.1</td><td class="pw"><b>8</b><i class="up">&#9650;1</i></td></tr>
+<tr><td class="seed">9</td><td class="l team"><b><span class="fn">Brick Johnson</span><span class="ab">Brick</span></b><span class="ow">Matt C.</span></td><td>0&ndash;4</td><td>434.6</td><td class="hm">610.8</td><td class="hm">15&ndash;21</td><td class="neg">&minus;1.7</td><td class="l odds"><div class="trk"><i style="width:5%" class="dim"></i></div><b>5%</b></td><td class="hm">3.9</td><td class="pw"><b>9</b><i class="dn">&#9660;3</i></td></tr>
+<tr><td class="seed">10</td><td class="l team"><b><span class="fn">Sunday Skaries</span><span class="ab">Skaries</span></b><span class="ow">Marko</span></td><td>0&ndash;4</td><td>414.6</td><td class="hm">449.4</td><td class="hm">7&ndash;29</td><td class="neg">&minus;0.8</td><td class="l odds"><div class="trk"><i style="width:4%" class="dim"></i></div><b>4%</b></td><td class="hm">3.8</td><td class="pw"><b>10</b><i></i></td></tr>
   </table></div>
   <p class="note"><b>All-play:</b> record vs. every team every week. <b>Luck:</b> wins minus all-play expected wins. <b>Power:</b> all-play win rate and ESPN rest-of-season projection, equally weighted; arrow is change from Week 3.</p>
 </section>
