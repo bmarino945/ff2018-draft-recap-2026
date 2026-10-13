@@ -207,10 +207,6 @@ ol.tp span{display:block;font-size:14.5px}
 .tl b{display:block;font-size:17px;font-weight:800}
 .tl span{display:block;font-size:14.5px}
 .tl.r{text-align:right}
-.tb{display:flex;height:34px}
-.tb i{display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:800;font-size:15px;min-width:44px}
-.tb i.f{background:var(--green);color:#fff}
-.tb i.d{background:var(--dog);color:var(--black)}
 .tug p{grid-column:1/-1;margin:0;font-size:14.5px;text-align:center}
 
 /* superlatives + rivalry cards */
@@ -260,8 +256,7 @@ footer{margin-top:64px;background:var(--black);color:var(--white);padding:22px 0
   ul.bl{grid-template-columns:minmax(0,1fr)}
   .sups,.sups.three{grid-template-columns:repeat(2,minmax(0,1fr))}
   .tug{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
-  .tug .tb{grid-column:1/-1;grid-row:2}
-  .wr{grid-template-columns:90px minmax(0,1fr)}
+  .tug   .wr{grid-template-columns:90px minmax(0,1fr)}
   .wr>span{grid-column:2;text-align:left}
 }
 @media (max-width:480px){.tcs{grid-template-columns:minmax(0,1fr)}}
@@ -398,7 +393,6 @@ em.up{color:var(--green)}em.dn{color:#C8102E}em.nc{color:var(--black)}
 .pt i{display:none}
 .pt b{font-weight:800}
 
-.mtag{font-style:normal;font-weight:800;color:var(--green);text-transform:uppercase;letter-spacing:.04em;margin-right:6px;font-size:12.5px}
 
 @media (max-width:1180px){
   .aws{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -498,9 +492,6 @@ tr.mine td:first-child{box-shadow:inset 4px 0 0 var(--green)}
 .pt.mine{background:var(--green)!important;color:#fff;box-shadow:none;z-index:3}
 .ladder g.mine rect{stroke:var(--green);stroke-width:3}
 .ladder g.mine .cn{stroke:var(--green);stroke-width:3}
-.aw.mine,.rc.mine,.lu.mine,.pr.mine,.wr.mine,.tc.mine{padding-left:12px}
-.lu.mine{color:#fff}
-.lu.mine .ps{color:#fff}
 
 /* pick'em */
 .pks{max-width:900px}
@@ -630,6 +621,35 @@ table.hm2 th.mine{color:var(--green);border-radius:8px;box-shadow:inset 4px 0 0 
 .cr.hd b:last-child{text-align:right}
 @media (max-width:640px){.cr{padding:10px 12px;font-size:14.5px}.cr i{font-size:11.5px}.cr.hd b{font-size:15px}.cmpbar select{min-width:0;width:100%}.cmpbar label{flex:1 1 100%}.cmpbar em{display:none}}
 
+/* ---- team cards: identical geometry on every card ---- */
+.tcs{grid-template-columns:repeat(5,minmax(0,1fr))}
+.tc{display:flex;flex-direction:column;padding:14px 14px 16px}
+.tc header{min-height:86px;align-items:start}
+.tc .tn{min-width:0}
+.tc .tn b,.tc .tn span{overflow-wrap:anywhere}
+.tc svg{margin:6px 0 10px;flex:none}
+.tc dl{margin-top:0;font-size:13px;grid-template-columns:auto minmax(0,1fr)}
+.tc dd{white-space:normal;overflow-wrap:anywhere}
+@media (max-width:1279px){.tcs{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:640px){.tcs{grid-template-columns:repeat(2,minmax(0,1fr))}.tc header{min-height:0}}
+@media (max-width:480px){.tcs{grid-template-columns:minmax(0,1fr)}}
+
+/* Week 6 rows */
+.tug .vs{font-weight:800;font-size:14px;text-align:center}
+@media (max-width:640px){.tug .vs{display:none}}
+
+/* a picked team stays readable on every row type */
+.lu.mine{background:var(--g4)!important;box-shadow:inset 4px 0 0 var(--green);margin:0 -18px;padding-left:18px;padding-right:18px}
+.lu.mine .pn b,.lu.mine strong{color:var(--black)}
+.lu.mine .pn .tm{color:var(--green);font-weight:700}
+.lu.mine .ps{color:var(--green)}
+.lu.mine .bar{background:var(--g3)}
+
+/* your-week card: one label column, values aligned */
+.mecard li{display:grid;grid-template-columns:150px minmax(0,1fr);gap:4px 16px;align-items:baseline}
+.mecard li b{display:block;min-width:0}
+@media (max-width:640px){.mecard li{grid-template-columns:minmax(0,1fr);gap:2px}}
+
 </style>
 </head>
 <body>
@@ -654,7 +674,7 @@ table.hm2 th.mine{color:var(--green);border-radius:8px;box-shadow:inset 4px 0 0 
 
 <section class="me" id="me"><div class="wrap"><h2>Find your team</h2><p>Pick yours and the whole page lights it up, plus a recap of its week.</p><div class="chips"><button type="button" data-pick="10">Toolman</button><button type="button" data-pick="2">Bois</button><button type="button" data-pick="9">Bakers</button><button type="button" data-pick="7">OTM</button><button type="button" data-pick="3">Soyboys</button><button type="button" data-pick="5">RIP Dart</button><button type="button" data-pick="8">Wrote Back</button><button type="button" data-pick="6">Railroaders</button><button type="button" data-pick="1">Brick</button><button type="button" data-pick="4">Skaries</button></div><div class="mecard" id="mecard" hidden></div></div></section>
 
-<section class="cover" id="cover"><div class="wrap"><h2>The week in five stories</h2><div class="stys"><a class="sty" href="#awards"><span>The top score</span><b>169.08</b><p>Brick Johnson had the best week in the league, and the best score of the season.</p><i>Read more &rarr;</i></a><a class="sty" href="#week"><span>Hard luck</span><b>140.82</b><p>Sunday Skaries scored the 4th-best total of the week and still lost to Toolman.</p><i>Read more &rarr;</i></a><a class="sty" href="#totw"><span>The dream team</span><b>275.5</b><p>What you get by building one lineup from the best players on every roster.</p><i>Read more &rarr;</i></a><a class="sty" href="#power"><span>On the move</span><b>&#9650;2</b><p>Brick Johnson climbed the most in the power rankings, to No. 7.</p><i>Read more &rarr;</i></a><a class="sty" href="#next"><span>Next up</span><b>51%</b><p>Brick Johnson are the favorite in the closest game of Week 6, over I Wrote Back.</p><i>Read more &rarr;</i></a></div></div></section>
+<section class="cover" id="cover"><div class="wrap"><h2>The week in five stories</h2><div class="stys"><a class="sty" href="#awards"><span>The top score</span><b>169.08</b><p>Brick Johnson had the best week in the league, and the best score of the season.</p><i>Read more &rarr;</i></a><a class="sty" href="#week"><span>Hard luck</span><b>140.82</b><p>Sunday Skaries scored the 4th-best total of the week and still lost to Toolman.</p><i>Read more &rarr;</i></a><a class="sty" href="#totw"><span>The dream team</span><b>275.5</b><p>What you get by building one lineup from the best players on every roster.</p><i>Read more &rarr;</i></a><a class="sty" href="#power"><span>On the move</span><b>&#9650;2</b><p>Brick Johnson climbed the most in the power rankings, to No. 7.</p><i>Read more &rarr;</i></a><a class="sty" href="#next"><span>Next up</span><b>Week 6</b><p>Team Soyboys vs. Toolman Allen has the most at stake, with playoff odds of 88% and 99%.</p><i>Read more &rarr;</i></a></div></div></section>
 
 <main>
 
@@ -871,25 +891,24 @@ table.hm2 th.mine{color:var(--green);border-radius:8px;box-shadow:inset 4px 0 0 
   <a class="nx" href="#next">Next: Week 6 preview &rarr;</a>
 </section>
 
-<div class="chap" id="ch4"><div class="wrap"><span class="k">Chapter 5</span><h2>What&rsquo;s next</h2><p>Closest game: Brick Johnson vs. I Wrote Back (51%&ndash;49%). Biggest favorite: Toolman Allen over Team Soyboys (66%).</p><div class="in"><a href="#next">Week 6 preview</a><a href="#h2h">Rivalries</a></div></div></div>
+<div class="chap" id="ch4"><div class="wrap"><span class="k">Chapter 5</span><h2>What&rsquo;s next</h2><p>Team Soyboys vs. Toolman Allen has the most at stake: playoff odds of 88% and 99%.</p><div class="in"><a href="#next">Week 6 preview</a><a href="#h2h">Rivalries</a></div></div></div>
 <section class="card wrap" id="next">
-  <div class="ch"><h2>Week 6 preview</h2><p class="take">Closest game: Brick Johnson vs. I Wrote Back (51%&ndash;49%). Biggest favorite: Toolman Allen over Team Soyboys (66%).</p><p class="cap">Win chance from ESPN&rsquo;s projection for each team&rsquo;s best lineup. Up first, the tale of the tape for the closest game.</p></div>
-  <div class="tape"><div class="tape-h"><div><b><span class="fn">Brick Johnson</span><span class="ab">Brick</span></b><span>Matt C.</span></div><strong>51%</strong><em>vs.</em><strong>49%</strong><div class="r"><b><span class="fn">I Wrote Back</span><span class="ab">Wrote Back</span></b><span>Ryan</span></div></div><table><tr><td class="h">1&ndash;4</td><th>Record</th><td class="a up">2&ndash;3</td></tr>
-<tr><td class="h up">120.7</td><th>Points per week</th><td class="a">110.2</td></tr>
-<tr><td class="h up">24&ndash;21</td><th>All-play</th><td class="a">18&ndash;27</td></tr>
-<tr><td class="h">14%</td><th>Playoff odds</th><td class="a up">28%</td></tr>
-<tr><td class="h">115.0</td><th>Projected Week 6</th><td class="a up">117.8</td></tr>
-<tr><td class="h">Adams 95.1</td><th>Top player</th><td class="a">Williams 109.3</td></tr>
-<tr><td class="h up">7 wins</td><th>All-time series</th><td class="a">6 wins</td></tr></table><p>Last met 2025 Week 6, Wrote Back won 116.5&ndash;93.6.</p></div>
+  <div class="ch"><h2>Week 6 preview</h2><p class="take">Team Soyboys vs. Toolman Allen has the most at stake: playoff odds of 88% and 99%.</p><p class="cap">Records, history and what each game means for the playoff race. Up first, the tale of the tape for the game with the most at stake.</p></div>
+  <div class="tape"><div class="tape-h"><div><b><span class="fn">Team Soyboys</span><span class="ab">Soyboys</span></b><span>Mike</span></div><strong>3&ndash;2</strong><em>vs.</em><strong>4&ndash;1</strong><div class="r"><b><span class="fn">Toolman Allen</span><span class="ab">Toolman</span></b><span>Alex</span></div></div><table><tr><td class="h">3&ndash;2</td><th>Record</th><td class="a up">4&ndash;1</td></tr>
+<tr><td class="h">123.5</td><th>Points per week</th><td class="a up">139.9</td></tr>
+<tr><td class="h">22&ndash;23</td><th>All-play</th><td class="a up">32&ndash;13</td></tr>
+<tr><td class="h">88%</td><th>Playoff odds</th><td class="a up">99%</td></tr>
+<tr><td class="h">Gibbs 153.7</td><th>Top player</th><td class="a">Allen 143.0</td></tr>
+<tr><td class="h">1 wins</td><th>All-time series</th><td class="a up">4 wins</td></tr></table><p>Last met 2025 Week 6, Toolman won 111.2&ndash;96.0.</p></div>
   <h3>The rest of the slate</h3>
   <div class="tugs">
-<div class="tug"><div class="tl"><b>Bakers Trash</b><span>3&ndash;2 &middot; projected 121.4</span></div><div class="tb"><i class="f" style="width:55%">55%</i><i class="d" style="width:45%">45%</i></div><div class="tl r"><b>Sunday Skaries</b><span>0&ndash;5 &middot; projected 119.5</span></div><p><em class="mtag"> Coin flip</em> Skaries leads the series 6&ndash;2; last met 2025 Week 6, Skaries won 128.4&ndash;83.1</p></div>
-<div class="tug"><div class="tl"><b>RIP Dart</b><span>3&ndash;2 &middot; projected 124.8</span></div><div class="tb"><i class="f" style="width:62%">62%</i><i class="d" style="width:38%">38%</i></div><div class="tl r"><b>Relegation Bois</b><span>4&ndash;1 &middot; projected 100.0</span></div><p><em class="mtag"> Lean</em> Series tied 6&ndash;6; last met 2025 Week 6, Bois won 150.5&ndash;142.8</p></div>
-<div class="tug"><div class="tl"><b>Team Soyboys</b><span>3&ndash;2 &middot; projected 123.7</span></div><div class="tb"><i class="d" style="width:34%">34%</i><i class="f" style="width:66%">66%</i></div><div class="tl r"><b>Toolman Allen</b><span>4&ndash;1 &middot; projected 139.9</span></div><p><em class="mtag"> Lean</em> Toolman leads the series 4&ndash;1; last met 2025 Week 6, Toolman won 111.2&ndash;96.0</p></div>
-<div class="tug"><div class="tl"><b>OTM</b><span>3&ndash;2 &middot; projected 108.0</span></div><div class="tb"><i class="d" style="width:47%">47%</i><i class="f" style="width:53%">53%</i></div><div class="tl r"><b>Underground Railroaders</b><span>2&ndash;3 &middot; projected 119.0</span></div><p><em class="mtag"> Coin flip</em> Railroaders leads the series 9&ndash;6; last met 2025 Week 6, Railroaders won 140.7&ndash;100.9</p></div>
+<div class="tug"><div class="tl"><b>Bakers Trash</b><span>3&ndash;2</span></div><div class="vs">vs.</div><div class="tl r"><b>Sunday Skaries</b><span>0&ndash;5</span></div><p>Skaries leads the series 6&ndash;2; last met 2025 Week 6, Skaries won 128.4&ndash;83.1</p></div>
+<div class="tug"><div class="tl"><b>RIP Dart</b><span>3&ndash;2</span></div><div class="vs">vs.</div><div class="tl r"><b>Relegation Bois</b><span>4&ndash;1</span></div><p>Series tied 6&ndash;6; last met 2025 Week 6, Bois won 150.5&ndash;142.8</p></div>
+<div class="tug"><div class="tl"><b>OTM</b><span>3&ndash;2</span></div><div class="vs">vs.</div><div class="tl r"><b>Underground Railroaders</b><span>2&ndash;3</span></div><p>Railroaders leads the series 9&ndash;6; last met 2025 Week 6, Railroaders won 140.7&ndash;100.9</p></div>
+<div class="tug"><div class="tl"><b>Brick Johnson</b><span>1&ndash;4</span></div><div class="vs">vs.</div><div class="tl r"><b>I Wrote Back</b><span>2&ndash;3</span></div><p>Brick leads the series 7&ndash;6; last met 2025 Week 6, Wrote Back won 116.5&ndash;93.6</p></div>
 </div>
   <h3>Make your picks</h3>
-<div class="pks" id="pks" data-fav="{&quot;9-4&quot;: &quot;9&quot;, &quot;5-2&quot;: &quot;5&quot;, &quot;3-10&quot;: &quot;10&quot;, &quot;7-6&quot;: &quot;6&quot;, &quot;1-8&quot;: &quot;1&quot;}"><p class="note" style="margin-top:0">Tap the team you think wins. Picks stay on this device.</p><div class="pk" data-g="9-4"><button type="button" data-w="9"><b>Bakers Trash</b><span>55% &middot; proj. 121.4</span></button><em>vs.</em><button type="button" data-w="4"><b>Sunday Skaries</b><span>45% &middot; proj. 119.5</span></button></div><div class="pk" data-g="5-2"><button type="button" data-w="5"><b>RIP Dart</b><span>62% &middot; proj. 124.8</span></button><em>vs.</em><button type="button" data-w="2"><b>Relegation Bois</b><span>38% &middot; proj. 100.0</span></button></div><div class="pk" data-g="3-10"><button type="button" data-w="3"><b>Team Soyboys</b><span>34% &middot; proj. 123.7</span></button><em>vs.</em><button type="button" data-w="10"><b>Toolman Allen</b><span>66% &middot; proj. 139.9</span></button></div><div class="pk" data-g="7-6"><button type="button" data-w="7"><b>OTM</b><span>47% &middot; proj. 108.0</span></button><em>vs.</em><button type="button" data-w="6"><b>Underground Railroaders</b><span>53% &middot; proj. 119.0</span></button></div><div class="pk" data-g="1-8"><button type="button" data-w="1"><b>Brick Johnson</b><span>51% &middot; proj. 115.0</span></button><em>vs.</em><button type="button" data-w="8"><b>I Wrote Back</b><span>49% &middot; proj. 117.8</span></button></div><p class="pkout" id="pkout"></p></div>
+<div class="pks" id="pks"><p class="note" style="margin-top:0">Tap the team you think wins. Picks stay on this device.</p><div class="pk" data-g="9-4"><button type="button" data-w="9"><b>Bakers Trash</b><span>3&ndash;2</span></button><em>vs.</em><button type="button" data-w="4"><b>Sunday Skaries</b><span>0&ndash;5</span></button></div><div class="pk" data-g="5-2"><button type="button" data-w="5"><b>RIP Dart</b><span>3&ndash;2</span></button><em>vs.</em><button type="button" data-w="2"><b>Relegation Bois</b><span>4&ndash;1</span></button></div><div class="pk" data-g="3-10"><button type="button" data-w="3"><b>Team Soyboys</b><span>3&ndash;2</span></button><em>vs.</em><button type="button" data-w="10"><b>Toolman Allen</b><span>4&ndash;1</span></button></div><div class="pk" data-g="7-6"><button type="button" data-w="7"><b>OTM</b><span>3&ndash;2</span></button><em>vs.</em><button type="button" data-w="6"><b>Underground Railroaders</b><span>2&ndash;3</span></button></div><div class="pk" data-g="1-8"><button type="button" data-w="1"><b>Brick Johnson</b><span>1&ndash;4</span></button><em>vs.</em><button type="button" data-w="8"><b>I Wrote Back</b><span>2&ndash;3</span></button></div><p class="pkout" id="pkout"></p></div>
   <a class="nx" href="#h2h">Next: Rivalries &rarr;</a>
 </section>
 
@@ -918,7 +937,7 @@ table.hm2 th.mine{color:var(--green);border-radius:8px;box-shadow:inset 4px 0 0 
 </main>
 <script>
 (function(){
-  var ME={"1": {"n": "Brick Johnson", "s": "Brick", "o": "Matt C.", "rec": "1-4", "rank": 9, "pow": 7, "pm": 2, "odds": 14, "od": 9, "sc": 169.08, "won": true, "opp": "OTM", "osc": 103.28, "srank": 1, "aw": ["Team of the week", "Biggest jump", "Mr. Efficiency"], "star": "Parker Washington", "spts": 30.4, "bench": 0.0, "nopp": "I Wrote Back", "nwin": 51, "nproj": 115.0, "streak": "W1"}, "2": {"n": "Relegation Bois", "s": "Bois", "o": "Brandon", "rec": "4-1", "rank": 2, "pow": 3, "pm": 0, "odds": 95, "od": 3, "sc": 136.96, "won": true, "opp": "Bakers Trash", "osc": 108.74, "srank": 5, "aw": ["Boom of the week"], "star": "Jaylen Warren", "spts": 36.8, "bench": 1.7, "nopp": "RIP Dart", "nwin": 38, "nproj": 100.0, "streak": "W1"}, "3": {"n": "Team Soyboys", "s": "Soyboys", "o": "Mike", "rec": "3-2", "rank": 5, "pow": 4, "pm": 0, "odds": 88, "od": 6, "sc": 143.54, "won": true, "opp": "I Wrote Back", "osc": 116.3, "srank": 3, "aw": ["Player of the week", "Bench blunder"], "star": "Jahmyr Gibbs", "spts": 37.7, "bench": 48.2, "nopp": "Toolman Allen", "nwin": 34, "nproj": 123.7, "streak": "W1"}, "4": {"n": "Sunday Skaries", "s": "Skaries", "o": "Marko", "rec": "0-5", "rank": 10, "pow": 10, "pm": 0, "odds": 6, "od": 2, "sc": 140.82, "won": false, "opp": "Toolman Allen", "osc": 162.4, "srank": 4, "aw": ["Heartbreaker"], "star": "Malik Nabers", "spts": 29.1, "bench": 0.0, "nopp": "Bakers Trash", "nwin": 45, "nproj": 119.5, "streak": "L5"}, "5": {"n": "RIP Dart", "s": "RIP Dart", "o": "Anthony", "rec": "3-2", "rank": 6, "pow": 6, "pm": -1, "odds": 74, "od": 10, "sc": 94.92, "won": true, "opp": "Underground Railroaders", "osc": 59.64, "srank": 9, "aw": [], "star": "Trey McBride", "spts": 21.6, "bench": 15.9, "nopp": "Relegation Bois", "nwin": 62, "nproj": 124.8, "streak": "W2"}, "6": {"n": "Underground Railroaders", "s": "Railroaders", "o": "Matt B.", "rec": "2-3", "rank": 8, "pow": 9, "pm": -2, "odds": 29, "od": -23, "sc": 59.64, "won": false, "opp": "RIP Dart", "osc": 94.92, "srank": 10, "aw": ["Biggest drop", "Waiver wizard"], "star": "Jared Goff", "spts": 28.94, "bench": 21.8, "nopp": "OTM", "nwin": 53, "nproj": 119.0, "streak": "L1"}, "7": {"n": "OTM", "s": "OTM", "o": "Bryan", "rec": "3-2", "rank": 4, "pow": 5, "pm": 1, "odds": 79, "od": -3, "sc": 103.28, "won": false, "opp": "Brick Johnson", "osc": 169.08, "srank": 8, "aw": [], "star": "Aaron Rodgers", "spts": 22, "bench": 24.5, "nopp": "Underground Railroaders", "nwin": 47, "nproj": 108.0, "streak": "L1"}, "8": {"n": "I Wrote Back", "s": "Wrote Back", "o": "Ryan", "rec": "2-3", "rank": 7, "pow": 8, "pm": 0, "odds": 28, "od": -3, "sc": 116.3, "won": false, "opp": "Team Soyboys", "osc": 143.54, "srank": 6, "aw": [], "star": "George Pickens", "spts": 28, "bench": 16.2, "nopp": "Brick Johnson", "nwin": 49, "nproj": 117.8, "streak": "L1"}, "9": {"n": "Bakers Trash", "s": "Bakers", "o": "Peter", "rec": "3-2", "rank": 3, "pow": 2, "pm": -1, "odds": 88, "od": -4, "sc": 108.74, "won": false, "opp": "Relegation Bois", "osc": 136.96, "srank": 7, "aw": ["Bust of the week"], "star": "Christian Watson", "spts": 32.3, "bench": 6.9, "nopp": "Sunday Skaries", "nwin": 55, "nproj": 121.4, "streak": "L2"}, "10": {"n": "Toolman Allen", "s": "Toolman", "o": "Alex", "rec": "4-1", "rank": 1, "pow": 1, "pm": 1, "odds": 99, "od": 4, "sc": 162.4, "won": true, "opp": "Sunday Skaries", "osc": 140.82, "srank": 2, "aw": [], "star": "Puka Nacua", "spts": 37.7, "bench": 17.7, "nopp": "Team Soyboys", "nwin": 66, "nproj": 139.9, "streak": "W2"}};
+  var ME={"1": {"n": "Brick Johnson", "s": "Brick", "o": "Matt C.", "rec": "1-4", "rank": 9, "pow": 7, "pm": 2, "odds": 14, "od": 9, "sc": 169.08, "won": true, "opp": "OTM", "osc": 103.28, "srank": 1, "aw": ["Team of the week", "Biggest jump", "Mr. Efficiency"], "star": "Parker Washington", "spts": 30.4, "bench": 0.0, "nopp": "I Wrote Back", "streak": "W1"}, "2": {"n": "Relegation Bois", "s": "Bois", "o": "Brandon", "rec": "4-1", "rank": 2, "pow": 3, "pm": 0, "odds": 95, "od": 3, "sc": 136.96, "won": true, "opp": "Bakers Trash", "osc": 108.74, "srank": 5, "aw": ["Boom of the week"], "star": "Jaylen Warren", "spts": 36.8, "bench": 1.7, "nopp": "RIP Dart", "streak": "W1"}, "3": {"n": "Team Soyboys", "s": "Soyboys", "o": "Mike", "rec": "3-2", "rank": 5, "pow": 4, "pm": 0, "odds": 88, "od": 6, "sc": 143.54, "won": true, "opp": "I Wrote Back", "osc": 116.3, "srank": 3, "aw": ["Player of the week", "Bench blunder"], "star": "Jahmyr Gibbs", "spts": 37.7, "bench": 48.2, "nopp": "Toolman Allen", "streak": "W1"}, "4": {"n": "Sunday Skaries", "s": "Skaries", "o": "Marko", "rec": "0-5", "rank": 10, "pow": 10, "pm": 0, "odds": 6, "od": 2, "sc": 140.82, "won": false, "opp": "Toolman Allen", "osc": 162.4, "srank": 4, "aw": ["Heartbreaker"], "star": "Malik Nabers", "spts": 29.1, "bench": 0.0, "nopp": "Bakers Trash", "streak": "L5"}, "5": {"n": "RIP Dart", "s": "RIP Dart", "o": "Anthony", "rec": "3-2", "rank": 6, "pow": 6, "pm": -1, "odds": 74, "od": 10, "sc": 94.92, "won": true, "opp": "Underground Railroaders", "osc": 59.64, "srank": 9, "aw": [], "star": "Trey McBride", "spts": 21.6, "bench": 15.9, "nopp": "Relegation Bois", "streak": "W2"}, "6": {"n": "Underground Railroaders", "s": "Railroaders", "o": "Matt B.", "rec": "2-3", "rank": 8, "pow": 9, "pm": -2, "odds": 29, "od": -23, "sc": 59.64, "won": false, "opp": "RIP Dart", "osc": 94.92, "srank": 10, "aw": ["Biggest drop", "Waiver wizard"], "star": "Jared Goff", "spts": 28.94, "bench": 21.8, "nopp": "OTM", "streak": "L1"}, "7": {"n": "OTM", "s": "OTM", "o": "Bryan", "rec": "3-2", "rank": 4, "pow": 5, "pm": 1, "odds": 79, "od": -3, "sc": 103.28, "won": false, "opp": "Brick Johnson", "osc": 169.08, "srank": 8, "aw": [], "star": "Aaron Rodgers", "spts": 22, "bench": 24.5, "nopp": "Underground Railroaders", "streak": "L1"}, "8": {"n": "I Wrote Back", "s": "Wrote Back", "o": "Ryan", "rec": "2-3", "rank": 7, "pow": 8, "pm": 0, "odds": 28, "od": -3, "sc": 116.3, "won": false, "opp": "Team Soyboys", "osc": 143.54, "srank": 6, "aw": [], "star": "George Pickens", "spts": 28, "bench": 16.2, "nopp": "Brick Johnson", "streak": "L1"}, "9": {"n": "Bakers Trash", "s": "Bakers", "o": "Peter", "rec": "3-2", "rank": 3, "pow": 2, "pm": -1, "odds": 88, "od": -4, "sc": 108.74, "won": false, "opp": "Relegation Bois", "osc": 136.96, "srank": 7, "aw": ["Bust of the week"], "star": "Christian Watson", "spts": 32.3, "bench": 6.9, "nopp": "Sunday Skaries", "streak": "L2"}, "10": {"n": "Toolman Allen", "s": "Toolman", "o": "Alex", "rec": "4-1", "rank": 1, "pow": 1, "pm": 1, "odds": 99, "od": 4, "sc": 162.4, "won": true, "opp": "Sunday Skaries", "osc": 140.82, "srank": 2, "aw": [], "star": "Puka Nacua", "spts": 37.7, "bench": 17.7, "nopp": "Team Soyboys", "streak": "W2"}};
   var $=function(q,r){return Array.prototype.slice.call((r||document).querySelectorAll(q))};
   var me=null;try{me=localStorage.getItem('ff18_me')}catch(e){}
   function ord(n){var s=['th','st','nd','rd'],v=n%100;return n+(s[(v-20)%10]||s[v]||s[0])}
@@ -938,7 +957,7 @@ table.hm2 th.mine{color:var(--green);border-radius:8px;box-shadow:inset 4px 0 0 
      +'<li><b>Playoff odds</b>'+d.odds+'%'+od+'.</li>'
      +'<li><b>Trophies</b>'+aw+'.</li>'
      +'<li><b>Best player</b>'+d.star+', '+d.spts.toFixed(1)+' points. '+d.bench.toFixed(1)+' points sat on the bench.</li>'
-     +(d.nopp?'<li><b>Next up</b>'+d.nopp+', a '+d.nwin+'% chance to win with '+d.nproj.toFixed(1)+' projected.</li>':'')
+     +(d.nopp?'<li><b>Next up</b>Week 6 against '+d.nopp+'.</li>':'')
      +'</ul>';
     card.hidden=false;
   }
@@ -949,7 +968,7 @@ table.hm2 th.mine{color:var(--green);border-radius:8px;box-shadow:inset 4px 0 0 
   })});
   mark();
 
-  var CM={"t": {"1": {"n": "Brick Johnson", "rec": "1\u20134", "ppg": 120.7, "pag": 142.8, "ap": "24\u201321", "apw": 24, "luck": -1.7, "odds": 14, "pow": 7, "iq": 87, "pw": 4.7, "wins": 1, "best": "WR (#1)", "worst": "TE (#10)"}, "2": {"n": "Relegation Bois", "rec": "4\u20131", "ppg": 131.0, "pag": 118.3, "ap": "30\u201315", "apw": 30, "luck": 0.7, "odds": 95, "pow": 3, "iq": 91, "pw": 8.8, "wins": 4, "best": "DST (#1)", "worst": "K (#10)"}, "3": {"n": "Team Soyboys", "rec": "3\u20132", "ppg": 123.5, "pag": 104.9, "ap": "22\u201323", "apw": 22, "luck": 0.6, "odds": 88, "pow": 4, "iq": 79, "pw": 8.0, "wins": 3, "best": "RB (#1)", "worst": "QB (#10)"}, "4": {"n": "Sunday Skaries", "rec": "0\u20135", "ppg": 111.1, "pag": 122.4, "ap": "13\u201332", "apw": 13, "luck": -1.4, "odds": 6, "pow": 10, "iq": 91, "pw": 3.9, "wins": 0, "best": "QB (#5)", "worst": "RB (#9)"}, "5": {"n": "RIP Dart", "rec": "3\u20132", "ppg": 114.1, "pag": 100.7, "ap": "18\u201327", "apw": 18, "luck": 1.0, "odds": 74, "pow": 6, "iq": 86, "pw": 7.6, "wins": 3, "best": "TE (#1)", "worst": "QB (#9)"}, "6": {"n": "Underground Railroaders", "rec": "2\u20133", "ppg": 108.4, "pag": 137.4, "ap": "17\u201328", "apw": 17, "luck": 0.1, "odds": 29, "pow": 9, "iq": 82, "pw": 5.9, "wins": 2, "best": "QB (#2)", "worst": "WR (#10)"}, "7": {"n": "OTM", "rec": "3\u20132", "ppg": 123.6, "pag": 129.7, "ap": "25\u201320", "apw": 25, "luck": 0.2, "odds": 79, "pow": 5, "iq": 89, "pw": 7.6, "wins": 3, "best": "WR (#2)", "worst": "DST (#10)"}, "8": {"n": "I Wrote Back", "rec": "2\u20133", "ppg": 110.2, "pag": 124.6, "ap": "18\u201327", "apw": 18, "luck": 0.0, "odds": 28, "pow": 8, "iq": 89, "pw": 5.8, "wins": 2, "best": "QB (#4)", "worst": "RB (#10)"}, "9": {"n": "Bakers Trash", "rec": "3\u20132", "ppg": 124.0, "pag": 109.9, "ap": "26\u201319", "apw": 26, "luck": 0.1, "odds": 88, "pow": 2, "iq": 86, "pw": 8.1, "wins": 3, "best": "TE (#2)", "worst": "QB (#8)"}, "10": {"n": "Toolman Allen", "rec": "4\u20131", "ppg": 139.9, "pag": 115.7, "ap": "32\u201313", "apw": 32, "luck": 0.4, "odds": 99, "pow": 1, "iq": 88, "pw": 9.7, "wins": 4, "best": "QB (#1)", "worst": "WR (#8)"}}, "s": {"1": {"2": [8, 8], "3": [12, 2], "4": [6, 6], "5": [9, 8], "6": [9, 8], "7": [9, 6], "8": [7, 6], "9": [10, 9], "10": [5, 5]}, "2": {"1": [8, 8], "3": [7, 10], "4": [8, 7], "5": [6, 6], "6": [7, 12], "7": [10, 3], "8": [7, 4], "9": [10, 13], "10": [1, 6]}, "3": {"1": [2, 12], "2": [10, 7], "4": [8, 7], "5": [7, 10], "6": [11, 5], "7": [6, 10], "8": [9, 8], "9": [7, 6], "10": [1, 4]}, "4": {"1": [6, 6], "2": [7, 8], "3": [7, 8], "5": [13, 7], "6": [3, 6], "7": [10, 8], "8": [9, 13], "9": [6, 2], "10": [1, 9]}, "5": {"1": [8, 9], "2": [6, 6], "3": [10, 7], "4": [7, 13], "6": [7, 7], "7": [5, 10], "8": [4, 9], "9": [9, 5], "10": [4, 5]}, "6": {"1": [8, 9], "2": [12, 7], "3": [5, 11], "4": [6, 3], "5": [7, 7], "7": [9, 6], "8": [11, 4], "9": [5, 12], "10": [3, 5]}, "7": {"1": [6, 9], "2": [3, 10], "3": [10, 6], "4": [8, 10], "5": [10, 5], "6": [6, 9], "8": [8, 6], "9": [8, 4], "10": [2, 11]}, "8": {"1": [6, 7], "2": [4, 7], "3": [8, 9], "4": [13, 9], "5": [9, 4], "6": [4, 11], "7": [6, 8], "9": [5, 10], "10": [5, 8]}, "9": {"1": [9, 10], "2": [13, 10], "3": [6, 7], "4": [2, 6], "5": [5, 9], "6": [12, 5], "7": [4, 8], "8": [10, 5], "10": [3, 8]}, "10": {"1": [5, 5], "2": [6, 1], "3": [4, 1], "4": [9, 1], "5": [5, 4], "6": [5, 3], "7": [11, 2], "8": [8, 5], "9": [8, 3]}}, "d": ["1", "8"]};
+  var CM={"t": {"1": {"n": "Brick Johnson", "rec": "1\u20134", "ppg": 120.7, "pag": 142.8, "ap": "24\u201321", "apw": 24, "luck": -1.7, "odds": 14, "pow": 7, "iq": 87, "pw": 4.7, "wins": 1, "best": "WR (#1)", "worst": "TE (#10)"}, "2": {"n": "Relegation Bois", "rec": "4\u20131", "ppg": 131.0, "pag": 118.3, "ap": "30\u201315", "apw": 30, "luck": 0.7, "odds": 95, "pow": 3, "iq": 91, "pw": 8.8, "wins": 4, "best": "DST (#1)", "worst": "K (#10)"}, "3": {"n": "Team Soyboys", "rec": "3\u20132", "ppg": 123.5, "pag": 104.9, "ap": "22\u201323", "apw": 22, "luck": 0.6, "odds": 88, "pow": 4, "iq": 79, "pw": 8.0, "wins": 3, "best": "RB (#1)", "worst": "QB (#10)"}, "4": {"n": "Sunday Skaries", "rec": "0\u20135", "ppg": 111.1, "pag": 122.4, "ap": "13\u201332", "apw": 13, "luck": -1.4, "odds": 6, "pow": 10, "iq": 91, "pw": 3.9, "wins": 0, "best": "QB (#5)", "worst": "RB (#9)"}, "5": {"n": "RIP Dart", "rec": "3\u20132", "ppg": 114.1, "pag": 100.7, "ap": "18\u201327", "apw": 18, "luck": 1.0, "odds": 74, "pow": 6, "iq": 86, "pw": 7.6, "wins": 3, "best": "TE (#1)", "worst": "QB (#9)"}, "6": {"n": "Underground Railroaders", "rec": "2\u20133", "ppg": 108.4, "pag": 137.4, "ap": "17\u201328", "apw": 17, "luck": 0.1, "odds": 29, "pow": 9, "iq": 82, "pw": 5.9, "wins": 2, "best": "QB (#2)", "worst": "WR (#10)"}, "7": {"n": "OTM", "rec": "3\u20132", "ppg": 123.6, "pag": 129.7, "ap": "25\u201320", "apw": 25, "luck": 0.2, "odds": 79, "pow": 5, "iq": 89, "pw": 7.6, "wins": 3, "best": "WR (#2)", "worst": "DST (#10)"}, "8": {"n": "I Wrote Back", "rec": "2\u20133", "ppg": 110.2, "pag": 124.6, "ap": "18\u201327", "apw": 18, "luck": 0.0, "odds": 28, "pow": 8, "iq": 89, "pw": 5.8, "wins": 2, "best": "QB (#4)", "worst": "RB (#10)"}, "9": {"n": "Bakers Trash", "rec": "3\u20132", "ppg": 124.0, "pag": 109.9, "ap": "26\u201319", "apw": 26, "luck": 0.1, "odds": 88, "pow": 2, "iq": 86, "pw": 8.1, "wins": 3, "best": "TE (#2)", "worst": "QB (#8)"}, "10": {"n": "Toolman Allen", "rec": "4\u20131", "ppg": 139.9, "pag": 115.7, "ap": "32\u201313", "apw": 32, "luck": 0.4, "odds": 99, "pow": 1, "iq": 88, "pw": 9.7, "wins": 4, "best": "QB (#1)", "worst": "WR (#8)"}}, "s": {"1": {"2": [8, 8], "3": [12, 2], "4": [6, 6], "5": [9, 8], "6": [9, 8], "7": [9, 6], "8": [7, 6], "9": [10, 9], "10": [5, 5]}, "2": {"1": [8, 8], "3": [7, 10], "4": [8, 7], "5": [6, 6], "6": [7, 12], "7": [10, 3], "8": [7, 4], "9": [10, 13], "10": [1, 6]}, "3": {"1": [2, 12], "2": [10, 7], "4": [8, 7], "5": [7, 10], "6": [11, 5], "7": [6, 10], "8": [9, 8], "9": [7, 6], "10": [1, 4]}, "4": {"1": [6, 6], "2": [7, 8], "3": [7, 8], "5": [13, 7], "6": [3, 6], "7": [10, 8], "8": [9, 13], "9": [6, 2], "10": [1, 9]}, "5": {"1": [8, 9], "2": [6, 6], "3": [10, 7], "4": [7, 13], "6": [7, 7], "7": [5, 10], "8": [4, 9], "9": [9, 5], "10": [4, 5]}, "6": {"1": [8, 9], "2": [12, 7], "3": [5, 11], "4": [6, 3], "5": [7, 7], "7": [9, 6], "8": [11, 4], "9": [5, 12], "10": [3, 5]}, "7": {"1": [6, 9], "2": [3, 10], "3": [10, 6], "4": [8, 10], "5": [10, 5], "6": [6, 9], "8": [8, 6], "9": [8, 4], "10": [2, 11]}, "8": {"1": [6, 7], "2": [4, 7], "3": [8, 9], "4": [13, 9], "5": [9, 4], "6": [4, 11], "7": [6, 8], "9": [5, 10], "10": [5, 8]}, "9": {"1": [9, 10], "2": [13, 10], "3": [6, 7], "4": [2, 6], "5": [5, 9], "6": [12, 5], "7": [4, 8], "8": [10, 5], "10": [3, 8]}, "10": {"1": [5, 5], "2": [6, 1], "3": [4, 1], "4": [9, 1], "5": [5, 4], "6": [5, 3], "7": [11, 2], "8": [8, 5], "9": [8, 3]}}, "d": ["3", "10"]};
   var cA=document.getElementById('cmA'),cB=document.getElementById('cmB');
   if(cA){
     cA.value=CM.d[0];cB.value=CM.d[1];
@@ -979,16 +998,15 @@ table.hm2 th.mine{color:var(--green);border-radius:8px;box-shadow:inset 4px 0 0 
   var pk={};try{pk=JSON.parse(localStorage.getItem('ff18_w6')||'{}')}catch(e){}
   var box=document.getElementById('pks');
   if(box){
-    var fav=JSON.parse(box.getAttribute('data-fav'));
     function paint(){
-      var n=0,dogs=0;
+      var n=0;
       $('.pk',box).forEach(function(row){
         var g=row.getAttribute('data-g');
         $('button',row).forEach(function(b){b.classList.toggle('on',pk[g]===b.getAttribute('data-w'))});
-        if(pk[g]){n++;if(pk[g]!==fav[g])dogs++}
+        if(pk[g])n++;
       });
       var out=document.getElementById('pkout'),tot=$('.pk',box).length;
-      out.textContent=n?('You picked '+n+' of '+tot+' games'+(n===tot?' ('+dogs+' against the projection).':'. '+(tot-n)+' to go.')):'';
+      out.textContent=n?('You picked '+n+' of '+tot+' games'+(n===tot?'. All locked in.':'. '+(tot-n)+' to go.')):'';
       try{localStorage.setItem('ff18_w6',JSON.stringify(pk))}catch(e){}
     }
     $('.pk button',box).forEach(function(b){b.addEventListener('click',function(){
