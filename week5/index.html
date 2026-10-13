@@ -1,0 +1,673 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>FF2018 Week 5 Recap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0B0C0B; --ink:#0B0C0B; --line:#D5D9D6; --wash:#F2F4F2; --white:#FFFFFF;
+  --green:#087F42; --green-hi:#22C06E; --g1:#087F42; --g2:#5DAA7F; --g3:#BFE0CC; --g4:#EAF4EE; --dog:#D9DDDA;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:60px}
+html,body{margin:0;padding:0;background:var(--white);color:var(--ink)}
+body{font-family:'Inter',"Segoe UI",-apple-system,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%;font-variant-numeric:tabular-nums;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+.wrap{max-width:1320px;margin:0 auto;padding:0 40px}
+a{color:inherit}
+
+/* nav */
+nav.top{position:sticky;top:0;z-index:10;background:var(--black);color:var(--white);border-bottom:1px solid #26292A}
+nav.top .wrap{display:flex;align-items:center;gap:30px;height:50px}
+.logo{font-family:'Archivo Black',sans-serif;font-size:17px;text-decoration:none;color:var(--white)}
+.links{display:flex;gap:22px;overflow-x:auto;scrollbar-width:none}
+.links::-webkit-scrollbar{display:none}
+.links a{white-space:nowrap;text-decoration:none;font-size:14.5px;font-weight:600;color:var(--white);padding:4px 0;border-bottom:2px solid transparent}
+.links a:hover{border-bottom-color:var(--green-hi)}
+
+/* hero */
+.hero{background:var(--black);color:var(--white);padding:34px 0 36px}
+.eyebrow{color:var(--green-hi);font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.hero h1{margin:10px 0 0;font-family:'Archivo Black',sans-serif;font-weight:400;font-size:clamp(44px,7vw,92px);line-height:.92}
+.hero h1 span{color:var(--green-hi)}
+.hstats{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:28px;margin-top:30px}
+.hstats span{display:block;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.hstats b{display:block;font-family:'Inter',sans-serif;font-weight:800;font-size:36px;letter-spacing:-.01em;line-height:1;color:var(--green-hi);margin-top:8px;white-space:nowrap}
+.hstats p{margin:7px 0 0;font-size:15px;line-height:1.35}
+
+/* layout */
+.card{padding:44px 0 4px;min-width:0}
+.card+.card{margin-top:40px;border-top:1px solid var(--line)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 64px;align-items:start}
+.split h3{margin-top:0}
+.split.wide{grid-template-columns:minmax(0,3fr) minmax(0,2fr)}
+.ch{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin-bottom:14px}
+.ch .sn{font-weight:800;color:var(--green);font-size:18px}
+.ch h2{margin:0;font-family:'Archivo Black',sans-serif;font-weight:400;font-size:clamp(24px,2.6vw,32px);line-height:1.1}
+.ch p{flex-basis:100%;margin:6px 0 0;font-size:15.5px;font-weight:500}
+.ch p.take{margin-top:10px;font-size:18px;font-weight:700;line-height:1.4}
+.ch p.take+p{margin-top:2px}
+.card h3{margin:22px 0 10px;font-size:17px;font-weight:800}
+.note{margin:14px 0 0;font-size:14.5px}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+/* tables */
+table{border-collapse:collapse}
+table.data{width:100%;font-size:15.5px}
+table.data th{font-size:13px;letter-spacing:.03em;text-transform:uppercase;font-weight:800;text-align:right;padding:0 7px 9px;white-space:nowrap;vertical-align:bottom}
+table.data td{padding:10px 8px;text-align:right;white-space:nowrap}
+table.data .l{text-align:left}
+table.data td.b{font-weight:800}
+table.data tr:hover td{background:var(--wash)}
+
+/* standings */
+.st td.seed{text-align:left;font-weight:800;font-size:18px;width:28px}
+.st td.seed.in{color:var(--green)}
+.st td,.st th{padding-left:5px;padding-right:5px}
+.st td{padding-top:7px;padding-bottom:7px}
+.st td.team b{display:block;font-weight:700;line-height:1.25}
+.st td.team .ow{display:block;font-size:14px;line-height:1.25}
+.st td.pos{color:var(--green);font-weight:700}
+.st td.neg{font-weight:700}
+.st td.last i{display:inline-block;width:18px;font-style:normal;font-weight:800}
+.st td.last i.w{color:var(--green)}
+.st td.odds{min-width:98px}
+.st td.odds .trk{display:inline-block;vertical-align:middle;width:50px;height:14px;background:var(--g4);border-radius:2px;overflow:hidden}
+.st td.odds .trk i{display:block;height:14px;background:var(--green)}
+.st td.odds .trk i.dim{background:var(--black)}
+.st td.odds b{display:inline-block;width:46px;text-align:right;font-weight:800;font-size:16px}
+.st td.pw{font-weight:700;text-align:center;white-space:nowrap}
+.st td.pw b{display:inline-block;width:22px;text-align:right;font-weight:700}
+.st td.pw i{display:inline-block;width:30px;margin-left:6px;text-align:left;font-style:normal;font-size:12.5px;font-weight:800}
+.st th.pwh{text-align:center}
+.st td.pw .up{color:var(--green)}
+.st td.pw .dn{color:#C8102E}
+.st tr.cut td{padding:0}
+.st tr.cut span{display:block;border-top:2px solid var(--green);text-align:left;font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--green);padding:6px 0 4px}
+.st tr.cut:hover td{background:none}
+
+/* head to head */
+.h2h th{text-align:center}
+.h2h th.l{font-size:15.5px;letter-spacing:0;text-transform:none;font-weight:700;padding-right:10px;vertical-align:middle}
+.h2h td{text-align:center;padding:8px 4px;min-width:50px;border-bottom:1px solid var(--line);font-weight:500}
+.h2h td.x{background:var(--wash)}
+.h2h td.lead{color:var(--green);font-weight:800}
+.h2h td.b{text-align:right;font-weight:800}
+
+/* svg visuals: drawn at native size on desktop, scaled down on narrow screens */
+.viz{overflow-x:auto;-webkit-overflow-scrolling:touch}
+/* phone versions of the wide visuals */
+.mv,.ab{display:none}
+.key{font-size:13.5px;margin:12px 0 0;line-height:1.6}
+.ladder.m .cl{font-size:13px}
+.ladder.m .wk,.ladder.m .rk{font-size:14px}
+.board.m .mt{font-size:16px}
+.board.m .mn{font-size:14px}
+.board.m .ls,.board.m .ws{font-size:14.5px}
+.luck.m .ln{font-size:16px}
+.luck.m .sub{font-size:13.5px}
+.luck.m .lv{font-size:15px}
+.luck.m .ph{font-size:14px;font-weight:800}
+.calls.m .ln{font-size:16px}
+.calls.m .in{font-size:13.5px}
+@media (max-width:1000px){
+  .dv{display:none}
+  .mv{display:block}
+  .mv svg{width:100%;max-width:560px;height:auto}
+}
+.viz svg,.tc svg{display:block;max-width:100%;height:auto;overflow:visible}
+svg text{font-family:'Inter',"Segoe UI",sans-serif;fill:var(--black)}
+svg .tk{font-size:13px;font-weight:600}
+svg .gl{stroke:var(--line);stroke-width:1}
+svg .b,svg tspan.b{font-weight:800}
+svg .up{fill:var(--green);font-weight:800;font-size:13px}
+svg .dn{fill:#C8102E;font-weight:800;font-size:13px}
+
+/* race */
+.ladder .wk{font-size:14.5px;font-weight:800}
+.ladder .rk{font-size:15px;font-weight:800}
+.ladder .cutln{stroke:var(--green);stroke-width:2}
+.ladder rect.in{fill:var(--g4);stroke:var(--g3);stroke-width:1}
+.ladder rect.out{fill:#fff;stroke:var(--line);stroke-width:1}
+.ladder .cl{font-size:14.5px;font-weight:700}
+.ladder .cn{stroke:#C4C9C6;stroke-width:1.5}
+.ladder g:hover .cn{stroke:var(--black);stroke-width:2.5}
+.ladder g:hover rect{stroke:var(--black);stroke-width:2}
+
+/* week on one scale, lineup calls */
+.board .gw{font-size:17px;font-weight:800}
+.board .gs{font-size:14.5px}
+svg .gap{stroke:var(--g3);stroke-width:8;stroke-linecap:round}
+svg .wd{fill:var(--green)}
+svg .ld{fill:var(--black)}
+.board .ws{font-size:15px;font-weight:800;fill:var(--green)}
+.board .ls{font-size:15px;font-weight:700}
+.board .note{font-size:15px}
+.calls .ln,.luck .ln{font-size:15.5px}
+.calls .sc{fill:var(--dog)}
+.calls .bc{fill:var(--green)}
+.calls .in{font-size:14px;font-weight:600}
+svg tspan.g{fill:var(--green)}
+
+/* team cards */
+.tcs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:34px 20px}
+.tc{border-top:2px solid var(--black);padding-top:12px;min-width:0}
+.tc header{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:start;min-height:64px}
+.tc .sd{font-family:'Archivo Black',sans-serif;font-size:24px;line-height:1;color:var(--black)}
+.tc .tn b{display:block;font-size:16px;font-weight:800;line-height:1.2}
+.tc .tn span{display:block;font-size:14px}
+.tc .od{text-align:right}
+.tc .od b{display:block;font-size:20px;font-weight:800;line-height:1;color:var(--green)}
+.tc .od span{display:block;font-size:12px;font-weight:700}
+.tc svg{margin:14px 0 6px}
+.spark .avg{stroke:var(--black);stroke-width:1;stroke-dasharray:4 4}
+.spark polyline{fill:none;stroke:var(--black);stroke-width:1.25}
+.spark .w{fill:var(--green)}
+.spark .l{fill:#fff;stroke:var(--black);stroke-width:2}
+.spark .sv{font-size:13.5px;font-weight:600}
+.spark .sv.w{fill:var(--green);font-weight:800}
+.tc dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:3px 8px;margin:12px 0 0;font-size:13.5px}
+.tc dt{font-weight:700}
+.tc dd{margin:0;text-align:right;white-space:nowrap}
+
+/* luck */
+.luck .ph{font-size:14.5px;font-weight:800}
+.luck .axis{stroke:var(--black);stroke-width:1.5}
+.luck .bp{fill:var(--green)}
+.luck .bn{fill:var(--black)}
+.luck .lv{font-size:15px;font-weight:800}
+.luck .lv.pos{fill:var(--green)}
+
+/* lineup calls list */
+ul.bl{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 48px;font-size:15px}
+ul.bl li{padding:8px 0;border-top:1px solid var(--line)}
+ul.bl li span{display:inline-block;width:54px;font-weight:800;color:var(--green)}
+
+/* waiver wire */
+.wire{display:grid;gap:10px}
+.wr{display:grid;grid-template-columns:100px minmax(0,1fr) 190px;gap:14px;align-items:center;font-size:15px}
+.uq{display:flex;flex-wrap:wrap;gap:4px}
+.uq i{display:block;width:18px;height:18px;border:2px solid var(--green);background:#fff}
+.uq i.on{background:var(--green)}
+.uq em{font-style:normal;font-weight:600}
+.wr>span{white-space:nowrap;text-align:right}
+ol.tp{list-style:none;margin:0;padding:0}
+ol.tp li{display:grid;grid-template-columns:70px minmax(0,1fr);gap:14px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+ol.tp strong{font-family:'Archivo Black',sans-serif;font-weight:400;font-size:24px;color:var(--green)}
+ol.tp b{display:block;font-size:16px;font-weight:800}
+ol.tp span{display:block;font-size:14.5px}
+
+/* next week */
+.tugs{display:grid;gap:4px}
+.tug{display:grid;grid-template-columns:250px minmax(0,1fr) 250px;gap:6px 22px;align-items:center;padding:14px 0;border-top:1px solid var(--line)}
+.tl b{display:block;font-size:17px;font-weight:800}
+.tl span{display:block;font-size:14.5px}
+.tl.r{text-align:right}
+.tb{display:flex;height:34px}
+.tb i{display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:800;font-size:15px;min-width:44px}
+.tb i.f{background:var(--green);color:#fff}
+.tb i.d{background:var(--dog);color:var(--black)}
+.tug p{grid-column:1/-1;margin:0;font-size:14.5px;text-align:center}
+
+/* superlatives + rivalry cards */
+.sups{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:30px 24px}
+.sups.three{grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:34px}
+.sup{border-top:2px solid var(--black);padding-top:12px}
+.sup span{display:block;font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+.sup b{display:block;font-family:'Archivo Black',sans-serif;font-weight:400;font-size:34px;line-height:1.1;color:var(--green);margin-top:8px}
+.sup strong{display:block;font-size:16.5px;font-weight:800;margin-top:6px}
+.sup p{margin:2px 0 0;font-size:14.5px}
+
+/* tale of the tape */
+.tape{max-width:860px;margin:6px auto 34px;border-top:2px solid var(--black);padding-top:16px}
+.tape-h{display:grid;grid-template-columns:minmax(0,1fr) auto auto auto minmax(0,1fr);gap:18px;align-items:center}
+.tape-h b{display:block;font-family:'Archivo Black',sans-serif;font-weight:400;font-size:24px;line-height:1.1}
+.tape-h span{display:block;font-size:15px}
+.tape-h .r{text-align:right}
+.tape-h b span{font-size:inherit}
+.tape-h b .ab{display:none}
+.tape-h strong{font-family:'Archivo Black',sans-serif;font-weight:400;font-size:30px;color:var(--green)}
+.tape-h em{font-style:normal;font-weight:800;font-size:15px}
+.tape table{width:100%;border-collapse:collapse;margin-top:16px;font-size:16px}
+.tape td,.tape th{padding:10px 8px;border-top:1px solid var(--line)}
+.tape th{text-align:center;font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;width:34%}
+.tape td.h{text-align:left}
+.tape td.a{text-align:right}
+.tape td.up{color:var(--green);font-weight:800}
+.tape p{margin:12px 0 0;text-align:center;font-size:15px}
+
+footer{margin-top:64px;background:var(--black);color:var(--white);padding:22px 0 28px;font-size:14.5px}
+
+@media (max-width:1180px){
+  .hstats{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .tcs{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .sups{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .split,.split.wide{grid-template-columns:minmax(0,1fr);gap:28px}
+}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  nav.top .wrap{gap:18px}
+  .hero{padding:26px 0 28px}
+  .hstats{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 18px}
+  .hstats b{font-size:29px}
+  .card{padding-top:34px}
+  .card+.card{margin-top:30px}
+  .tcs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  ul.bl{grid-template-columns:minmax(0,1fr)}
+  .sups,.sups.three{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tug{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .tug .tb{grid-column:1/-1;grid-row:2}
+  .wr{grid-template-columns:90px minmax(0,1fr)}
+  .wr>span{grid-column:2;text-align:left}
+}
+@media (max-width:480px){.tcs{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:640px){
+  body{font-size:14.5px}
+  .ch h2{font-size:22px}
+  .ch .sn{font-size:15px}
+  .ch p{font-size:14px}
+  .ch p.take{font-size:15.5px}
+  .card h3{font-size:15px}
+  .note{font-size:13px}
+  ul.bl{font-size:13.5px}
+  .hstats p{font-size:13.5px}
+  .tl b{font-size:15px}
+  .tl span,.tug p{font-size:13px}
+  ol.tp b{font-size:14.5px}
+  ol.tp span{font-size:13px}
+  ol.tp strong{font-size:20px}
+  .sup strong{font-size:14.5px}
+  .sup p{font-size:13px}
+  .sup span{font-size:11.5px}
+  table.data{font-size:13px}
+  table.data th{font-size:10px;padding:0 4px 8px}
+  .st .hm,.st td.team .ow,.st td.odds .trk{display:none}
+  table.data.st td,table.data.st th{padding:8px 3px}
+  table.data.st{font-size:12.5px}
+  table.data.st td.team{white-space:nowrap}
+  .st td.team b{font-size:12.5px}
+  .st td.seed{font-size:13.5px;width:auto}
+  .st td.odds{min-width:0}
+  .st td.odds b{width:auto;font-size:12.5px}
+  .st td.pw b{width:14px}
+  .st td.pw i{width:22px;margin-left:3px;font-size:10.5px}
+  .fn{display:none}
+  .ab{display:inline}
+  table.data.h2h{font-size:13px}
+  table.data.h2h th{font-size:11px;padding:0 2px 6px}
+  table.data.h2h th.l{font-size:13px;padding:0 8px 0 0;position:sticky;left:0;z-index:1;background:#fff;border-right:2px solid var(--black)}
+  table.data.h2h td{min-width:44px;padding:8px 3px;font-size:13px}
+  .sup b{font-size:27px}
+  .uq i{width:12px;height:12px;border-width:1.5px}
+  .uq{gap:3px}
+  .wr{row-gap:3px}
+  .wr>span{font-size:13.5px}
+  .tape-h{gap:6px}
+  .tape-h b .fn{display:none}
+  .tape-h b .ab{display:block}
+  .tape-h b{font-size:17px}
+  .tape-h strong{font-size:20px}
+  .tape-h em{font-size:13px}
+  .tape table{font-size:14.5px}
+  .tape th{font-size:11px}
+  .tc{display:grid;grid-template-columns:200px minmax(0,1fr);column-gap:12px;align-items:center}
+  .tc header{grid-column:1/-1;min-height:0}
+  .tc svg{width:200px;margin:8px 0 0}
+  .tc dl{grid-template-columns:minmax(0,1fr);gap:0;margin:8px 0 0;font-size:13px}
+  .tc dt{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;margin-top:6px}
+  .tc dt:first-child{margin-top:0}
+  .tc dd{text-align:left;font-weight:600;white-space:normal}
+  .tcs{gap:26px}
+}
+@media print{nav.top{position:static}.card{break-inside:avoid}}
+
+/* ---- awards, all-league team, power tiers, recaps, score strip, skill vs luck (league palette) ---- */
+.hero .tagline{margin:14px 0 0;font-size:clamp(17px,2vw,21px);font-weight:600;color:var(--white);max-width:760px;line-height:1.4}
+.tm{display:inline;font-weight:inherit;white-space:normal}
+.tm i{display:none}
+
+/* awards */
+.aws{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:30px 24px}
+.aw{border-top:2px solid var(--black);padding-top:12px;min-width:0}
+.aw .em{display:none}
+.aw>span{display:block;font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+.aw strong{display:block;font-family:'Archivo Black',sans-serif;font-weight:400;font-size:34px;line-height:1.1;color:var(--green);margin-top:8px}
+.aw>div{font-size:16.5px;font-weight:800;margin-top:6px}
+.aw p{margin:2px 0 0;font-size:14.5px}
+
+/* all-league team of the week */
+.totw{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,1.2fr);gap:44px;align-items:start}
+.lus{border-top:2px solid var(--black)}
+.lu{display:grid;grid-template-columns:54px minmax(0,1.5fr) minmax(0,1fr) 56px;gap:14px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.lu:first-child{border-top:0}
+.lu .ps{font-size:13px;font-weight:800;letter-spacing:.04em;color:var(--green)}
+.lu .pn b{display:block;font-size:16px;font-weight:800}
+.lu .pn .tm{font-size:14px;font-weight:500}
+.lu .bn{font-style:normal;font-size:12px;font-weight:800;color:var(--green);margin-left:8px;text-transform:uppercase;letter-spacing:.04em}
+.lu .bar{height:14px;background:var(--g4);border-radius:2px;overflow:hidden}
+.lu .bar i{display:block;height:100%;background:var(--green)}
+.lu strong{text-align:right;font-weight:800;font-size:17px}
+.totw aside{border-top:2px solid var(--black);padding-top:12px}
+.totw aside span{display:block;font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+.totw aside b{display:block;font-family:'Archivo Black',sans-serif;font-weight:400;font-size:46px;line-height:1.1;color:var(--green);margin-top:8px}
+.totw aside p{font-size:14.5px;margin:8px 0 0}
+
+/* power rankings */
+.pw{display:grid;gap:0}
+.tier{margin:26px 0 0;display:block;font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--green);border-top:2px solid var(--green);padding:6px 0 0}
+.tier:first-child{margin-top:0}
+.tier i{display:none}
+.pr{display:grid;grid-template-columns:40px 44px minmax(0,1fr) 230px;gap:10px 16px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+.tier+.pr{border-top:0}
+.pr .n{font-family:'Archivo Black',sans-serif;font-weight:400;font-size:28px;text-align:center}
+.pr>em{font-style:normal;font-weight:800;font-size:13px;text-align:center}
+em.up{color:var(--green)}em.dn{color:#C8102E}em.nc{color:var(--black)}
+.pr .who strong{display:block;font-size:18px;font-weight:800}
+.pr .who span{display:block;font-size:14.5px}
+.pr .who p{margin:2px 0 0;font-size:14.5px}
+.pr .od{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:2px 8px;align-items:center}
+.pr .od .trk{height:14px;background:var(--g4);border-radius:2px;overflow:hidden}
+.pr .od .trk i{display:block;height:100%;background:var(--green)}
+.pr .od b{font-size:17px;font-weight:800}
+.pr .od em{font-style:normal;font-size:13px;font-weight:800}
+.pr .od span{grid-column:1/-1;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+
+/* game recaps */
+.rcs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 48px}
+.rc{border-top:2px solid var(--black);padding-top:12px}
+.rc .tg{display:block;font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--green)}
+.rc h4{margin:6px 0 6px;font-size:17px;font-weight:800;line-height:1.45}
+.rc h4 em{font-style:normal;font-family:'Archivo Black',sans-serif;font-weight:400;color:var(--green);margin:0 2px}
+.rc p{margin:0;font-size:15px}
+.rc p.st{margin-top:6px;font-size:14px}
+
+/* every score */
+.strip{position:relative;padding-top:26px}
+.strip .ax{position:absolute;left:78px;right:206px;top:0;height:calc(100% - 4px);pointer-events:none}
+.strip .ax em{position:absolute;top:0;transform:translateX(-50%);font-style:normal;font-size:12.5px;font-weight:700}
+.strip .ax>span{position:absolute;top:22px;bottom:0;width:0;border-left:1px dashed var(--black)}
+.sr{display:grid;grid-template-columns:70px minmax(0,1fr) 190px;gap:8px;align-items:center;padding:7px 0;border-top:1px solid var(--line)}
+.sr b{font-weight:800;font-size:14.5px}
+.sr .tr{position:relative;height:30px;background:linear-gradient(var(--g4),var(--g4)) center/100% 4px no-repeat}
+.sr .tr i{position:absolute;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--black);border:2px solid #fff}
+.sr .tr i.w{background:var(--green)}
+.sr .tr i:hover{transform:scale(1.4);z-index:2}
+.sr span{font-size:13px;font-weight:500;line-height:1.3}
+.sr.cur{background:var(--g4);border-top-color:transparent}
+
+/* skill vs luck */
+.quad{position:relative;height:460px;border-top:2px solid var(--black);border-bottom:1px solid var(--line);margin-top:14px;overflow:hidden}
+.quad .qa{position:absolute;top:0;bottom:0;width:0;border-left:1px dashed var(--black)}
+.quad .qb{position:absolute;left:0;right:0;top:50%;border-top:1px dashed var(--black)}
+.quad>em{position:absolute;font-style:normal;font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--green)}
+.q1{left:0;top:10px}.q2{right:0;top:10px}.q3{left:0;bottom:10px}.q4{right:0;bottom:10px}
+.quad .ya,.quad .yb,.quad .xa{position:absolute;font-size:12px;font-weight:600}
+.quad .ya{left:50%;top:40px;margin-left:8px}.quad .yb{left:50%;bottom:40px;margin-left:8px}.quad .xa{right:0;top:50%;margin-top:6px}
+.pt{position:absolute;transform:translate(-50%,50%);display:flex;align-items:center;background:#fff;border:2px solid var(--black);border-radius:3px;padding:2px 9px;font-size:13px}
+.pt:hover{background:var(--black);color:#fff;z-index:3}
+.pt i{display:none}
+.pt b{font-weight:800}
+
+.mtag{font-style:normal;font-weight:800;color:var(--green);text-transform:uppercase;letter-spacing:.04em;margin-right:6px;font-size:12.5px}
+
+@media (max-width:1180px){
+  .aws{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .totw{grid-template-columns:minmax(0,1fr)}
+  .rcs{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:760px){
+  .aws{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .aw strong{font-size:27px}
+  .aw>span{font-size:12px}
+  .aw>div{font-size:14.5px}
+  .aw p{font-size:13px}
+  .lu{grid-template-columns:42px minmax(0,1fr) 48px;padding:9px 0}
+  .lu .bar{display:none}
+  .lu .pn b{font-size:14.5px}
+  .pr{grid-template-columns:30px 34px minmax(0,1fr);gap:6px 10px}
+  .pr .n{font-size:22px}
+  .pr .od{grid-column:1/-1}
+  .pr .who strong{font-size:16px}
+  .sr{grid-template-columns:44px minmax(0,1fr)}
+  .sr span{grid-column:1/-1;font-size:12px}
+  .strip .ax{left:52px;right:0}
+  .sr .tr i{width:13px;height:13px;margin:-6.5px 0 0 -6.5px}
+  .quad{height:420px}
+  .quad>em{font-size:12px}
+  .pt b{font-size:12px}
+}
+@media (max-width:480px){.aws{grid-template-columns:minmax(0,1fr)}}
+
+</style>
+</head>
+<body>
+<nav class="top"><div class="wrap">
+  <a class="logo" href="#">FF2018</a>
+  <div class="links"><a href="#awards">Awards</a><a href="#totw">All-league</a><a href="#power">Power</a><a href="#standings">Standings</a><a href="#race">Race</a><a href="#week">Week 5</a><a href="#strip">Scores</a><a href="#sups">Superlatives</a><a href="#teams">Teams</a><a href="#luck">Luck</a><a href="#calls">Lineups</a><a href="#wire">Waivers</a><a href="#next">Week 6</a><a href="#h2h">Rivalries</a></div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">FF2018 &middot; 2026 season &middot; Week 5 recap &middot; October 13, 2026</div>
+  <h1>Five weeks <span>in.</span></h1>
+  <p class="tagline">Brick led the league with 169.08. Skaries scored 140.82 and still lost.</p>
+  <div class="hstats">
+<div><span>Top score</span><b>169.08</b><p>Brick Johnson</p></div>
+<div><span>Blowout</span><b>65.80</b><p>Brick over OTM</p></div>
+<div><span>Nail-biter</span><b>21.58</b><p>Toolman over Skaries</p></div>
+<div><span>Player of the week</span><b>37.7</b><p>Jahmyr Gibbs, Soyboys</p></div>
+<div><span>Tough luck</span><b>140.82</b><p>Skaries scored the 4th-best total and lost to Toolman</p></div>
+<div><span>Bench blunder</span><b>48.2</b><p>Soyboys left 48.2 on the bench</p></div>
+  </div>
+</div></header>
+
+<main class="wrap">
+
+<section class="card" id="awards">
+  <div class="ch"><span class="sn">01</span><h2>The Week 5 awards</h2><p class="take">Brick led the league with 169.08. Skaries scored 140.82 and still lost.</p><p>Ten trophies, handed out on this week&rsquo;s numbers.</p></div>
+  <div class="aws">
+<div class="aw"><b class="em"></b><span>Team of the week</span><strong>169.08</strong><div><span class="tm"><i></i>Brick Johnson</span></div><p>Top score in the league.</p></div>
+<div class="aw"><b class="em"></b><span>Player of the week</span><strong>37.7</strong><div><span class="tm"><i></i>Team Soyboys</span></div><p>Jahmyr Gibbs, the top individual score of Week 5.</p></div>
+<div class="aw"><b class="em"></b><span>Boom of the week</span><strong>+19.2</strong><div><span class="tm"><i></i>Relegation Bois</span></div><p>Jaylen Warren: 36.8 vs. a 17.6 projection.</p></div>
+<div class="aw"><b class="em"></b><span>Bust of the week</span><strong>&minus;16.7</strong><div><span class="tm"><i></i>Bakers Trash</span></div><p>Tyler Shough: -0.2 vs. a 16.5 projection.</p></div>
+<div class="aw"><b class="em"></b><span>Biggest jump</span><strong>+94.6</strong><div><span class="tm"><i></i>Brick Johnson</span></div><p>169.1 this week vs. 74.5 in Week 4.</p></div>
+<div class="aw"><b class="em"></b><span>Biggest drop</span><strong>&minus;94.2</strong><div><span class="tm"><i></i>Underground Railroaders</span></div><p>59.6 this week vs. 153.9 in Week 4.</p></div>
+<div class="aw"><b class="em"></b><span>Heartbreaker</span><strong>140.82</strong><div><span class="tm"><i></i>Sunday Skaries</span></div><p>The 4th-best score of the week, and it lost to Toolman.</p></div>
+<div class="aw"><b class="em"></b><span>Bench blunder</span><strong>48.2</strong><div><span class="tm"><i></i>Team Soyboys</span></div><p>Points left on the bench this week.</p></div>
+<div class="aw"><b class="em"></b><span>Waiver wizard</span><strong>28.9</strong><div><span class="tm"><i></i>Underground Railroaders</span></div><p>Jared Goff, a pickup, started for them.</p></div>
+<div class="aw"><b class="em"></b><span>Mr. Efficiency</span><strong>100%</strong><div><span class="tm"><i></i>Brick Johnson</span></div><p>Closest to their best possible lineup (169.1 of 169.1).</p></div>
+</div>
+</section>
+
+<section class="card" id="totw">
+  <div class="ch"><span class="sn">02</span><h2>All-league team of the week</h2><p>The best lineup you could build from every roster in the league, using each player&rsquo;s actual Week 5 points.</p></div>
+  <div class="totw"><div class="lus"><div class="lu"><span class="ps">QB</span><div class="pn"><b>Drake Maye</b><span class="tm"><i></i>Railroaders</span><em class="bn">on the bench</em></div><div class="bar"><i style="width:100%"></i></div><strong>39.5</strong></div><div class="lu"><span class="ps">RB</span><div class="pn"><b>Jahmyr Gibbs</b><span class="tm"><i></i>Soyboys</span></div><div class="bar"><i style="width:96%"></i></div><strong>37.7</strong></div><div class="lu"><span class="ps">RB</span><div class="pn"><b>Jaylen Warren</b><span class="tm"><i></i>Bois</span></div><div class="bar"><i style="width:93%"></i></div><strong>36.8</strong></div><div class="lu"><span class="ps">WR</span><div class="pn"><b>Puka Nacua</b><span class="tm"><i></i>Toolman</span></div><div class="bar"><i style="width:96%"></i></div><strong>37.7</strong></div><div class="lu"><span class="ps">WR</span><div class="pn"><b>Christian Watson</b><span class="tm"><i></i>Bakers</span></div><div class="bar"><i style="width:82%"></i></div><strong>32.3</strong></div><div class="lu"><span class="ps">TE</span><div class="pn"><b>Brock Bowers</b><span class="tm"><i></i>Bakers</span></div><div class="bar"><i style="width:58%"></i></div><strong>23.0</strong></div><div class="lu"><span class="ps">FLEX</span><div class="pn"><b>Bucky Irving</b><span class="tm"><i></i>Soyboys</span><em class="bn">on the bench</em></div><div class="bar"><i style="width:80%"></i></div><strong>31.5</strong></div><div class="lu"><span class="ps">K</span><div class="pn"><b>Ka&#x27;imi Fairbairn</b><span class="tm"><i></i>RIP Dart</span></div><div class="bar"><i style="width:43%"></i></div><strong>17.0</strong></div><div class="lu"><span class="ps">DST</span><div class="pn"><b>49ers D/ST</b><span class="tm"><i></i>Soyboys</span><em class="bn">on the bench</em></div><div class="bar"><i style="width:51%"></i></div><strong>20.0</strong></div></div><aside><span>Combined</span><b>275.5</b><p>The best lineup you could build from every roster in the league. The top real team scored 169.1.</p><p>6 of 10 teams are represented; Soyboys supplied the most (3). 3 of the 9 were on a bench.</p></aside></div>
+</section>
+
+<section class="card" id="power">
+  <div class="ch"><span class="sn">03</span><h2>Power rankings</h2><p>Ranked on all-play win rate and ESPN&rsquo;s rest-of-season projection. Arrows show movement since Week 4; playoff odds come from 40,000 simulations.</p></div>
+  <div class="pw">
+<div class="tier"><i></i>Title tier</div>
+<div class="pr"><b class="n">1</b><em class="up">&#9650;1</em><div class="who"><strong><span class="tm"><i></i>Toolman Allen</span></strong><span>4&ndash;1 &middot; Alex</span><p>97 points left on the bench so far.</p></div><div class="od"><div class="trk"><i style="width:99%"></i></div><b>99%</b><em class="up">&#9650;4</em><span>playoff odds</span></div></div>
+<div class="pr"><b class="n">2</b><em class="dn">&#9660;1</em><div class="who"><strong><span class="tm"><i></i>Bakers Trash</span></strong><span>3&ndash;2 &middot; Peter</span><p>98 points left on the bench so far.</p></div><div class="od"><div class="trk"><i style="width:88%"></i></div><b>88%</b><em class="dn">&#9660;4</em><span>playoff odds</span></div></div>
+<div class="pr"><b class="n">3</b><em class="nc">&ndash;</em><div class="who"><strong><span class="tm"><i></i>Relegation Bois</span></strong><span>4&ndash;1 &middot; Brandon</span><p>11 waiver adds this season.</p></div><div class="od"><div class="trk"><i style="width:95%"></i></div><b>95%</b><em class="up">&#9650;3</em><span>playoff odds</span></div></div>
+<div class="tier"><i></i>Playoff pack</div>
+<div class="pr"><b class="n">4</b><em class="nc">&ndash;</em><div class="who"><strong><span class="tm"><i></i>Team Soyboys</span></strong><span>3&ndash;2 &middot; Mike</span><p>162 points left on the bench so far.</p></div><div class="od"><div class="trk"><i style="width:88%"></i></div><b>88%</b><em class="up">&#9650;6</em><span>playoff odds</span></div></div>
+<div class="pr"><b class="n">5</b><em class="up">&#9650;1</em><div class="who"><strong><span class="tm"><i></i>OTM</span></strong><span>3&ndash;2 &middot; Bryan</span><p>23 waiver adds this season.</p></div><div class="od"><div class="trk"><i style="width:79%"></i></div><b>79%</b><em class="dn">&#9660;3</em><span>playoff odds</span></div></div>
+<div class="pr"><b class="n">6</b><em class="dn">&#9660;1</em><div class="who"><strong><span class="tm"><i></i>RIP Dart</span></strong><span>3&ndash;2 &middot; Anthony</span><p>90 points left on the bench so far.</p></div><div class="od"><div class="trk"><i style="width:74%"></i></div><b>74%</b><em class="up">&#9650;10</em><span>playoff odds</span></div></div>
+<div class="tier"><i></i>Bubble</div>
+<div class="pr"><b class="n">7</b><em class="up">&#9650;2</em><div class="who"><strong><span class="tm"><i></i>Brick Johnson</span></strong><span>1&ndash;4 &middot; Matt C.</span><p>87 points left on the bench so far.</p></div><div class="od"><div class="trk"><i style="width:14%"></i></div><b>14%</b><em class="up">&#9650;9</em><span>playoff odds</span></div></div>
+<div class="pr"><b class="n">8</b><em class="nc">&ndash;</em><div class="who"><strong><span class="tm"><i></i>I Wrote Back</span></strong><span>2&ndash;3 &middot; Ryan</span><p>110.2 points per week, 9th in the league.</p></div><div class="od"><div class="trk"><i style="width:28%"></i></div><b>28%</b><em class="dn">&#9660;3</em><span>playoff odds</span></div></div>
+<div class="tier"><i></i>Help wanted</div>
+<div class="pr"><b class="n">9</b><em class="dn">&#9660;2</em><div class="who"><strong><span class="tm"><i></i>Underground Railroaders</span></strong><span>2&ndash;3 &middot; Matt B.</span><p>119 points left on the bench so far.</p></div><div class="od"><div class="trk"><i style="width:29%"></i></div><b>29%</b><em class="dn">&#9660;23</em><span>playoff odds</span></div></div>
+<div class="pr"><b class="n">10</b><em class="nc">&ndash;</em><div class="who"><strong><span class="tm"><i></i>Sunday Skaries</span></strong><span>0&ndash;5 &middot; Marko</span><p>5 straight losses.</p></div><div class="od"><div class="trk"><i style="width:6%"></i></div><b>6%</b><em class="up">&#9650;2</em><span>playoff odds</span></div></div>
+</div>
+</section>
+
+<section class="card" id="standings">
+  <div class="ch"><span class="sn">04</span><h2>Standings</h2><p>Playoff odds from 40,000 simulations of Weeks 6&ndash;14.</p></div>
+  <div class="tw"><table class="data st">
+    <tr><th>#</th><th class="l">Team</th><th>W&ndash;L</th><th>PF</th><th class="hm">PA</th><th class="hm">All-play</th><th>Luck</th><th class="l"><span class="fn">Playoffs</span><span class="ab">Odds</span></th><th class="hm">Proj. W</th><th class="pwh">Power</th></tr>
+<tr><td class="seed in">1</td><td class="l team"><b><span class="fn">Toolman Allen</span><span class="ab">Toolman</span></b><span class="ow">Alex</span></td><td>4&ndash;1</td><td>699.7</td><td class="hm">578.5</td><td class="hm">32&ndash;13</td><td class="pos">+0.4</td><td class="l odds"><div class="trk"><i style="width:99%"></i></div><b>99%</b></td><td class="hm">9.7</td><td class="pw"><b>1</b><i class="up">&#9650;1</i></td></tr>
+<tr><td class="seed in">2</td><td class="l team"><b><span class="fn">Relegation Bois</span><span class="ab">Bois</span></b><span class="ow">Brandon</span></td><td>4&ndash;1</td><td>654.8</td><td class="hm">591.4</td><td class="hm">30&ndash;15</td><td class="pos">+0.7</td><td class="l odds"><div class="trk"><i style="width:95%"></i></div><b>95%</b></td><td class="hm">8.8</td><td class="pw"><b>3</b><i></i></td></tr>
+<tr><td class="seed in">3</td><td class="l team"><b><span class="fn">Bakers Trash</span><span class="ab">Bakers</span></b><span class="ow">Peter</span></td><td>3&ndash;2</td><td>619.9</td><td class="hm">549.4</td><td class="hm">26&ndash;19</td><td class="pos">+0.1</td><td class="l odds"><div class="trk"><i style="width:88%"></i></div><b>88%</b></td><td class="hm">8.1</td><td class="pw"><b>2</b><i class="dn">&#9660;1</i></td></tr>
+<tr><td class="seed in">4</td><td class="l team"><b><span class="fn">OTM</span><span class="ab">OTM</span></b><span class="ow">Bryan</span></td><td>3&ndash;2</td><td>617.9</td><td class="hm">648.4</td><td class="hm">25&ndash;20</td><td class="pos">+0.2</td><td class="l odds"><div class="trk"><i style="width:79%"></i></div><b>79%</b></td><td class="hm">7.6</td><td class="pw"><b>5</b><i class="up">&#9650;1</i></td></tr>
+<tr><td class="seed in">5</td><td class="l team"><b><span class="fn">Team Soyboys</span><span class="ab">Soyboys</span></b><span class="ow">Mike</span></td><td>3&ndash;2</td><td>617.3</td><td class="hm">524.6</td><td class="hm">22&ndash;23</td><td class="pos">+0.6</td><td class="l odds"><div class="trk"><i style="width:88%"></i></div><b>88%</b></td><td class="hm">8.0</td><td class="pw"><b>4</b><i></i></td></tr>
+<tr><td class="seed in">6</td><td class="l team"><b><span class="fn">RIP Dart</span><span class="ab">RIP Dart</span></b><span class="ow">Anthony</span></td><td>3&ndash;2</td><td>570.5</td><td class="hm">503.5</td><td class="hm">18&ndash;27</td><td class="pos">+1.0</td><td class="l odds"><div class="trk"><i style="width:74%"></i></div><b>74%</b></td><td class="hm">7.6</td><td class="pw"><b>6</b><i class="dn">&#9660;1</i></td></tr>
+<tr class="cut"><td colspan="10"><span>Playoff line</span></td></tr>
+<tr><td class="seed">7</td><td class="l team"><b><span class="fn">I Wrote Back</span><span class="ab">Wrote Back</span></b><span class="ow">Ryan</span></td><td>2&ndash;3</td><td>551.1</td><td class="hm">623.2</td><td class="hm">18&ndash;27</td><td class="">0.0</td><td class="l odds"><div class="trk"><i style="width:28%" class="dim"></i></div><b>28%</b></td><td class="hm">5.8</td><td class="pw"><b>8</b><i></i></td></tr>
+<tr><td class="seed">8</td><td class="l team"><b><span class="fn">Underground Railroaders</span><span class="ab">Railroaders</span></b><span class="ow">Matt B.</span></td><td>2&ndash;3</td><td>541.9</td><td class="hm">687.2</td><td class="hm">17&ndash;28</td><td class="pos">+0.1</td><td class="l odds"><div class="trk"><i style="width:29%" class="dim"></i></div><b>29%</b></td><td class="hm">5.9</td><td class="pw"><b>9</b><i class="dn">&#9660;2</i></td></tr>
+<tr><td class="seed">9</td><td class="l team"><b><span class="fn">Brick Johnson</span><span class="ab">Brick</span></b><span class="ow">Matt C.</span></td><td>1&ndash;4</td><td>603.7</td><td class="hm">714.1</td><td class="hm">24&ndash;21</td><td class="neg">&minus;1.7</td><td class="l odds"><div class="trk"><i style="width:14%" class="dim"></i></div><b>14%</b></td><td class="hm">4.7</td><td class="pw"><b>7</b><i class="up">&#9650;2</i></td></tr>
+<tr><td class="seed">10</td><td class="l team"><b><span class="fn">Sunday Skaries</span><span class="ab">Skaries</span></b><span class="ow">Marko</span></td><td>0&ndash;5</td><td>555.4</td><td class="hm">611.8</td><td class="hm">13&ndash;32</td><td class="neg">&minus;1.4</td><td class="l odds"><div class="trk"><i style="width:6%" class="dim"></i></div><b>6%</b></td><td class="hm">3.9</td><td class="pw"><b>10</b><i></i></td></tr>
+  </table></div>
+  <p class="note"><b>All-play:</b> record vs. every team every week. <b>Luck:</b> wins minus all-play expected wins. <b>Power:</b> all-play win rate and ESPN rest-of-season projection, equally weighted; arrow is change from Week 4.</p>
+</section>
+
+<section class="card" id="race">
+  <div class="ch"><span class="sn">05</span><h2>The race</h2><p class="take">Team Soyboys moved up 2 to 5th; Underground Railroaders fell 3 to 8th.</p><p>Where every team sat in the standings after each week. Green boxes are playoff spots.</p></div>
+  <div class="viz"><div class="dv"><svg class="ladder" viewBox="0 0 1240 420" width="1240" role="img" aria-label="Standings after each week"><text x="40.0" y="22" class="wk">Week 1</text><text x="285.0" y="22" class="wk">Week 2</text><text x="530.0" y="22" class="wk">Week 3</text><text x="775.0" y="22" class="wk">Week 4</text><text x="1020.0" y="22" class="wk">Week 5</text><text x="24" y="65.0" text-anchor="end" class="rk">1</text><text x="24" y="103.0" text-anchor="end" class="rk">2</text><text x="24" y="141.0" text-anchor="end" class="rk">3</text><text x="24" y="179.0" text-anchor="end" class="rk">4</text><text x="24" y="217.0" text-anchor="end" class="rk">5</text><text x="24" y="255.0" text-anchor="end" class="rk">6</text><text x="24" y="293.0" text-anchor="end" class="rk">7</text><text x="24" y="331.0" text-anchor="end" class="rk">8</text><text x="24" y="369.0" text-anchor="end" class="rk">9</text><text x="24" y="407.0" text-anchor="end" class="rk">10</text><line x1="0" x2="1240" y1="269.0" y2="269.0" class="cutln"/><g><title>Sunday Skaries: Week 1 7th (0&ndash;1); Week 2 10th (0&ndash;2); Week 3 10th (0&ndash;3); Week 4 10th (0&ndash;4); Week 5 10th (0&ndash;5)</title><line x1="190.0" y1="288.0" x2="285.0" y2="402.0" class="cn"/><line x1="435.0" y1="402.0" x2="530.0" y2="402.0" class="cn"/><line x1="680.0" y1="402.0" x2="775.0" y2="402.0" class="cn"/><line x1="925.0" y1="402.0" x2="1020.0" y2="402.0" class="cn"/><rect x="40.0" y="274.0" width="150" height="28" rx="3" class="out"/><text x="50.0" y="293.0" class="cl">Skaries</text><rect x="285.0" y="388.0" width="150" height="28" rx="3" class="out"/><text x="295.0" y="407.0" class="cl">Skaries</text><rect x="530.0" y="388.0" width="150" height="28" rx="3" class="out"/><text x="540.0" y="407.0" class="cl">Skaries</text><rect x="775.0" y="388.0" width="150" height="28" rx="3" class="out"/><text x="785.0" y="407.0" class="cl">Skaries</text><rect x="1020.0" y="388.0" width="150" height="28" rx="3" class="out"/><text x="1030.0" y="407.0" class="cl">Skaries</text></g><g><title>Brick Johnson: Week 1 9th (0&ndash;1); Week 2 8th (0&ndash;2); Week 3 9th (0&ndash;3); Week 4 9th (0&ndash;4); Week 5 9th (1&ndash;4)</title><line x1="190.0" y1="364.0" x2="285.0" y2="326.0" class="cn"/><line x1="435.0" y1="326.0" x2="530.0" y2="364.0" class="cn"/><line x1="680.0" y1="364.0" x2="775.0" y2="364.0" class="cn"/><line x1="925.0" y1="364.0" x2="1020.0" y2="364.0" class="cn"/><rect x="40.0" y="350.0" width="150" height="28" rx="3" class="out"/><text x="50.0" y="369.0" class="cl">Brick</text><rect x="285.0" y="312.0" width="150" height="28" rx="3" class="out"/><text x="295.0" y="331.0" class="cl">Brick</text><rect x="530.0" y="350.0" width="150" height="28" rx="3" class="out"/><text x="540.0" y="369.0" class="cl">Brick</text><rect x="775.0" y="350.0" width="150" height="28" rx="3" class="out"/><text x="785.0" y="369.0" class="cl">Brick</text><rect x="1020.0" y="350.0" width="150" height="28" rx="3" class="out"/><text x="1030.0" y="369.0" class="cl">Brick</text></g><g><title>Underground Railroaders: Week 1 10th (0&ndash;1); Week 2 6th (1&ndash;1); Week 3 6th (1&ndash;2); Week 4 5th (2&ndash;2); Week 5 8th (2&ndash;3)</title><line x1="190.0" y1="402.0" x2="285.0" y2="250.0" class="cn"/><line x1="435.0" y1="250.0" x2="530.0" y2="250.0" class="cn"/><line x1="680.0" y1="250.0" x2="775.0" y2="212.0" class="cn"/><line x1="925.0" y1="212.0" x2="1020.0" y2="326.0" class="cn"/><rect x="40.0" y="388.0" width="150" height="28" rx="3" class="out"/><text x="50.0" y="407.0" class="cl">Railroaders</text><rect x="285.0" y="236.0" width="150" height="28" rx="3" class="in"/><text x="295.0" y="255.0" class="cl">Railroaders</text><rect x="530.0" y="236.0" width="150" height="28" rx="3" class="in"/><text x="540.0" y="255.0" class="cl">Railroaders</text><rect x="775.0" y="198.0" width="150" height="28" rx="3" class="in"/><text x="785.0" y="217.0" class="cl">Railroaders</text><rect x="1020.0" y="312.0" width="150" height="28" rx="3" class="out"/><text x="1030.0" y="331.0" class="cl">Railroaders</text><text x="1182.0" y="331.0" class="dn">&#9660;3</text></g><g><title>I Wrote Back: Week 1 8th (0&ndash;1); Week 2 9th (0&ndash;2); Week 3 7th (1&ndash;2); Week 4 8th (2&ndash;2); Week 5 7th (2&ndash;3)</title><line x1="190.0" y1="326.0" x2="285.0" y2="364.0" class="cn"/><line x1="435.0" y1="364.0" x2="530.0" y2="288.0" class="cn"/><line x1="680.0" y1="288.0" x2="775.0" y2="326.0" class="cn"/><line x1="925.0" y1="326.0" x2="1020.0" y2="288.0" class="cn"/><rect x="40.0" y="312.0" width="150" height="28" rx="3" class="out"/><text x="50.0" y="331.0" class="cl">Wrote Back</text><rect x="285.0" y="350.0" width="150" height="28" rx="3" class="out"/><text x="295.0" y="369.0" class="cl">Wrote Back</text><rect x="530.0" y="274.0" width="150" height="28" rx="3" class="out"/><text x="540.0" y="293.0" class="cl">Wrote Back</text><rect x="775.0" y="312.0" width="150" height="28" rx="3" class="out"/><text x="785.0" y="331.0" class="cl">Wrote Back</text><rect x="1020.0" y="274.0" width="150" height="28" rx="3" class="out"/><text x="1030.0" y="293.0" class="cl">Wrote Back</text><text x="1182.0" y="293.0" class="up">&#9650;1</text></g><g><title>RIP Dart: Week 1 6th (0&ndash;1); Week 2 7th (1&ndash;1); Week 3 8th (1&ndash;2); Week 4 6th (2&ndash;2); Week 5 6th (3&ndash;2)</title><line x1="190.0" y1="250.0" x2="285.0" y2="288.0" class="cn"/><line x1="435.0" y1="288.0" x2="530.0" y2="326.0" class="cn"/><line x1="680.0" y1="326.0" x2="775.0" y2="250.0" class="cn"/><line x1="925.0" y1="250.0" x2="1020.0" y2="250.0" class="cn"/><rect x="40.0" y="236.0" width="150" height="28" rx="3" class="in"/><text x="50.0" y="255.0" class="cl">RIP Dart</text><rect x="285.0" y="274.0" width="150" height="28" rx="3" class="out"/><text x="295.0" y="293.0" class="cl">RIP Dart</text><rect x="530.0" y="312.0" width="150" height="28" rx="3" class="out"/><text x="540.0" y="331.0" class="cl">RIP Dart</text><rect x="775.0" y="236.0" width="150" height="28" rx="3" class="in"/><text x="785.0" y="255.0" class="cl">RIP Dart</text><rect x="1020.0" y="236.0" width="150" height="28" rx="3" class="in"/><text x="1030.0" y="255.0" class="cl">RIP Dart</text></g><g><title>Team Soyboys: Week 1 2nd (1&ndash;0); Week 2 5th (1&ndash;1); Week 3 5th (2&ndash;1); Week 4 7th (2&ndash;2); Week 5 5th (3&ndash;2)</title><line x1="190.0" y1="98.0" x2="285.0" y2="212.0" class="cn"/><line x1="435.0" y1="212.0" x2="530.0" y2="212.0" class="cn"/><line x1="680.0" y1="212.0" x2="775.0" y2="288.0" class="cn"/><line x1="925.0" y1="288.0" x2="1020.0" y2="212.0" class="cn"/><rect x="40.0" y="84.0" width="150" height="28" rx="3" class="in"/><text x="50.0" y="103.0" class="cl">Soyboys</text><rect x="285.0" y="198.0" width="150" height="28" rx="3" class="in"/><text x="295.0" y="217.0" class="cl">Soyboys</text><rect x="530.0" y="198.0" width="150" height="28" rx="3" class="in"/><text x="540.0" y="217.0" class="cl">Soyboys</text><rect x="775.0" y="274.0" width="150" height="28" rx="3" class="out"/><text x="785.0" y="293.0" class="cl">Soyboys</text><rect x="1020.0" y="198.0" width="150" height="28" rx="3" class="in"/><text x="1030.0" y="217.0" class="cl">Soyboys</text><text x="1182.0" y="217.0" class="up">&#9650;2</text></g><g><title>OTM: Week 1 1st (1&ndash;0); Week 2 4th (1&ndash;1); Week 3 4th (2&ndash;1); Week 4 3rd (3&ndash;1); Week 5 4th (3&ndash;2)</title><line x1="190.0" y1="60.0" x2="285.0" y2="174.0" class="cn"/><line x1="435.0" y1="174.0" x2="530.0" y2="174.0" class="cn"/><line x1="680.0" y1="174.0" x2="775.0" y2="136.0" class="cn"/><line x1="925.0" y1="136.0" x2="1020.0" y2="174.0" class="cn"/><rect x="40.0" y="46.0" width="150" height="28" rx="3" class="in"/><text x="50.0" y="65.0" class="cl">OTM</text><rect x="285.0" y="160.0" width="150" height="28" rx="3" class="in"/><text x="295.0" y="179.0" class="cl">OTM</text><rect x="530.0" y="160.0" width="150" height="28" rx="3" class="in"/><text x="540.0" y="179.0" class="cl">OTM</text><rect x="775.0" y="122.0" width="150" height="28" rx="3" class="in"/><text x="785.0" y="141.0" class="cl">OTM</text><rect x="1020.0" y="160.0" width="150" height="28" rx="3" class="in"/><text x="1030.0" y="179.0" class="cl">OTM</text><text x="1182.0" y="179.0" class="dn">&#9660;1</text></g><g><title>Bakers Trash: Week 1 4th (1&ndash;0); Week 2 2nd (2&ndash;0); Week 3 1st (3&ndash;0); Week 4 4th (3&ndash;1); Week 5 3rd (3&ndash;2)</title><line x1="190.0" y1="174.0" x2="285.0" y2="98.0" class="cn"/><line x1="435.0" y1="98.0" x2="530.0" y2="60.0" class="cn"/><line x1="680.0" y1="60.0" x2="775.0" y2="174.0" class="cn"/><line x1="925.0" y1="174.0" x2="1020.0" y2="136.0" class="cn"/><rect x="40.0" y="160.0" width="150" height="28" rx="3" class="in"/><text x="50.0" y="179.0" class="cl">Bakers</text><rect x="285.0" y="84.0" width="150" height="28" rx="3" class="in"/><text x="295.0" y="103.0" class="cl">Bakers</text><rect x="530.0" y="46.0" width="150" height="28" rx="3" class="in"/><text x="540.0" y="65.0" class="cl">Bakers</text><rect x="775.0" y="160.0" width="150" height="28" rx="3" class="in"/><text x="785.0" y="179.0" class="cl">Bakers</text><rect x="1020.0" y="122.0" width="150" height="28" rx="3" class="in"/><text x="1030.0" y="141.0" class="cl">Bakers</text><text x="1182.0" y="141.0" class="up">&#9650;1</text></g><g><title>Relegation Bois: Week 1 5th (1&ndash;0); Week 2 3rd (2&ndash;0); Week 3 2nd (3&ndash;0); Week 4 2nd (3&ndash;1); Week 5 2nd (4&ndash;1)</title><line x1="190.0" y1="212.0" x2="285.0" y2="136.0" class="cn"/><line x1="435.0" y1="136.0" x2="530.0" y2="98.0" class="cn"/><line x1="680.0" y1="98.0" x2="775.0" y2="98.0" class="cn"/><line x1="925.0" y1="98.0" x2="1020.0" y2="98.0" class="cn"/><rect x="40.0" y="198.0" width="150" height="28" rx="3" class="in"/><text x="50.0" y="217.0" class="cl">Bois</text><rect x="285.0" y="122.0" width="150" height="28" rx="3" class="in"/><text x="295.0" y="141.0" class="cl">Bois</text><rect x="530.0" y="84.0" width="150" height="28" rx="3" class="in"/><text x="540.0" y="103.0" class="cl">Bois</text><rect x="775.0" y="84.0" width="150" height="28" rx="3" class="in"/><text x="785.0" y="103.0" class="cl">Bois</text><rect x="1020.0" y="84.0" width="150" height="28" rx="3" class="in"/><text x="1030.0" y="103.0" class="cl">Bois</text></g><g><title>Toolman Allen: Week 1 3rd (1&ndash;0); Week 2 1st (2&ndash;0); Week 3 3rd (2&ndash;1); Week 4 1st (3&ndash;1); Week 5 1st (4&ndash;1)</title><line x1="190.0" y1="136.0" x2="285.0" y2="60.0" class="cn"/><line x1="435.0" y1="60.0" x2="530.0" y2="136.0" class="cn"/><line x1="680.0" y1="136.0" x2="775.0" y2="60.0" class="cn"/><line x1="925.0" y1="60.0" x2="1020.0" y2="60.0" class="cn"/><rect x="40.0" y="122.0" width="150" height="28" rx="3" class="in"/><text x="50.0" y="141.0" class="cl">Toolman</text><rect x="285.0" y="46.0" width="150" height="28" rx="3" class="in"/><text x="295.0" y="65.0" class="cl">Toolman</text><rect x="530.0" y="122.0" width="150" height="28" rx="3" class="in"/><text x="540.0" y="141.0" class="cl">Toolman</text><rect x="775.0" y="46.0" width="150" height="28" rx="3" class="in"/><text x="785.0" y="65.0" class="cl">Toolman</text><rect x="1020.0" y="46.0" width="150" height="28" rx="3" class="in"/><text x="1030.0" y="65.0" class="cl">Toolman</text></g></svg></div><div class="mv"><svg class="ladder m" viewBox="0 0 380 336" role="img" aria-label="Standings after each week"><text x="26.0" y="22" class="wk">Wk 1</text><text x="90.5" y="22" class="wk">Wk 2</text><text x="155.0" y="22" class="wk">Wk 3</text><text x="219.5" y="22" class="wk">Wk 4</text><text x="284.0" y="22" class="wk">Wk 5</text><text x="18" y="57.0" text-anchor="end" class="rk">1</text><text x="18" y="87.0" text-anchor="end" class="rk">2</text><text x="18" y="117.0" text-anchor="end" class="rk">3</text><text x="18" y="147.0" text-anchor="end" class="rk">4</text><text x="18" y="177.0" text-anchor="end" class="rk">5</text><text x="18" y="207.0" text-anchor="end" class="rk">6</text><text x="18" y="237.0" text-anchor="end" class="rk">7</text><text x="18" y="267.0" text-anchor="end" class="rk">8</text><text x="18" y="297.0" text-anchor="end" class="rk">9</text><text x="18" y="327.0" text-anchor="end" class="rk">10</text><line x1="0" x2="380" y1="217.0" y2="217.0" class="cutln"/><g><line x1="92.0" y1="232.0" x2="90.5" y2="322.0" class="cn"/><line x1="156.5" y1="322.0" x2="155.0" y2="322.0" class="cn"/><line x1="221.0" y1="322.0" x2="219.5" y2="322.0" class="cn"/><line x1="285.5" y1="322.0" x2="284.0" y2="322.0" class="cn"/><rect x="26.0" y="220.0" width="66" height="24" rx="3" class="out"/><text x="59.0" y="237.0" text-anchor="middle" class="cl">SKA</text><rect x="90.5" y="310.0" width="66" height="24" rx="3" class="out"/><text x="123.5" y="327.0" text-anchor="middle" class="cl">SKA</text><rect x="155.0" y="310.0" width="66" height="24" rx="3" class="out"/><text x="188.0" y="327.0" text-anchor="middle" class="cl">SKA</text><rect x="219.5" y="310.0" width="66" height="24" rx="3" class="out"/><text x="252.5" y="327.0" text-anchor="middle" class="cl">SKA</text><rect x="284.0" y="310.0" width="66" height="24" rx="3" class="out"/><text x="317.0" y="327.0" text-anchor="middle" class="cl">SKA</text></g><g><line x1="92.0" y1="292.0" x2="90.5" y2="262.0" class="cn"/><line x1="156.5" y1="262.0" x2="155.0" y2="292.0" class="cn"/><line x1="221.0" y1="292.0" x2="219.5" y2="292.0" class="cn"/><line x1="285.5" y1="292.0" x2="284.0" y2="292.0" class="cn"/><rect x="26.0" y="280.0" width="66" height="24" rx="3" class="out"/><text x="59.0" y="297.0" text-anchor="middle" class="cl">BRI</text><rect x="90.5" y="250.0" width="66" height="24" rx="3" class="out"/><text x="123.5" y="267.0" text-anchor="middle" class="cl">BRI</text><rect x="155.0" y="280.0" width="66" height="24" rx="3" class="out"/><text x="188.0" y="297.0" text-anchor="middle" class="cl">BRI</text><rect x="219.5" y="280.0" width="66" height="24" rx="3" class="out"/><text x="252.5" y="297.0" text-anchor="middle" class="cl">BRI</text><rect x="284.0" y="280.0" width="66" height="24" rx="3" class="out"/><text x="317.0" y="297.0" text-anchor="middle" class="cl">BRI</text></g><g><line x1="92.0" y1="322.0" x2="90.5" y2="202.0" class="cn"/><line x1="156.5" y1="202.0" x2="155.0" y2="202.0" class="cn"/><line x1="221.0" y1="202.0" x2="219.5" y2="172.0" class="cn"/><line x1="285.5" y1="172.0" x2="284.0" y2="262.0" class="cn"/><rect x="26.0" y="310.0" width="66" height="24" rx="3" class="out"/><text x="59.0" y="327.0" text-anchor="middle" class="cl">RAI</text><rect x="90.5" y="190.0" width="66" height="24" rx="3" class="in"/><text x="123.5" y="207.0" text-anchor="middle" class="cl">RAI</text><rect x="155.0" y="190.0" width="66" height="24" rx="3" class="in"/><text x="188.0" y="207.0" text-anchor="middle" class="cl">RAI</text><rect x="219.5" y="160.0" width="66" height="24" rx="3" class="in"/><text x="252.5" y="177.0" text-anchor="middle" class="cl">RAI</text><rect x="284.0" y="250.0" width="66" height="24" rx="3" class="out"/><text x="317.0" y="267.0" text-anchor="middle" class="cl">RAI</text><text x="355.0" y="267.0" class="dn">&#9660;3</text></g><g><line x1="92.0" y1="262.0" x2="90.5" y2="292.0" class="cn"/><line x1="156.5" y1="292.0" x2="155.0" y2="232.0" class="cn"/><line x1="221.0" y1="232.0" x2="219.5" y2="262.0" class="cn"/><line x1="285.5" y1="262.0" x2="284.0" y2="232.0" class="cn"/><rect x="26.0" y="250.0" width="66" height="24" rx="3" class="out"/><text x="59.0" y="267.0" text-anchor="middle" class="cl">IWB</text><rect x="90.5" y="280.0" width="66" height="24" rx="3" class="out"/><text x="123.5" y="297.0" text-anchor="middle" class="cl">IWB</text><rect x="155.0" y="220.0" width="66" height="24" rx="3" class="out"/><text x="188.0" y="237.0" text-anchor="middle" class="cl">IWB</text><rect x="219.5" y="250.0" width="66" height="24" rx="3" class="out"/><text x="252.5" y="267.0" text-anchor="middle" class="cl">IWB</text><rect x="284.0" y="220.0" width="66" height="24" rx="3" class="out"/><text x="317.0" y="237.0" text-anchor="middle" class="cl">IWB</text><text x="355.0" y="237.0" class="up">&#9650;1</text></g><g><line x1="92.0" y1="202.0" x2="90.5" y2="232.0" class="cn"/><line x1="156.5" y1="232.0" x2="155.0" y2="262.0" class="cn"/><line x1="221.0" y1="262.0" x2="219.5" y2="202.0" class="cn"/><line x1="285.5" y1="202.0" x2="284.0" y2="202.0" class="cn"/><rect x="26.0" y="190.0" width="66" height="24" rx="3" class="in"/><text x="59.0" y="207.0" text-anchor="middle" class="cl">RIP</text><rect x="90.5" y="220.0" width="66" height="24" rx="3" class="out"/><text x="123.5" y="237.0" text-anchor="middle" class="cl">RIP</text><rect x="155.0" y="250.0" width="66" height="24" rx="3" class="out"/><text x="188.0" y="267.0" text-anchor="middle" class="cl">RIP</text><rect x="219.5" y="190.0" width="66" height="24" rx="3" class="in"/><text x="252.5" y="207.0" text-anchor="middle" class="cl">RIP</text><rect x="284.0" y="190.0" width="66" height="24" rx="3" class="in"/><text x="317.0" y="207.0" text-anchor="middle" class="cl">RIP</text></g><g><line x1="92.0" y1="82.0" x2="90.5" y2="172.0" class="cn"/><line x1="156.5" y1="172.0" x2="155.0" y2="172.0" class="cn"/><line x1="221.0" y1="172.0" x2="219.5" y2="232.0" class="cn"/><line x1="285.5" y1="232.0" x2="284.0" y2="172.0" class="cn"/><rect x="26.0" y="70.0" width="66" height="24" rx="3" class="in"/><text x="59.0" y="87.0" text-anchor="middle" class="cl">SOY</text><rect x="90.5" y="160.0" width="66" height="24" rx="3" class="in"/><text x="123.5" y="177.0" text-anchor="middle" class="cl">SOY</text><rect x="155.0" y="160.0" width="66" height="24" rx="3" class="in"/><text x="188.0" y="177.0" text-anchor="middle" class="cl">SOY</text><rect x="219.5" y="220.0" width="66" height="24" rx="3" class="out"/><text x="252.5" y="237.0" text-anchor="middle" class="cl">SOY</text><rect x="284.0" y="160.0" width="66" height="24" rx="3" class="in"/><text x="317.0" y="177.0" text-anchor="middle" class="cl">SOY</text><text x="355.0" y="177.0" class="up">&#9650;2</text></g><g><line x1="92.0" y1="52.0" x2="90.5" y2="142.0" class="cn"/><line x1="156.5" y1="142.0" x2="155.0" y2="142.0" class="cn"/><line x1="221.0" y1="142.0" x2="219.5" y2="112.0" class="cn"/><line x1="285.5" y1="112.0" x2="284.0" y2="142.0" class="cn"/><rect x="26.0" y="40.0" width="66" height="24" rx="3" class="in"/><text x="59.0" y="57.0" text-anchor="middle" class="cl">OTM</text><rect x="90.5" y="130.0" width="66" height="24" rx="3" class="in"/><text x="123.5" y="147.0" text-anchor="middle" class="cl">OTM</text><rect x="155.0" y="130.0" width="66" height="24" rx="3" class="in"/><text x="188.0" y="147.0" text-anchor="middle" class="cl">OTM</text><rect x="219.5" y="100.0" width="66" height="24" rx="3" class="in"/><text x="252.5" y="117.0" text-anchor="middle" class="cl">OTM</text><rect x="284.0" y="130.0" width="66" height="24" rx="3" class="in"/><text x="317.0" y="147.0" text-anchor="middle" class="cl">OTM</text><text x="355.0" y="147.0" class="dn">&#9660;1</text></g><g><line x1="92.0" y1="142.0" x2="90.5" y2="82.0" class="cn"/><line x1="156.5" y1="82.0" x2="155.0" y2="52.0" class="cn"/><line x1="221.0" y1="52.0" x2="219.5" y2="142.0" class="cn"/><line x1="285.5" y1="142.0" x2="284.0" y2="112.0" class="cn"/><rect x="26.0" y="130.0" width="66" height="24" rx="3" class="in"/><text x="59.0" y="147.0" text-anchor="middle" class="cl">BAK</text><rect x="90.5" y="70.0" width="66" height="24" rx="3" class="in"/><text x="123.5" y="87.0" text-anchor="middle" class="cl">BAK</text><rect x="155.0" y="40.0" width="66" height="24" rx="3" class="in"/><text x="188.0" y="57.0" text-anchor="middle" class="cl">BAK</text><rect x="219.5" y="130.0" width="66" height="24" rx="3" class="in"/><text x="252.5" y="147.0" text-anchor="middle" class="cl">BAK</text><rect x="284.0" y="100.0" width="66" height="24" rx="3" class="in"/><text x="317.0" y="117.0" text-anchor="middle" class="cl">BAK</text><text x="355.0" y="117.0" class="up">&#9650;1</text></g><g><line x1="92.0" y1="172.0" x2="90.5" y2="112.0" class="cn"/><line x1="156.5" y1="112.0" x2="155.0" y2="82.0" class="cn"/><line x1="221.0" y1="82.0" x2="219.5" y2="82.0" class="cn"/><line x1="285.5" y1="82.0" x2="284.0" y2="82.0" class="cn"/><rect x="26.0" y="160.0" width="66" height="24" rx="3" class="in"/><text x="59.0" y="177.0" text-anchor="middle" class="cl">BOI</text><rect x="90.5" y="100.0" width="66" height="24" rx="3" class="in"/><text x="123.5" y="117.0" text-anchor="middle" class="cl">BOI</text><rect x="155.0" y="70.0" width="66" height="24" rx="3" class="in"/><text x="188.0" y="87.0" text-anchor="middle" class="cl">BOI</text><rect x="219.5" y="70.0" width="66" height="24" rx="3" class="in"/><text x="252.5" y="87.0" text-anchor="middle" class="cl">BOI</text><rect x="284.0" y="70.0" width="66" height="24" rx="3" class="in"/><text x="317.0" y="87.0" text-anchor="middle" class="cl">BOI</text></g><g><line x1="92.0" y1="112.0" x2="90.5" y2="52.0" class="cn"/><line x1="156.5" y1="52.0" x2="155.0" y2="112.0" class="cn"/><line x1="221.0" y1="112.0" x2="219.5" y2="52.0" class="cn"/><line x1="285.5" y1="52.0" x2="284.0" y2="52.0" class="cn"/><rect x="26.0" y="100.0" width="66" height="24" rx="3" class="in"/><text x="59.0" y="117.0" text-anchor="middle" class="cl">TOO</text><rect x="90.5" y="40.0" width="66" height="24" rx="3" class="in"/><text x="123.5" y="57.0" text-anchor="middle" class="cl">TOO</text><rect x="155.0" y="100.0" width="66" height="24" rx="3" class="in"/><text x="188.0" y="117.0" text-anchor="middle" class="cl">TOO</text><rect x="219.5" y="40.0" width="66" height="24" rx="3" class="in"/><text x="252.5" y="57.0" text-anchor="middle" class="cl">TOO</text><rect x="284.0" y="40.0" width="66" height="24" rx="3" class="in"/><text x="317.0" y="57.0" text-anchor="middle" class="cl">TOO</text></g></svg><p class="key m">TOO Toolman &middot; BOI Bois &middot; BAK Bakers &middot; OTM OTM &middot; SOY Soyboys &middot; RIP RIP Dart &middot; IWB Wrote Back &middot; RAI Railroaders &middot; BRI Brick &middot; SKA Skaries</p></div></div>
+</section>
+
+<section class="card" id="week">
+  <div class="ch"><span class="sn">06</span><h2>Week 5 scoreboard</h2><p class="take">No loser had enough on the bench to win.</p><p>Every game on one points scale: green dot is the winner, black dot the loser.</p></div>
+  <div class="viz"><div class="dv"><svg class="board" viewBox="0 0 1240 402" width="1240" role="img" aria-label="Week 5 scores on one scale"><line x1="320.0" x2="320.0" y1="30" y2="396" class="gl"/><text x="320.0" y="20" text-anchor="middle" class="tk">40</text><line x1="397.1" x2="397.1" y1="30" y2="396" class="gl"/><text x="397.1" y="20" text-anchor="middle" class="tk">60</text><line x1="474.3" x2="474.3" y1="30" y2="396" class="gl"/><text x="474.3" y="20" text-anchor="middle" class="tk">80</text><line x1="551.4" x2="551.4" y1="30" y2="396" class="gl"/><text x="551.4" y="20" text-anchor="middle" class="tk">100</text><line x1="628.6" x2="628.6" y1="30" y2="396" class="gl"/><text x="628.6" y="20" text-anchor="middle" class="tk">120</text><line x1="705.7" x2="705.7" y1="30" y2="396" class="gl"/><text x="705.7" y="20" text-anchor="middle" class="tk">140</text><line x1="782.9" x2="782.9" y1="30" y2="396" class="gl"/><text x="782.9" y="20" text-anchor="middle" class="tk">160</text><line x1="860.0" x2="860.0" y1="30" y2="396" class="gl"/><text x="860.0" y="20" text-anchor="middle" class="tk">180</text><text x="0" y="70.0" class="gw">Brick Johnson</text><text x="0" y="91.0" class="gs">beat OTM by 65.80</text><line x1="564.1" x2="817.9" y1="72.0" y2="72.0" class="gap"/><circle cx="564.1" cy="72.0" r="8" class="ld"/><circle cx="817.9" cy="72.0" r="8" class="wd"/><text x="564.1" y="57.0" text-anchor="middle" class="ls">103.28</text><text x="817.9" y="57.0" text-anchor="middle" class="ws">169.08</text><text x="0" y="144.0" class="gw">RIP Dart</text><text x="0" y="165.0" class="gs">beat Underground Railroaders by 35.28</text><line x1="395.8" x2="531.8" y1="146.0" y2="146.0" class="gap"/><circle cx="395.8" cy="146.0" r="8" class="ld"/><circle cx="531.8" cy="146.0" r="8" class="wd"/><text x="395.8" y="131.0" text-anchor="middle" class="ls">59.64</text><text x="531.8" y="131.0" text-anchor="middle" class="ws">94.92</text><text x="0" y="218.0" class="gw">Relegation Bois</text><text x="0" y="239.0" class="gs">beat Bakers Trash by 28.22</text><line x1="585.1" x2="694.0" y1="220.0" y2="220.0" class="gap"/><circle cx="585.1" cy="220.0" r="8" class="ld"/><circle cx="694.0" cy="220.0" r="8" class="wd"/><text x="585.1" y="205.0" text-anchor="middle" class="ls">108.74</text><text x="694.0" y="205.0" text-anchor="middle" class="ws">136.96</text><text x="0" y="292.0" class="gw">Team Soyboys</text><text x="0" y="313.0" class="gs">beat I Wrote Back by 27.24</text><line x1="614.3" x2="719.4" y1="294.0" y2="294.0" class="gap"/><circle cx="614.3" cy="294.0" r="8" class="ld"/><circle cx="719.4" cy="294.0" r="8" class="wd"/><text x="614.3" y="279.0" text-anchor="middle" class="ls">116.30</text><text x="719.4" y="279.0" text-anchor="middle" class="ws">143.54</text><text x="0" y="366.0" class="gw">Toolman Allen</text><text x="0" y="387.0" class="gs">beat Sunday Skaries by 21.58</text><line x1="708.9" x2="792.1" y1="368.0" y2="368.0" class="gap"/><circle cx="708.9" cy="368.0" r="8" class="ld"/><circle cx="792.1" cy="368.0" r="8" class="wd"/><text x="708.9" y="353.0" text-anchor="middle" class="ls">140.82</text><text x="792.1" y="353.0" text-anchor="middle" class="ws">162.40</text></svg></div><div class="mv"><svg class="board m" viewBox="0 0 380 480" role="img" aria-label="Week 5 scores"><text x="0" y="16" class="mt"><tspan class="b">Brick</tspan> beat OTM by 65.80</text><line x1="173.3" x2="336.9" y1="54" y2="54" class="gap"/><circle cx="173.3" cy="54" r="7" class="ld"/><circle cx="336.9" cy="54" r="7" class="wd"/><text x="173.3" y="41" text-anchor="middle" class="ls">103.28</text><text x="336.9" y="41" text-anchor="middle" class="ws">169.08</text><text x="0" y="112" class="mt"><tspan class="b">RIP Dart</tspan> beat Railroaders by 35.28</text><line x1="64.8" x2="152.5" y1="150" y2="150" class="gap"/><circle cx="64.8" cy="150" r="7" class="ld"/><circle cx="152.5" cy="150" r="7" class="wd"/><text x="64.8" y="137" text-anchor="middle" class="ls">59.64</text><text x="152.5" y="137" text-anchor="middle" class="ws">94.92</text><text x="0" y="208" class="mt"><tspan class="b">Bois</tspan> beat Bakers by 28.22</text><line x1="186.9" x2="257.0" y1="246" y2="246" class="gap"/><circle cx="186.9" cy="246" r="7" class="ld"/><circle cx="257.0" cy="246" r="7" class="wd"/><text x="186.9" y="233" text-anchor="middle" class="ls">108.74</text><text x="257.0" y="233" text-anchor="middle" class="ws">136.96</text><text x="0" y="304" class="mt"><tspan class="b">Soyboys</tspan> beat Wrote Back by 27.24</text><line x1="205.7" x2="273.4" y1="342" y2="342" class="gap"/><circle cx="205.7" cy="342" r="7" class="ld"/><circle cx="273.4" cy="342" r="7" class="wd"/><text x="205.7" y="329" text-anchor="middle" class="ls">116.30</text><text x="273.4" y="329" text-anchor="middle" class="ws">143.54</text><text x="0" y="400" class="mt"><tspan class="b">Toolman</tspan> beat Skaries by 21.58</text><line x1="266.6" x2="320.3" y1="438" y2="438" class="gap"/><circle cx="266.6" cy="438" r="7" class="ld"/><circle cx="320.3" cy="438" r="7" class="wd"/><text x="271.6" y="425" text-anchor="end" class="ls">140.82</text><text x="315.3" y="425" text-anchor="start" class="ws">162.40</text></svg></div></div>
+  <h3>Game recaps</h3>
+  <div class="rcs">
+<div class="rc"><span class="tg"> Blowout</span><h4><span class="tm"><i></i>Brick Johnson</span> <em>169.08</em> &ndash; <span class="tm"><i></i>OTM</span> <em>103.28</em></h4><p>Brick won by 65.80, the widest gap of the week.</p><p class="st">Stars: Parker Washington 30.4 (Brick) &middot; Aaron Rodgers 22.0 (OTM)</p></div>
+<div class="rc"><span class="tg"> Handled it</span><h4><span class="tm"><i></i>RIP Dart</span> <em>94.92</em> &ndash; <span class="tm"><i></i>Underground Railroaders</span> <em>59.64</em></h4><p>RIP Dart won by 35.3.</p><p class="st">Stars: Trey McBride 21.6 (RIP Dart) &middot; Jared Goff 28.9 (Railroaders)</p></div>
+<div class="rc"><span class="tg"> Handled it</span><h4><span class="tm"><i></i>Relegation Bois</span> <em>136.96</em> &ndash; <span class="tm"><i></i>Bakers Trash</span> <em>108.74</em></h4><p>Bois won by 28.2.</p><p class="st">Stars: Jaylen Warren 36.8 (Bois) &middot; Christian Watson 32.3 (Bakers)</p></div>
+<div class="rc"><span class="tg"> Handled it</span><h4><span class="tm"><i></i>Team Soyboys</span> <em>143.54</em> &ndash; <span class="tm"><i></i>I Wrote Back</span> <em>116.30</em></h4><p>Soyboys won by 27.2.</p><p class="st">Stars: Jahmyr Gibbs 37.7 (Soyboys) &middot; George Pickens 28.0 (Wrote Back)</p></div>
+<div class="rc"><span class="tg"> Nail-biter</span><h4><span class="tm"><i></i>Toolman Allen</span> <em>162.40</em> &ndash; <span class="tm"><i></i>Sunday Skaries</span> <em>140.82</em></h4><p>Decided by 21.58, the closest game of the week.</p><p class="st">Stars: Puka Nacua 37.7 (Toolman) &middot; Malik Nabers 29.1 (Skaries)</p></div>
+</div>
+</section>
+
+<section class="card" id="strip">
+  <div class="ch"><span class="sn">07</span><h2>Every score so far</h2><p class="take">Scores run from 60 (Railroaders, Week 5) to 169 (Brick, Week 5); the league average is 120.6.</p><p>One row per week, one dot per team. Green won, black lost; the vertical line is the league average.</p></div>
+  <div class="strip"><div class="ax"><span style="left:57.6%"></span><em style="left:0.0%">40</em><em style="left:14.3%">60</em><em style="left:28.6%">80</em><em style="left:42.9%">100</em><em style="left:57.1%">120</em><em style="left:71.4%">140</em><em style="left:85.7%">160</em><em style="left:100.0%">180</em></div><div class="sr"><b>Wk 1</b><div class="tr"><i class="l" style="left:40.69%" title="Brick Johnson: 96.96 (lost)"></i><i class="w" style="left:54.47%" title="Relegation Bois: 116.26 (won)"></i><i class="w" style="left:85.54%" title="Team Soyboys: 159.76 (won)"></i><i class="l" style="left:51.07%" title="Sunday Skaries: 111.50 (lost)"></i><i class="l" style="left:57.43%" title="RIP Dart: 120.40 (lost)"></i><i class="l" style="left:28.59%" title="Underground Railroaders: 80.02 (lost)"></i><i class="w" style="left:90.37%" title="OTM: 166.52 (won)"></i><i class="l" style="left:49.11%" title="I Wrote Back: 108.76 (lost)"></i><i class="w" style="left:68.76%" title="Bakers Trash: 136.26 (won)"></i><i class="w" style="left:81.04%" title="Toolman Allen: 153.46 (won)"></i></div><span>High OTM 167<br>Low Railroaders 80</span></div><div class="sr"><b>Wk 2</b><div class="tr"><i class="l" style="left:70.36%" title="Brick Johnson: 138.50 (lost)"></i><i class="w" style="left:49.89%" title="Relegation Bois: 109.84 (won)"></i><i class="l" style="left:37.63%" title="Team Soyboys: 92.68 (lost)"></i><i class="l" style="left:40.70%" title="Sunday Skaries: 96.98 (lost)"></i><i class="w" style="left:42.29%" title="RIP Dart: 99.20 (won)"></i><i class="w" style="left:78.27%" title="Underground Railroaders: 149.58 (won)"></i><i class="l" style="left:41.61%" title="OTM: 98.26 (lost)"></i><i class="l" style="left:44.27%" title="I Wrote Back: 101.98 (lost)"></i><i class="w" style="left:47.30%" title="Bakers Trash: 106.22 (won)"></i><i class="w" style="left:85.94%" title="Toolman Allen: 160.32 (won)"></i></div><span>High Toolman 160<br>Low Soyboys 93</span></div><div class="sr"><b>Wk 3</b><div class="tr"><i class="l" style="left:60.46%" title="Brick Johnson: 124.64 (lost)"></i><i class="w" style="left:85.34%" title="Relegation Bois: 159.48 (won)"></i><i class="w" style="left:56.39%" title="Team Soyboys: 118.94 (won)"></i><i class="l" style="left:48.50%" title="Sunday Skaries: 107.90 (lost)"></i><i class="l" style="left:36.10%" title="RIP Dart: 90.54 (lost)"></i><i class="l" style="left:41.97%" title="Underground Railroaders: 98.76 (lost)"></i><i class="w" style="left:58.51%" title="OTM: 121.92 (won)"></i><i class="w" style="left:51.49%" title="I Wrote Back: 112.08 (won)"></i><i class="w" style="left:86.93%" title="Bakers Trash: 161.70 (won)"></i><i class="l" style="left:49.11%" title="Toolman Allen: 108.76 (lost)"></i></div><span>High Bakers 162<br>Low RIP Dart 91</span></div><div class="sr"><b>Wk 4</b><div class="tr"><i class="l" style="left:24.63%" title="Brick Johnson: 74.48 (lost)"></i><i class="l" style="left:65.91%" title="Relegation Bois: 132.28 (lost)"></i><i class="l" style="left:44.56%" title="Team Soyboys: 102.38 (lost)"></i><i class="l" style="left:41.56%" title="Sunday Skaries: 98.18 (lost)"></i><i class="w" style="left:89.61%" title="RIP Dart: 165.46 (won)"></i><i class="w" style="left:81.34%" title="Underground Railroaders: 153.88 (won)"></i><i class="w" style="left:62.80%" title="OTM: 127.92 (won)"></i><i class="w" style="left:51.44%" title="I Wrote Back: 112.02 (won)"></i><i class="l" style="left:47.81%" title="Bakers Trash: 106.94 (lost)"></i><i class="w" style="left:53.37%" title="Toolman Allen: 114.72 (won)"></i></div><span>High RIP Dart 165<br>Low Brick 74</span></div><div class="sr cur"><b>Wk 5</b><div class="tr"><i class="w" style="left:92.20%" title="Brick Johnson: 169.08 (won)"></i><i class="w" style="left:69.26%" title="Relegation Bois: 136.96 (won)"></i><i class="w" style="left:73.96%" title="Team Soyboys: 143.54 (won)"></i><i class="l" style="left:72.01%" title="Sunday Skaries: 140.82 (lost)"></i><i class="w" style="left:39.23%" title="RIP Dart: 94.92 (won)"></i><i class="l" style="left:14.03%" title="Underground Railroaders: 59.64 (lost)"></i><i class="l" style="left:45.20%" title="OTM: 103.28 (lost)"></i><i class="l" style="left:54.50%" title="I Wrote Back: 116.30 (lost)"></i><i class="l" style="left:49.10%" title="Bakers Trash: 108.74 (lost)"></i><i class="w" style="left:87.43%" title="Toolman Allen: 162.40 (won)"></i></div><span>High Brick 169<br>Low Railroaders 60</span></div></div>
+</section>
+
+<section class="card" id="sups">
+  <div class="ch"><span class="sn">08</span><h2>Season superlatives</h2><p>The best, worst and strangest numbers through Week 5.</p></div>
+  <div class="sups">
+<div class="sup"><span>Best game of the season</span><b>169.08</b><strong>Brick Johnson</strong><p>Week 5</p></div>
+<div class="sup"><span>Worst game of the season</span><b>59.64</b><strong>Underground Railroaders</strong><p>Week 5</p></div>
+<div class="sup"><span>Toughest schedule</span><b>142.8</b><strong>Brick Johnson</strong><p>points against per week</p></div>
+<div class="sup"><span>Easiest schedule</span><b>100.7</b><strong>RIP Dart</strong><p>points against per week</p></div>
+<div class="sup"><span>Hottest streak</span><b>W2</b><strong>Toolman Allen</strong><p>2 straight wins</p></div>
+<div class="sup"><span>Coldest streak</span><b>L5</b><strong>Sunday Skaries</strong><p>5 straight losses</p></div>
+<div class="sup"><span>Most consistent</span><b>&plusmn;4.8</b><strong>I Wrote Back</strong><p>weekly scores from 102 to 116</p></div>
+<div class="sup"><span>Least predictable</span><b>&plusmn;37.5</b><strong>Underground Railroaders</strong><p>weekly scores from 60 to 154</p></div>
+<div class="sup"><span>Busiest on waivers</span><b>23</b><strong>OTM</strong><p>adds this season</p></div>
+<div class="sup"><span>Quietest on waivers</span><b>0</b><strong>Sunday Skaries</strong><p>adds this season</p></div>
+</div>
+</section>
+
+<section class="card" id="teams">
+  <div class="ch"><span class="sn">09</span><h2>Team by team</h2><p>Each team&rsquo;s four weekly scores, left to right. Green means a win; the dashed line is the league average (120.6).</p></div>
+  <div class="tcs">
+<article class="tc"><header><span class="sd">1</span><div class="tn"><b>Toolman Allen</b><span>Alex &middot; 4&ndash;1 &middot; W2</span></div><div class="od"><b>99%</b><span>playoffs</span></div></header><svg class="spark" viewBox="0 0 232 92" width="232" role="img" aria-label="Toolman Allen weekly scores"><line x1="4" x2="228" y1="34.5" y2="34.5" class="avg"/><polyline points="22.0,18.5 69.0,15.1 116.0,40.3 163.0,37.4 210.0,14.1"/><circle cx="22.0" cy="18.5" r="5" class="w"><title>Week 1: 153.46, win</title></circle><text x="22.0" y="88" text-anchor="middle" class="sv w">153</text><circle cx="69.0" cy="15.1" r="5" class="w"><title>Week 2: 160.32, win</title></circle><text x="69.0" y="88" text-anchor="middle" class="sv w">160</text><circle cx="116.0" cy="40.3" r="5" class="l"><title>Week 3: 108.76, loss</title></circle><text x="116.0" y="88" text-anchor="middle" class="sv">109</text><circle cx="163.0" cy="37.4" r="5" class="w"><title>Week 4: 114.72, win</title></circle><text x="163.0" y="88" text-anchor="middle" class="sv w">115</text><circle cx="210.0" cy="14.1" r="5" class="w"><title>Week 5: 162.40, win</title></circle><text x="210.0" y="88" text-anchor="middle" class="sv w">162</text></svg><dl><dt>Best position</dt><dd>QB, 1st</dd><dt>Worst position</dt><dd>WR, 8th</dd><dt>Top player</dt><dd>Allen 143.0</dd></dl></article>
+<article class="tc"><header><span class="sd">2</span><div class="tn"><b>Relegation Bois</b><span>Brandon &middot; 4&ndash;1 &middot; W1</span></div><div class="od"><b>95%</b><span>playoffs</span></div></header><svg class="spark" viewBox="0 0 232 92" width="232" role="img" aria-label="Relegation Bois weekly scores"><line x1="4" x2="228" y1="34.5" y2="34.5" class="avg"/><polyline points="22.0,36.6 69.0,39.7 116.0,15.6 163.0,28.8 210.0,26.5"/><circle cx="22.0" cy="36.6" r="5" class="w"><title>Week 1: 116.26, win</title></circle><text x="22.0" y="88" text-anchor="middle" class="sv w">116</text><circle cx="69.0" cy="39.7" r="5" class="w"><title>Week 2: 109.84, win</title></circle><text x="69.0" y="88" text-anchor="middle" class="sv w">110</text><circle cx="116.0" cy="15.6" r="5" class="w"><title>Week 3: 159.48, win</title></circle><text x="116.0" y="88" text-anchor="middle" class="sv w">159</text><circle cx="163.0" cy="28.8" r="5" class="l"><title>Week 4: 132.28, loss</title></circle><text x="163.0" y="88" text-anchor="middle" class="sv">132</text><circle cx="210.0" cy="26.5" r="5" class="w"><title>Week 5: 136.96, win</title></circle><text x="210.0" y="88" text-anchor="middle" class="sv w">137</text></svg><dl><dt>Best position</dt><dd>DST, 1st</dd><dt>Worst position</dt><dd>K, 10th</dd><dt>Top player</dt><dd>Smith-Njigba 139.5</dd></dl></article>
+<article class="tc"><header><span class="sd">3</span><div class="tn"><b>Bakers Trash</b><span>Peter &middot; 3&ndash;2 &middot; L2</span></div><div class="od"><b>88%</b><span>playoffs</span></div></header><svg class="spark" viewBox="0 0 232 92" width="232" role="img" aria-label="Bakers Trash weekly scores"><line x1="4" x2="228" y1="34.5" y2="34.5" class="avg"/><polyline points="22.0,26.9 69.0,41.5 116.0,14.5 163.0,41.1 210.0,40.3"/><circle cx="22.0" cy="26.9" r="5" class="w"><title>Week 1: 136.26, win</title></circle><text x="22.0" y="88" text-anchor="middle" class="sv w">136</text><circle cx="69.0" cy="41.5" r="5" class="w"><title>Week 2: 106.22, win</title></circle><text x="69.0" y="88" text-anchor="middle" class="sv w">106</text><circle cx="116.0" cy="14.5" r="5" class="w"><title>Week 3: 161.70, win</title></circle><text x="116.0" y="88" text-anchor="middle" class="sv w">162</text><circle cx="163.0" cy="41.1" r="5" class="l"><title>Week 4: 106.94, loss</title></circle><text x="163.0" y="88" text-anchor="middle" class="sv">107</text><circle cx="210.0" cy="40.3" r="5" class="l"><title>Week 5: 108.74, loss</title></circle><text x="210.0" y="88" text-anchor="middle" class="sv">109</text></svg><dl><dt>Best position</dt><dd>TE, 2nd</dd><dt>Worst position</dt><dd>QB, 8th</dd><dt>Top player</dt><dd>Walker 110.1</dd></dl></article>
+<article class="tc"><header><span class="sd">4</span><div class="tn"><b>OTM</b><span>Bryan &middot; 3&ndash;2 &middot; L1</span></div><div class="od"><b>79%</b><span>playoffs</span></div></header><svg class="spark" viewBox="0 0 232 92" width="232" role="img" aria-label="OTM weekly scores"><line x1="4" x2="228" y1="34.5" y2="34.5" class="avg"/><polyline points="22.0,12.1 69.0,45.4 116.0,33.8 163.0,30.9 210.0,42.9"/><circle cx="22.0" cy="12.1" r="5" class="w"><title>Week 1: 166.52, win</title></circle><text x="22.0" y="88" text-anchor="middle" class="sv w">167</text><circle cx="69.0" cy="45.4" r="5" class="l"><title>Week 2: 98.26, loss</title></circle><text x="69.0" y="88" text-anchor="middle" class="sv">98</text><circle cx="116.0" cy="33.8" r="5" class="w"><title>Week 3: 121.92, win</title></circle><text x="116.0" y="88" text-anchor="middle" class="sv w">122</text><circle cx="163.0" cy="30.9" r="5" class="w"><title>Week 4: 127.92, win</title></circle><text x="163.0" y="88" text-anchor="middle" class="sv w">128</text><circle cx="210.0" cy="42.9" r="5" class="l"><title>Week 5: 103.28, loss</title></circle><text x="210.0" y="88" text-anchor="middle" class="sv">103</text></svg><dl><dt>Best position</dt><dd>WR, 2nd</dd><dt>Worst position</dt><dd>DST, 10th</dd><dt>Top player</dt><dd>Robinson 121.2</dd></dl></article>
+<article class="tc"><header><span class="sd">5</span><div class="tn"><b>Team Soyboys</b><span>Mike &middot; 3&ndash;2 &middot; W1</span></div><div class="od"><b>88%</b><span>playoffs</span></div></header><svg class="spark" viewBox="0 0 232 92" width="232" role="img" aria-label="Team Soyboys weekly scores"><line x1="4" x2="228" y1="34.5" y2="34.5" class="avg"/><polyline points="22.0,15.4 69.0,48.1 116.0,35.3 163.0,43.4 210.0,23.3"/><circle cx="22.0" cy="15.4" r="5" class="w"><title>Week 1: 159.76, win</title></circle><text x="22.0" y="88" text-anchor="middle" class="sv w">160</text><circle cx="69.0" cy="48.1" r="5" class="l"><title>Week 2: 92.68, loss</title></circle><text x="69.0" y="88" text-anchor="middle" class="sv">93</text><circle cx="116.0" cy="35.3" r="5" class="w"><title>Week 3: 118.94, win</title></circle><text x="116.0" y="88" text-anchor="middle" class="sv w">119</text><circle cx="163.0" cy="43.4" r="5" class="l"><title>Week 4: 102.38, loss</title></circle><text x="163.0" y="88" text-anchor="middle" class="sv">102</text><circle cx="210.0" cy="23.3" r="5" class="w"><title>Week 5: 143.54, win</title></circle><text x="210.0" y="88" text-anchor="middle" class="sv w">144</text></svg><dl><dt>Best position</dt><dd>RB, 1st</dd><dt>Worst position</dt><dd>QB, 10th</dd><dt>Top player</dt><dd>Gibbs 153.7</dd></dl></article>
+<article class="tc"><header><span class="sd">6</span><div class="tn"><b>RIP Dart</b><span>Anthony &middot; 3&ndash;2 &middot; W2</span></div><div class="od"><b>74%</b><span>playoffs</span></div></header><svg class="spark" viewBox="0 0 232 92" width="232" role="img" aria-label="RIP Dart weekly scores"><line x1="4" x2="228" y1="34.5" y2="34.5" class="avg"/><polyline points="22.0,34.6 69.0,44.9 116.0,49.1 163.0,12.6 210.0,47.0"/><circle cx="22.0" cy="34.6" r="5" class="l"><title>Week 1: 120.40, loss</title></circle><text x="22.0" y="88" text-anchor="middle" class="sv">120</text><circle cx="69.0" cy="44.9" r="5" class="w"><title>Week 2: 99.20, win</title></circle><text x="69.0" y="88" text-anchor="middle" class="sv w">99</text><circle cx="116.0" cy="49.1" r="5" class="l"><title>Week 3: 90.54, loss</title></circle><text x="116.0" y="88" text-anchor="middle" class="sv">91</text><circle cx="163.0" cy="12.6" r="5" class="w"><title>Week 4: 165.46, win</title></circle><text x="163.0" y="88" text-anchor="middle" class="sv w">165</text><circle cx="210.0" cy="47.0" r="5" class="w"><title>Week 5: 94.92, win</title></circle><text x="210.0" y="88" text-anchor="middle" class="sv w">95</text></svg><dl><dt>Best position</dt><dd>TE, 1st</dd><dt>Worst position</dt><dd>QB, 9th</dd><dt>Top player</dt><dd>Taylor 97.4</dd></dl></article>
+<article class="tc"><header><span class="sd">7</span><div class="tn"><b>I Wrote Back</b><span>Ryan &middot; 2&ndash;3 &middot; L1</span></div><div class="od"><b>28%</b><span>playoffs</span></div></header><svg class="spark" viewBox="0 0 232 92" width="232" role="img" aria-label="I Wrote Back weekly scores"><line x1="4" x2="228" y1="34.5" y2="34.5" class="avg"/><polyline points="22.0,40.3 69.0,43.6 116.0,38.6 163.0,38.7 210.0,36.6"/><circle cx="22.0" cy="40.3" r="5" class="l"><title>Week 1: 108.76, loss</title></circle><text x="22.0" y="88" text-anchor="middle" class="sv">109</text><circle cx="69.0" cy="43.6" r="5" class="l"><title>Week 2: 101.98, loss</title></circle><text x="69.0" y="88" text-anchor="middle" class="sv">102</text><circle cx="116.0" cy="38.6" r="5" class="w"><title>Week 3: 112.08, win</title></circle><text x="116.0" y="88" text-anchor="middle" class="sv w">112</text><circle cx="163.0" cy="38.7" r="5" class="w"><title>Week 4: 112.02, win</title></circle><text x="163.0" y="88" text-anchor="middle" class="sv w">112</text><circle cx="210.0" cy="36.6" r="5" class="l"><title>Week 5: 116.30, loss</title></circle><text x="210.0" y="88" text-anchor="middle" class="sv">116</text></svg><dl><dt>Best position</dt><dd>QB, 4th</dd><dt>Worst position</dt><dd>RB, 10th</dd><dt>Top player</dt><dd>Williams 109.3</dd></dl></article>
+<article class="tc"><header><span class="sd">8</span><div class="tn"><b>Underground Railroaders</b><span>Matt B. &middot; 2&ndash;3 &middot; L1</span></div><div class="od"><b>29%</b><span>playoffs</span></div></header><svg class="spark" viewBox="0 0 232 92" width="232" role="img" aria-label="Underground Railroaders weekly scores"><line x1="4" x2="228" y1="34.5" y2="34.5" class="avg"/><polyline points="22.0,54.3 69.0,20.4 116.0,45.1 163.0,18.3 210.0,64.2"/><circle cx="22.0" cy="54.3" r="5" class="l"><title>Week 1: 80.02, loss</title></circle><text x="22.0" y="88" text-anchor="middle" class="sv">80</text><circle cx="69.0" cy="20.4" r="5" class="w"><title>Week 2: 149.58, win</title></circle><text x="69.0" y="88" text-anchor="middle" class="sv w">150</text><circle cx="116.0" cy="45.1" r="5" class="l"><title>Week 3: 98.76, loss</title></circle><text x="116.0" y="88" text-anchor="middle" class="sv">99</text><circle cx="163.0" cy="18.3" r="5" class="w"><title>Week 4: 153.88, win</title></circle><text x="163.0" y="88" text-anchor="middle" class="sv w">154</text><circle cx="210.0" cy="64.2" r="5" class="l"><title>Week 5: 59.64, loss</title></circle><text x="210.0" y="88" text-anchor="middle" class="sv">60</text></svg><dl><dt>Best position</dt><dd>QB, 2nd</dd><dt>Worst position</dt><dd>WR, 10th</dd><dt>Top player</dt><dd>Lamb 115.1</dd></dl></article>
+<article class="tc"><header><span class="sd">9</span><div class="tn"><b>Brick Johnson</b><span>Matt C. &middot; 1&ndash;4 &middot; W1</span></div><div class="od"><b>14%</b><span>playoffs</span></div></header><svg class="spark" viewBox="0 0 232 92" width="232" role="img" aria-label="Brick Johnson weekly scores"><line x1="4" x2="228" y1="34.5" y2="34.5" class="avg"/><polyline points="22.0,46.0 69.0,25.8 116.0,32.5 163.0,56.9 210.0,10.9"/><circle cx="22.0" cy="46.0" r="5" class="l"><title>Week 1: 96.96, loss</title></circle><text x="22.0" y="88" text-anchor="middle" class="sv">97</text><circle cx="69.0" cy="25.8" r="5" class="l"><title>Week 2: 138.50, loss</title></circle><text x="69.0" y="88" text-anchor="middle" class="sv">138</text><circle cx="116.0" cy="32.5" r="5" class="l"><title>Week 3: 124.64, loss</title></circle><text x="116.0" y="88" text-anchor="middle" class="sv">125</text><circle cx="163.0" cy="56.9" r="5" class="l"><title>Week 4: 74.48, loss</title></circle><text x="163.0" y="88" text-anchor="middle" class="sv">74</text><circle cx="210.0" cy="10.9" r="5" class="w"><title>Week 5: 169.08, win</title></circle><text x="210.0" y="88" text-anchor="middle" class="sv w">169</text></svg><dl><dt>Best position</dt><dd>WR, 1st</dd><dt>Worst position</dt><dd>TE, 10th</dd><dt>Top player</dt><dd>Adams 95.1</dd></dl></article>
+<article class="tc"><header><span class="sd">10</span><div class="tn"><b>Sunday Skaries</b><span>Marko &middot; 0&ndash;5 &middot; L5</span></div><div class="od"><b>6%</b><span>playoffs</span></div></header><svg class="spark" viewBox="0 0 232 92" width="232" role="img" aria-label="Sunday Skaries weekly scores"><line x1="4" x2="228" y1="34.5" y2="34.5" class="avg"/><polyline points="22.0,38.9 69.0,46.0 116.0,40.7 163.0,45.4 210.0,24.6"/><circle cx="22.0" cy="38.9" r="5" class="l"><title>Week 1: 111.50, loss</title></circle><text x="22.0" y="88" text-anchor="middle" class="sv">112</text><circle cx="69.0" cy="46.0" r="5" class="l"><title>Week 2: 96.98, loss</title></circle><text x="69.0" y="88" text-anchor="middle" class="sv">97</text><circle cx="116.0" cy="40.7" r="5" class="l"><title>Week 3: 107.90, loss</title></circle><text x="116.0" y="88" text-anchor="middle" class="sv">108</text><circle cx="163.0" cy="45.4" r="5" class="l"><title>Week 4: 98.18, loss</title></circle><text x="163.0" y="88" text-anchor="middle" class="sv">98</text><circle cx="210.0" cy="24.6" r="5" class="l"><title>Week 5: 140.82, loss</title></circle><text x="210.0" y="88" text-anchor="middle" class="sv">141</text></svg><dl><dt>Best position</dt><dd>QB, 5th</dd><dt>Worst position</dt><dd>RB, 9th</dd><dt>Top player</dt><dd>McCaffrey 91.3</dd></dl></article>
+</div>
+</section>
+
+<section class="card" id="luck">
+  <div class="ch"><span class="sn">10</span><h2>Luck</h2><p class="take">Brick Johnson has 1.7 fewer wins than its scores earned; RIP Dart has 1.0 more.</p><p>&ldquo;Scores earned&rdquo; is the win rate a team would have if it played every other team each week.</p></div>
+  <div class="viz"><div class="dv"><svg class="luck" viewBox="0 0 1240 424" width="1240" role="img" aria-label="Wins compared with the wins their scores earned"><text x="626" y="20" text-anchor="end" class="ph">&#9664; Fewer wins than their scores earned</text><text x="654" y="20" class="ph">More wins than their scores earned &#9654;</text><line x1="640" x2="640" y1="32" y2="420" class="axis"/><text x="0" y="63.0" class="ln b">RIP Dart</text><rect x="640" y="49.0" width="150.0" height="18" class="bp"/><text x="798.0" y="63.0" class="lv pos">+1.0</text><text x="980" y="63.0" class="ln">3 wins; scores earned 2.0</text><text x="0" y="101.0" class="ln b">Relegation Bois</text><rect x="640" y="87.0" width="100.0" height="18" class="bp"/><text x="748.0" y="101.0" class="lv pos">+0.7</text><text x="980" y="101.0" class="ln">4 wins; scores earned 3.3</text><text x="0" y="139.0" class="ln b">Team Soyboys</text><rect x="640" y="125.0" width="83.3" height="18" class="bp"/><text x="731.3" y="139.0" class="lv pos">+0.6</text><text x="980" y="139.0" class="ln">3 wins; scores earned 2.4</text><text x="0" y="177.0" class="ln b">Toolman Allen</text><rect x="640" y="163.0" width="66.7" height="18" class="bp"/><text x="714.7" y="177.0" class="lv pos">+0.4</text><text x="980" y="177.0" class="ln">4 wins; scores earned 3.6</text><text x="0" y="215.0" class="ln b">OTM</text><rect x="640" y="201.0" width="33.3" height="18" class="bp"/><text x="681.3" y="215.0" class="lv pos">+0.2</text><text x="980" y="215.0" class="ln">3 wins; scores earned 2.8</text><text x="0" y="253.0" class="ln b">Bakers Trash</text><rect x="640" y="239.0" width="16.7" height="18" class="bp"/><text x="664.7" y="253.0" class="lv pos">+0.1</text><text x="980" y="253.0" class="ln">3 wins; scores earned 2.9</text><text x="0" y="291.0" class="ln b">Underground Railroaders</text><rect x="640" y="277.0" width="16.7" height="18" class="bp"/><text x="664.7" y="291.0" class="lv pos">+0.1</text><text x="980" y="291.0" class="ln">2 wins; scores earned 1.9</text><text x="0" y="329.0" class="ln b">I Wrote Back</text><rect x="640" y="315.0" width="0.0" height="18" class="bp"/><text x="648.0" y="329.0" class="lv pos">0.0</text><text x="980" y="329.0" class="ln">2 wins; scores earned 2.0</text><text x="0" y="367.0" class="ln b">Sunday Skaries</text><rect x="423.3" y="353.0" width="216.7" height="18" class="bn"/><text x="415.3" y="367.0" text-anchor="end" class="lv">&minus;1.4</text><text x="980" y="367.0" class="ln">0 wins; scores earned 1.4</text><text x="0" y="405.0" class="ln b">Brick Johnson</text><rect x="390.0" y="391.0" width="250.0" height="18" class="bn"/><text x="382.0" y="405.0" text-anchor="end" class="lv">&minus;1.7</text><text x="980" y="405.0" class="ln">1 win; scores earned 2.7</text></svg></div><div class="mv"><svg class="luck m" viewBox="0 0 380 470" role="img" aria-label="Wins compared with the wins their scores earned"><text x="254" y="14" text-anchor="end" class="ph">&#9664; fewer wins</text><text x="270" y="14" class="ph">more wins &#9654;</text><line x1="262" x2="262" y1="22" y2="466" class="axis"/><text x="0" y="43.0" class="ln b">RIP Dart</text><text x="0" y="59.0" class="sub">3 W, earned 2.0</text><rect x="262" y="38.0" width="52.0" height="16" class="bp"/><text x="320.0" y="51.0" class="lv pos">+1.0</text><text x="0" y="87.0" class="ln b">Bois</text><text x="0" y="103.0" class="sub">4 W, earned 3.3</text><rect x="262" y="82.0" width="34.7" height="16" class="bp"/><text x="302.7" y="95.0" class="lv pos">+0.7</text><text x="0" y="131.0" class="ln b">Soyboys</text><text x="0" y="147.0" class="sub">3 W, earned 2.4</text><rect x="262" y="126.0" width="28.9" height="16" class="bp"/><text x="296.9" y="139.0" class="lv pos">+0.6</text><text x="0" y="175.0" class="ln b">Toolman</text><text x="0" y="191.0" class="sub">4 W, earned 3.6</text><rect x="262" y="170.0" width="23.1" height="16" class="bp"/><text x="291.1" y="183.0" class="lv pos">+0.4</text><text x="0" y="219.0" class="ln b">OTM</text><text x="0" y="235.0" class="sub">3 W, earned 2.8</text><rect x="262" y="214.0" width="11.6" height="16" class="bp"/><text x="279.6" y="227.0" class="lv pos">+0.2</text><text x="0" y="263.0" class="ln b">Bakers</text><text x="0" y="279.0" class="sub">3 W, earned 2.9</text><rect x="262" y="258.0" width="5.8" height="16" class="bp"/><text x="273.8" y="271.0" class="lv pos">+0.1</text><text x="0" y="307.0" class="ln b">Railroaders</text><text x="0" y="323.0" class="sub">2 W, earned 1.9</text><rect x="262" y="302.0" width="5.8" height="16" class="bp"/><text x="273.8" y="315.0" class="lv pos">+0.1</text><text x="0" y="351.0" class="ln b">Wrote Back</text><text x="0" y="367.0" class="sub">2 W, earned 2.0</text><rect x="262" y="346.0" width="0.0" height="16" class="bp"/><text x="268.0" y="359.0" class="lv pos">0.0</text><text x="0" y="395.0" class="ln b">Skaries</text><text x="0" y="411.0" class="sub">0 W, earned 1.4</text><rect x="186.9" y="390.0" width="75.1" height="16" class="bn"/><text x="180.9" y="403.0" text-anchor="end" class="lv">&minus;1.4</text><text x="0" y="439.0" class="ln b">Brick</text><text x="0" y="455.0" class="sub">1 W, earned 2.7</text><rect x="175.3" y="434.0" width="86.7" height="16" class="bn"/><text x="169.3" y="447.0" text-anchor="end" class="lv">&minus;1.7</text></svg></div></div>
+  <h3>Skill vs. luck</h3>
+  <p class="note" style="margin-top:0">Left to right is how much a team scores; bottom to top is how many more wins it has than its scores earned.</p>
+  <div class="quad"><span class="qa" style="left:41.1%"></span><span class="qb"></span><em class="q1">Fraud watch</em><em class="q2">Charmed life</em><em class="q3">Pure pain</em><em class="q4">Robbed</em><span class="ya">more wins than earned</span><span class="yb">fewer wins than earned</span><span class="xa">scores more per week &#9654;</span><div class="pt" style="left:41.3%;bottom:9.7%" title="Brick Johnson: 120.7 points per week, &minus;1.7 wins vs. expected"><i></i><b>BRI</b></div><div class="pt" style="left:67.2%;bottom:66.1%" title="Relegation Bois: 131.0 points per week, +0.7 wins vs. expected"><i></i><b>BOI</b></div><div class="pt" style="left:48.2%;bottom:76.9%" title="Team Soyboys: 123.5 points per week, +0.6 wins vs. expected"><i></i><b>SOY</b></div><div class="pt" style="left:16.9%;bottom:15.1%" title="Sunday Skaries: 111.1 points per week, &minus;1.4 wins vs. expected"><i></i><b>SKA</b></div><div class="pt" style="left:24.6%;bottom:74.2%" title="RIP Dart: 114.1 points per week, +1.0 wins vs. expected"><i></i><b>RIP</b></div><div class="pt" style="left:10.1%;bottom:61.7%" title="Underground Railroaders: 108.4 points per week, +0.1 wins vs. expected"><i></i><b>RAI</b></div><div class="pt" style="left:48.5%;bottom:64.4%" title="OTM: 123.6 points per week, +0.2 wins vs. expected"><i></i><b>OTM</b></div><div class="pt" style="left:14.8%;bottom:50.0%" title="I Wrote Back: 110.2 points per week, 0.0 wins vs. expected"><i></i><b>IWB</b></div><div class="pt" style="left:49.5%;bottom:52.7%" title="Bakers Trash: 124.0 points per week, +0.1 wins vs. expected"><i></i><b>BAK</b></div><div class="pt" style="left:89.9%;bottom:60.8%" title="Toolman Allen: 139.9 points per week, +0.4 wins vs. expected"><i></i><b>TOO</b></div></div><p class="key"> TOO Toolman &middot;  BOI Bois &middot;  BAK Bakers &middot;  OTM OTM &middot;  SOY Soyboys &middot;  RIP RIP Dart &middot;  IWB Wrote Back &middot;  RAI Railroaders &middot;  BRI Brick &middot;  SKA Skaries</p>
+</section>
+
+<section class="card" id="calls">
+  <div class="ch"><span class="sn">11</span><h2>Bench regrets</h2><p class="take">Team Soyboys left the most on the bench (161.6), and it cost 2 games. 8 of 25 games were lost with the winning points on the bench.</p><p>Grey is what each team scored; green is what its best possible lineup would have added.</p></div>
+  <div class="viz"><div class="dv"><svg class="calls" viewBox="0 0 1240 388" width="1240" role="img" aria-label="Points scored and points left on the bench"><text x="0" y="27.0" class="ln b">Team Soyboys</text><g><title>Team Soyboys: scored 617.3, left 161.6 on the bench</title><rect x="230" y="11.0" width="495.8" height="22" class="sc"/><rect x="725.8" y="11.0" width="129.8" height="22" class="bc"/><text x="240" y="27.0" class="in">617.3 scored</text></g><text x="867.6" y="27.0" class="ln"><tspan class="b g">161.6 on the bench</tspan>, cost 2 games</text><text x="0" y="65.0" class="ln b">Underground Railroaders</text><g><title>Underground Railroaders: scored 541.9, left 119.1 on the bench</title><rect x="230" y="49.0" width="435.3" height="22" class="sc"/><rect x="665.3" y="49.0" width="95.7" height="22" class="bc"/><text x="240" y="65.0" class="in">541.9 scored</text></g><text x="772.9" y="65.0" class="ln"><tspan class="b g">119.1 on the bench</tspan></text><text x="0" y="103.0" class="ln b">Bakers Trash</text><g><title>Bakers Trash: scored 619.9, left 98.2 on the bench</title><rect x="230" y="87.0" width="497.9" height="22" class="sc"/><rect x="727.9" y="87.0" width="78.8" height="22" class="bc"/><text x="240" y="103.0" class="in">619.9 scored</text></g><text x="818.7" y="103.0" class="ln"><tspan class="b g">98.2 on the bench</tspan>, cost 1 game</text><text x="0" y="141.0" class="ln b">Toolman Allen</text><g><title>Toolman Allen: scored 699.7, left 97.1 on the bench</title><rect x="230" y="125.0" width="562.0" height="22" class="sc"/><rect x="792.0" y="125.0" width="78.0" height="22" class="bc"/><text x="240" y="141.0" class="in">699.7 scored</text></g><text x="882.0" y="141.0" class="ln"><tspan class="b g">97.1 on the bench</tspan>, cost 1 game</text><text x="0" y="179.0" class="ln b">RIP Dart</text><g><title>RIP Dart: scored 570.5, left 89.8 on the bench</title><rect x="230" y="163.0" width="458.3" height="22" class="sc"/><rect x="688.3" y="163.0" width="72.1" height="22" class="bc"/><text x="240" y="179.0" class="in">570.5 scored</text></g><text x="772.4" y="179.0" class="ln"><tspan class="b g">89.8 on the bench</tspan></text><text x="0" y="217.0" class="ln b">Brick Johnson</text><g><title>Brick Johnson: scored 603.7, left 86.9 on the bench</title><rect x="230" y="201.0" width="484.9" height="22" class="sc"/><rect x="714.9" y="201.0" width="69.8" height="22" class="bc"/><text x="240" y="217.0" class="in">603.7 scored</text></g><text x="796.7" y="217.0" class="ln"><tspan class="b g">86.9 on the bench</tspan>, cost 1 game</text><text x="0" y="255.0" class="ln b">OTM</text><g><title>OTM: scored 617.9, left 76.6 on the bench</title><rect x="230" y="239.0" width="496.3" height="22" class="sc"/><rect x="726.3" y="239.0" width="61.5" height="22" class="bc"/><text x="240" y="255.0" class="in">617.9 scored</text></g><text x="799.9" y="255.0" class="ln"><tspan class="b g">76.6 on the bench</tspan></text><text x="0" y="293.0" class="ln b">I Wrote Back</text><g><title>I Wrote Back: scored 551.1, left 71.2 on the bench</title><rect x="230" y="277.0" width="442.7" height="22" class="sc"/><rect x="672.7" y="277.0" width="57.2" height="22" class="bc"/><text x="240" y="293.0" class="in">551.1 scored</text></g><text x="741.9" y="293.0" class="ln"><tspan class="b g">71.2 on the bench</tspan>, cost 1 game</text><text x="0" y="331.0" class="ln b">Relegation Bois</text><g><title>Relegation Bois: scored 654.8, left 68.0 on the bench</title><rect x="230" y="315.0" width="526.0" height="22" class="sc"/><rect x="756.0" y="315.0" width="54.6" height="22" class="bc"/><text x="240" y="331.0" class="in">654.8 scored</text></g><text x="822.6" y="331.0" class="ln"><tspan class="b g">68.0 on the bench</tspan></text><text x="0" y="369.0" class="ln b">Sunday Skaries</text><g><title>Sunday Skaries: scored 555.4, left 55.6 on the bench</title><rect x="230" y="353.0" width="446.1" height="22" class="sc"/><rect x="676.1" y="353.0" width="44.6" height="22" class="bc"/><text x="240" y="369.0" class="in">555.4 scored</text></g><text x="732.7" y="369.0" class="ln"><tspan class="b g">55.6 on the bench</tspan>, cost 2 games</text></svg></div><div class="mv"><svg class="calls m" viewBox="0 0 380 520" role="img" aria-label="Points scored and points left on the bench"><text x="0" y="16" class="ln b">Soyboys</text><text x="380" y="16" text-anchor="end" class="ln"><tspan class="b g">161.6 on bench</tspan>, cost 2</text><rect x="0" y="24" width="294.4" height="20" class="sc"/><rect x="294.4" y="24" width="77.1" height="20" class="bc"/><text x="8" y="39" class="in">617.3 scored</text><text x="0" y="68" class="ln b">Railroaders</text><text x="380" y="68" text-anchor="end" class="ln"><tspan class="b g">119.1 on bench</tspan></text><rect x="0" y="76" width="258.4" height="20" class="sc"/><rect x="258.4" y="76" width="56.8" height="20" class="bc"/><text x="8" y="91" class="in">541.9 scored</text><text x="0" y="120" class="ln b">Bakers</text><text x="380" y="120" text-anchor="end" class="ln"><tspan class="b g">98.2 on bench</tspan>, cost 1</text><rect x="0" y="128" width="295.6" height="20" class="sc"/><rect x="295.6" y="128" width="46.8" height="20" class="bc"/><text x="8" y="143" class="in">619.9 scored</text><text x="0" y="172" class="ln b">Toolman</text><text x="380" y="172" text-anchor="end" class="ln"><tspan class="b g">97.1 on bench</tspan>, cost 1</text><rect x="0" y="180" width="333.7" height="20" class="sc"/><rect x="333.7" y="180" width="46.3" height="20" class="bc"/><text x="8" y="195" class="in">699.7 scored</text><text x="0" y="224" class="ln b">RIP Dart</text><text x="380" y="224" text-anchor="end" class="ln"><tspan class="b g">89.8 on bench</tspan></text><rect x="0" y="232" width="272.1" height="20" class="sc"/><rect x="272.1" y="232" width="42.8" height="20" class="bc"/><text x="8" y="247" class="in">570.5 scored</text><text x="0" y="276" class="ln b">Brick</text><text x="380" y="276" text-anchor="end" class="ln"><tspan class="b g">86.9 on bench</tspan>, cost 1</text><rect x="0" y="284" width="287.9" height="20" class="sc"/><rect x="287.9" y="284" width="41.4" height="20" class="bc"/><text x="8" y="299" class="in">603.7 scored</text><text x="0" y="328" class="ln b">OTM</text><text x="380" y="328" text-anchor="end" class="ln"><tspan class="b g">76.6 on bench</tspan></text><rect x="0" y="336" width="294.7" height="20" class="sc"/><rect x="294.7" y="336" width="36.5" height="20" class="bc"/><text x="8" y="351" class="in">617.9 scored</text><text x="0" y="380" class="ln b">Wrote Back</text><text x="380" y="380" text-anchor="end" class="ln"><tspan class="b g">71.2 on bench</tspan>, cost 1</text><rect x="0" y="388" width="262.8" height="20" class="sc"/><rect x="262.8" y="388" width="34.0" height="20" class="bc"/><text x="8" y="403" class="in">551.1 scored</text><text x="0" y="432" class="ln b">Bois</text><text x="380" y="432" text-anchor="end" class="ln"><tspan class="b g">68.0 on bench</tspan></text><rect x="0" y="440" width="312.3" height="20" class="sc"/><rect x="312.3" y="440" width="32.4" height="20" class="bc"/><text x="8" y="455" class="in">654.8 scored</text><text x="0" y="484" class="ln b">Skaries</text><text x="380" y="484" text-anchor="end" class="ln"><tspan class="b g">55.6 on bench</tspan>, cost 2</text><rect x="0" y="492" width="264.9" height="20" class="sc"/><rect x="264.9" y="492" width="26.5" height="20" class="bc"/><text x="8" y="507" class="in">555.4 scored</text></svg></div></div>
+  <h3>Games lost with the winning points on the bench</h3>
+  <ul class="bl">
+<li><span>Wk 1</span><b>Skaries</b> lost to Bois by 4.76 with Dallas Goedert (23.7) and Malik Nabers (12.9) on the bench</li>
+<li><span>Wk 2</span><b>Soyboys</b> lost to Bois by 17.16 with Jake Ferguson (20.3) and Harrison Butker (16.0) on the bench</li>
+<li><span>Wk 2</span><b>Brick</b> lost to Railroaders by 11.08 with Patrick Mahomes (29.0) and Dalton Kincaid (22.5) on the bench</li>
+<li><span>Wk 2</span><b>Wrote Back</b> lost to Bakers by 4.24 with Dak Prescott (29.8) and Blake Corum (10.2) on the bench</li>
+<li><span>Wk 2</span><b>Skaries</b> lost to RIP Dart by 2.22 with Tony Pollard (7.5) and Brian Thomas Jr. (7.0) on the bench</li>
+<li><span>Wk 3</span><b>Toolman</b> lost to Wrote Back by 3.32 with Brock Purdy (31.3) and Matthew Golden (21.0) on the bench</li>
+<li><span>Wk 4</span><b>Soyboys</b> lost to OTM by 25.54 with Aaron Jones Sr. (16.8) and Mark Andrews (13.7) on the bench</li>
+<li><span>Wk 4</span><b>Bakers</b> lost to Toolman by 7.78 with RJ Harvey (19.3) and Devaughn Vele (17.4) on the bench</li>
+  </ul>
+</section>
+
+<section class="card" id="wire">
+  <div class="ch"><span class="sn">12</span><h2>Waiver wire</h2><p class="take">OTM has made the most adds (23); Underground Railroaders&rsquo; pickups have scored the most started points (151.0).</p><p>One square per add. Filled: started at least once. Empty: never started. 82 adds and 0 completed trades so far.</p></div>
+  <div class="split wide"><div class="wire">
+<div class="wr"><b>OTM</b><div class="uq"><i class="on" title="Juwan Johnson, added Wk 1: 14.4 points started"></i><i class="" title="Tyler Allgeier, added Wk 1: 0.0 points started"></i><i class="on" title="Caleb Douglas, added Wk 2: 3.9 points started"></i><i class="on" title="Evan McPherson, added Wk 2: 28.0 points started"></i><i class="on" title="Chiefs D/ST, added Wk 2: 8.0 points started"></i><i class="" title="Kaelon Black, added Wk 2: 0.0 points started"></i><i class="on" title="Dalton Schultz, added Wk 3: 6.0 points started"></i><i class="on" title="Tre Tucker, added Wk 3: 8.3 points started"></i><i class="" title="A.J. Brown, added Wk 3: 0.0 points started"></i><i class="on" title="Darren Waller, added Wk 4: 6.6 points started"></i><i class="on" title="Bills D/ST, added Wk 4: 1.0 points started"></i><i class="" title="Kalif Raymond, added Wk 4: 0.0 points started"></i><i class="" title="Jacory Croskey-Merritt, added Wk 4: 0.0 points started"></i><i class="" title="Alvin Kamara, added Wk 4: 0.0 points started"></i><i class="" title="Jacory Croskey-Merritt, added Wk 4: 0.0 points started"></i><i class="on" title="Sam Darnold, added Wk 4: 13.3 points started"></i><i class="on" title="Will Reichard, added Wk 5: 16.0 points started"></i><i class="on" title="T.J. Hockenson, added Wk 5: 1.7 points started"></i><i class="on" title="Jaguars D/ST, added Wk 5: 4.0 points started"></i><i class="" title="Tyler Allgeier, added Wk 5: 0.0 points started"></i><i class="" title="Mike Gesicki, added Wk 5: 0.0 points started"></i><i class="" title="Brian Robinson Jr., added Wk 5: 0.0 points started"></i><i class="on" title="Aaron Rodgers, added Wk 5: 22.0 points started"></i></div><span><b>23</b> adds &middot; 133.2 pts started</span></div>
+<div class="wr"><b>Brick</b><div class="uq"><i class="on" title="Buccaneers D/ST, added Wk 2: 4.0 points started"></i><i class="" title="Xavier Worthy, added Wk 2: 0.0 points started"></i><i class="on" title="Panthers D/ST, added Wk 3: 6.0 points started"></i><i class="on" title="Braelon Allen, added Wk 4: 8.7 points started"></i><i class="" title="Keenan Allen, added Wk 4: 0.0 points started"></i><i class="" title="Keaton Mitchell, added Wk 4: 0.0 points started"></i><i class="on" title="Tyler Loop, added Wk 4: 7.0 points started"></i><i class="on" title="Emanuel Wilson, added Wk 5: 13.2 points started"></i><i class="on" title="Jacoby Brissett, added Wk 5: 25.3 points started"></i><i class="on" title="Jets D/ST, added Wk 5: 18.0 points started"></i><i class="on" title="Jake Bates, added Wk 5: 10.0 points started"></i><i class="" title="Romeo Doubs, added Wk 5: 0.0 points started"></i></div><span><b>12</b> adds &middot; 92.2 pts started</span></div>
+<div class="wr"><b>Bois</b><div class="uq"><i class="on" title="Jaguars D/ST, added Wk 1: 15.0 points started"></i><i class="" title="Rashod Bateman, added Wk 2: 0.0 points started"></i><i class="on" title="Kyler Murray, added Wk 3: 21.9 points started"></i><i class="on" title="Chase McLaughlin, added Wk 3: 21.0 points started"></i><i class="on" title="Vikings D/ST, added Wk 3: 42.0 points started"></i><i class="" title="Adonai Mitchell, added Wk 3: 0.0 points started"></i><i class="on" title="Travis Kelce, added Wk 3: 17.4 points started"></i><i class="" title="Jordan Addison, added Wk 4: 0.0 points started"></i><i class="" title="Alvin Kamara, added Wk 5: 0.0 points started"></i><i class="" title="C.J. Stroud, added Wk 5: 0.0 points started"></i><i class="" title="Roman Wilson, added Wk 5: 0.0 points started"></i></div><span><b>11</b> adds &middot; 117.3 pts started</span></div>
+<div class="wr"><b>Railroaders</b><div class="uq"><i class="" title="Chargers D/ST, added Wk 1: 0.0 points started"></i><i class="on" title="Jalen Coker, added Wk 2: 18.4 points started"></i><i class="" title="Kenyon Sadiq, added Wk 2: 0.0 points started"></i><i class="on" title="Packers D/ST, added Wk 2: 11.0 points started"></i><i class="on" title="Cairo Santos, added Wk 2: 25.0 points started"></i><i class="on" title="Jared Goff, added Wk 2: 98.6 points started"></i><i class="" title="Rico Dowdle, added Wk 5: 0.0 points started"></i><i class="" title="Cowboys D/ST, added Wk 5: -2.0 points started"></i><i class="" title="Tyreek Hill, added Wk 5: 0.0 points started"></i><i class="" title="Dontayvion Wicks, added Wk 5: 0.0 points started"></i></div><span><b>10</b> adds &middot; 151.0 pts started</span></div>
+<div class="wr"><b>Bakers</b><div class="uq"><i class="on" title="Michael Mayer, added Wk 1: 14.5 points started"></i><i class="" title="Emmett Johnson, added Wk 2: 0.0 points started"></i><i class="" title="Devaughn Vele, added Wk 2: 0.0 points started"></i><i class="on" title="Tyler Shough, added Wk 3: 39.6 points started"></i><i class="on" title="Texans D/ST, added Wk 3: 10.0 points started"></i><i class="on" title="Chiefs D/ST, added Wk 4: 1.0 points started"></i><i class="on" title="Bengals D/ST, added Wk 5: 9.0 points started"></i><i class="on" title="Tre&#x27; Harris, added Wk 5: 3.6 points started"></i></div><span><b>8</b> adds &middot; 77.7 pts started</span></div>
+<div class="wr"><b>RIP Dart</b><div class="uq"><i class="" title="Kendrick Bourne, added Wk 2: 0.0 points started"></i><i class="on" title="Bryce Young, added Wk 3: 35.1 points started"></i><i class="on" title="Dontayvion Wicks, added Wk 3: 10.0 points started"></i><i class="" title="Ollie Gordon II, added Wk 4: 0.0 points started"></i><i class="on" title="Bears D/ST, added Wk 4: 7.0 points started"></i><i class="on" title="Kirk Cousins, added Wk 5: 13.7 points started"></i><i class="" title="Keon Coleman, added Wk 5: 0.0 points started"></i></div><span><b>7</b> adds &middot; 65.8 pts started</span></div>
+<div class="wr"><b>Wrote Back</b><div class="uq"><i class="" title="Jacory Croskey-Merritt, added Wk 2: 0.0 points started"></i><i class="" title="Denzel Boston, added Wk 3: 0.0 points started"></i><i class="on" title="Juwan Johnson, added Wk 4: 17.5 points started"></i><i class="on" title="Will Shipley, added Wk 5: 8.3 points started"></i></div><span><b>4</b> adds &middot; 25.8 pts started</span></div>
+<div class="wr"><b>Soyboys</b><div class="uq"><i class="" title="49ers D/ST, added Wk 2: 0.0 points started"></i><i class="" title="Harrison Butker, added Wk 2: 0.0 points started"></i><i class="" title="Malik Washington, added Wk 5: 0.0 points started"></i><i class="on" title="Commanders D/ST, added Wk 5: 3.0 points started"></i></div><span><b>4</b> adds &middot; 3.0 pts started</span></div>
+<div class="wr"><b>Toolman</b><div class="uq"><i class="on" title="Browns D/ST, added Wk 4: 8.0 points started"></i><i class="on" title="Texans D/ST, added Wk 5: 15.0 points started"></i><i class="on" title="Braelon Allen, added Wk 5: 18.6 points started"></i></div><span><b>3</b> adds &middot; 41.6 pts started</span></div>
+<div class="wr"><b>Skaries</b><div class="uq"></div><span><b>0</b> adds &middot; 0.0 pts started</span></div>
+</div><div><h3>Most points started from a pickup</h3><ol class="tp">
+<li><strong>98.6</strong><div><b>Jared Goff</b><span>Underground Railroaders, added Week 2</span></div></li>
+<li><strong>42.0</strong><div><b>Vikings D/ST</b><span>Relegation Bois, added Week 3</span></div></li>
+<li><strong>39.6</strong><div><b>Tyler Shough</b><span>Bakers Trash, added Week 3</span></div></li>
+<li><strong>35.1</strong><div><b>Bryce Young</b><span>RIP Dart, added Week 3</span></div></li>
+<li><strong>28.0</strong><div><b>Evan McPherson</b><span>OTM, added Week 2</span></div></li>
+</ol></div></div>
+</section>
+
+<section class="card" id="next">
+  <div class="ch"><span class="sn">13</span><h2>Week 6 preview</h2><p class="take">Closest game: Brick Johnson vs. I Wrote Back (51%&ndash;49%). Biggest favorite: Toolman Allen over Team Soyboys (66%).</p><p>Win chance from ESPN&rsquo;s projection for each team&rsquo;s best lineup. Up first, the tale of the tape for the closest game.</p></div>
+  <div class="tape"><div class="tape-h"><div><b><span class="fn">Brick Johnson</span><span class="ab">Brick</span></b><span>Matt C.</span></div><strong>51%</strong><em>vs.</em><strong>49%</strong><div class="r"><b><span class="fn">I Wrote Back</span><span class="ab">Wrote Back</span></b><span>Ryan</span></div></div><table><tr><td class="h">1&ndash;4</td><th>Record</th><td class="a up">2&ndash;3</td></tr>
+<tr><td class="h up">120.7</td><th>Points per week</th><td class="a">110.2</td></tr>
+<tr><td class="h up">24&ndash;21</td><th>All-play</th><td class="a">18&ndash;27</td></tr>
+<tr><td class="h">14%</td><th>Playoff odds</th><td class="a up">28%</td></tr>
+<tr><td class="h">115.0</td><th>Projected Week 6</th><td class="a up">117.8</td></tr>
+<tr><td class="h">Adams 95.1</td><th>Top player</th><td class="a">Williams 109.3</td></tr>
+<tr><td class="h up">7 wins</td><th>All-time series</th><td class="a">6 wins</td></tr></table><p>Last met 2025 Week 6, Wrote Back won 116.5&ndash;93.6.</p></div>
+  <h3>The rest of the slate</h3>
+  <div class="tugs">
+<div class="tug"><div class="tl"><b>Bakers Trash</b><span>3&ndash;2 &middot; projected 121.4</span></div><div class="tb"><i class="f" style="width:55%">55%</i><i class="d" style="width:45%">45%</i></div><div class="tl r"><b>Sunday Skaries</b><span>0&ndash;5 &middot; projected 119.5</span></div><p><em class="mtag"> Coin flip</em> Skaries leads the series 6&ndash;2; last met 2025 Week 6, Skaries won 128.4&ndash;83.1</p></div>
+<div class="tug"><div class="tl"><b>RIP Dart</b><span>3&ndash;2 &middot; projected 124.8</span></div><div class="tb"><i class="f" style="width:62%">62%</i><i class="d" style="width:38%">38%</i></div><div class="tl r"><b>Relegation Bois</b><span>4&ndash;1 &middot; projected 100.0</span></div><p><em class="mtag"> Lean</em> Series tied 6&ndash;6; last met 2025 Week 6, Bois won 150.5&ndash;142.8</p></div>
+<div class="tug"><div class="tl"><b>Team Soyboys</b><span>3&ndash;2 &middot; projected 123.7</span></div><div class="tb"><i class="d" style="width:34%">34%</i><i class="f" style="width:66%">66%</i></div><div class="tl r"><b>Toolman Allen</b><span>4&ndash;1 &middot; projected 139.9</span></div><p><em class="mtag"> Lean</em> Toolman leads the series 4&ndash;1; last met 2025 Week 6, Toolman won 111.2&ndash;96.0</p></div>
+<div class="tug"><div class="tl"><b>OTM</b><span>3&ndash;2 &middot; projected 108.0</span></div><div class="tb"><i class="d" style="width:47%">47%</i><i class="f" style="width:53%">53%</i></div><div class="tl r"><b>Underground Railroaders</b><span>2&ndash;3 &middot; projected 119.0</span></div><p><em class="mtag"> Coin flip</em> Railroaders leads the series 9&ndash;6; last met 2025 Week 6, Railroaders won 140.7&ndash;100.9</p></div>
+</div>
+</section>
+
+<section class="card" id="h2h">
+  <div class="ch"><span class="sn">14</span><h2>Rivalries</h2><p>Row team&rsquo;s record against each column team, 2018&ndash;2026 including playoffs. Green means the row team leads; hover for this season&rsquo;s score.</p></div>
+  <div class="sups three">
+<div class="sup"><span>Most lopsided</span><b>9&ndash;1</b><strong>Toolman Allen</strong><p>Toolman Allen vs. Sunday Skaries</p></div>
+<div class="sup"><span>Most played</span><b>13&ndash;10</b><strong>Bakers Trash</strong><p>Bakers Trash vs. Relegation Bois</p></div>
+<div class="sup"><span>Dead even</span><b>8&ndash;8</b><strong>Tied</strong><p>Brick Johnson vs. Relegation Bois</p></div>
+</div>
+  <div class="tw"><table class="data h2h">
+<tr><th class="l"></th><th>TOO</th><th>BOI</th><th>BAK</th><th>OTM</th><th>SOY</th><th>RIP</th><th>IWB</th><th>RAI</th><th>BRI</th><th>SKA</th><th>All</th></tr>
+<tr><th class="l"><span class="fn">Toolman Allen</span><span class="ab">TOO</span></th><td class="x"></td><td class="lead" title="Toolman Allen vs Relegation Bois: 6&ndash;1">6&ndash;1</td><td class="lead" title="Toolman Allen vs Bakers Trash: 8&ndash;3; Week 4 2026: 114.72&ndash;106.94">8&ndash;3</td><td class="lead" title="Toolman Allen vs OTM: 11&ndash;2; Week 2 2026: 160.32&ndash;98.26">11&ndash;2</td><td class="lead" title="Toolman Allen vs Team Soyboys: 4&ndash;1">4&ndash;1</td><td class="lead" title="Toolman Allen vs RIP Dart: 5&ndash;4; Week 1 2026: 153.46&ndash;120.40">5&ndash;4</td><td class="lead" title="Toolman Allen vs I Wrote Back: 8&ndash;5; Week 3 2026: 108.76&ndash;112.08">8&ndash;5</td><td class="lead" title="Toolman Allen vs Underground Railroaders: 5&ndash;3">5&ndash;3</td><td class="" title="Toolman Allen vs Brick Johnson: 5&ndash;5">5&ndash;5</td><td class="lead" title="Toolman Allen vs Sunday Skaries: 9&ndash;1; Week 5 2026: 162.40&ndash;140.82">9&ndash;1</td><td class="b">54&ndash;21</td></tr>
+<tr><th class="l"><span class="fn">Relegation Bois</span><span class="ab">BOI</span></th><td class="" title="Relegation Bois vs Toolman Allen: 1&ndash;6">1&ndash;6</td><td class="x"></td><td class="" title="Relegation Bois vs Bakers Trash: 10&ndash;13; Week 5 2026: 136.96&ndash;108.74">10&ndash;13</td><td class="lead" title="Relegation Bois vs OTM: 10&ndash;3">10&ndash;3</td><td class="" title="Relegation Bois vs Team Soyboys: 7&ndash;10; Week 2 2026: 109.84&ndash;92.68">7&ndash;10</td><td class="" title="Relegation Bois vs RIP Dart: 6&ndash;6">6&ndash;6</td><td class="lead" title="Relegation Bois vs I Wrote Back: 7&ndash;4">7&ndash;4</td><td class="" title="Relegation Bois vs Underground Railroaders: 7&ndash;12; Week 4 2026: 132.28&ndash;153.88">7&ndash;12</td><td class="" title="Relegation Bois vs Brick Johnson: 8&ndash;8; Week 3 2026: 159.48&ndash;124.64">8&ndash;8</td><td class="lead" title="Relegation Bois vs Sunday Skaries: 8&ndash;7; Week 1 2026: 116.26&ndash;111.50">8&ndash;7</td><td class="b">57&ndash;57</td></tr>
+<tr><th class="l"><span class="fn">Bakers Trash</span><span class="ab">BAK</span></th><td class="" title="Bakers Trash vs Toolman Allen: 3&ndash;8; Week 4 2026: 106.94&ndash;114.72">3&ndash;8</td><td class="lead" title="Bakers Trash vs Relegation Bois: 13&ndash;10; Week 5 2026: 108.74&ndash;136.96">13&ndash;10</td><td class="x"></td><td class="" title="Bakers Trash vs OTM: 4&ndash;8">4&ndash;8</td><td class="" title="Bakers Trash vs Team Soyboys: 6&ndash;7">6&ndash;7</td><td class="" title="Bakers Trash vs RIP Dart: 5&ndash;9">5&ndash;9</td><td class="lead" title="Bakers Trash vs I Wrote Back: 10&ndash;5; Week 2 2026: 106.22&ndash;101.98">10&ndash;5</td><td class="lead" title="Bakers Trash vs Underground Railroaders: 12&ndash;5; Week 3 2026: 161.70&ndash;98.76">12&ndash;5</td><td class="" title="Bakers Trash vs Brick Johnson: 9&ndash;10; Week 1 2026: 136.26&ndash;96.96">9&ndash;10</td><td class="" title="Bakers Trash vs Sunday Skaries: 2&ndash;6">2&ndash;6</td><td class="b">53&ndash;61</td></tr>
+<tr><th class="l"><span class="fn">OTM</span><span class="ab">OTM</span></th><td class="" title="OTM vs Toolman Allen: 2&ndash;11; Week 2 2026: 98.26&ndash;160.32">2&ndash;11</td><td class="" title="OTM vs Relegation Bois: 3&ndash;10">3&ndash;10</td><td class="lead" title="OTM vs Bakers Trash: 8&ndash;4">8&ndash;4</td><td class="x"></td><td class="lead" title="OTM vs Team Soyboys: 10&ndash;6; Week 4 2026: 127.92&ndash;102.38">10&ndash;6</td><td class="lead" title="OTM vs RIP Dart: 10&ndash;5">10&ndash;5</td><td class="lead" title="OTM vs I Wrote Back: 8&ndash;6; Week 1 2026: 166.52&ndash;108.76">8&ndash;6</td><td class="" title="OTM vs Underground Railroaders: 6&ndash;9">6&ndash;9</td><td class="" title="OTM vs Brick Johnson: 6&ndash;9; Week 5 2026: 103.28&ndash;169.08">6&ndash;9</td><td class="" title="OTM vs Sunday Skaries: 8&ndash;10; Week 3 2026: 121.92&ndash;107.90">8&ndash;10</td><td class="b">53&ndash;61</td></tr>
+<tr><th class="l"><span class="fn">Team Soyboys</span><span class="ab">SOY</span></th><td class="" title="Team Soyboys vs Toolman Allen: 1&ndash;4">1&ndash;4</td><td class="lead" title="Team Soyboys vs Relegation Bois: 10&ndash;7; Week 2 2026: 92.68&ndash;109.84">10&ndash;7</td><td class="lead" title="Team Soyboys vs Bakers Trash: 7&ndash;6">7&ndash;6</td><td class="" title="Team Soyboys vs OTM: 6&ndash;10; Week 4 2026: 102.38&ndash;127.92">6&ndash;10</td><td class="x"></td><td class="" title="Team Soyboys vs RIP Dart: 7&ndash;10; Week 3 2026: 118.94&ndash;90.54">7&ndash;10</td><td class="lead" title="Team Soyboys vs I Wrote Back: 9&ndash;8; Week 5 2026: 143.54&ndash;116.30">9&ndash;8</td><td class="lead" title="Team Soyboys vs Underground Railroaders: 11&ndash;5; Week 1 2026: 159.76&ndash;80.02">11&ndash;5</td><td class="" title="Team Soyboys vs Brick Johnson: 2&ndash;12">2&ndash;12</td><td class="lead" title="Team Soyboys vs Sunday Skaries: 8&ndash;7">8&ndash;7</td><td class="b">57&ndash;57</td></tr>
+<tr><th class="l"><span class="fn">RIP Dart</span><span class="ab">RIP</span></th><td class="" title="RIP Dart vs Toolman Allen: 4&ndash;5; Week 1 2026: 120.40&ndash;153.46">4&ndash;5</td><td class="" title="RIP Dart vs Relegation Bois: 6&ndash;6">6&ndash;6</td><td class="lead" title="RIP Dart vs Bakers Trash: 9&ndash;5">9&ndash;5</td><td class="" title="RIP Dart vs OTM: 5&ndash;10">5&ndash;10</td><td class="lead" title="RIP Dart vs Team Soyboys: 10&ndash;7; Week 3 2026: 90.54&ndash;118.94">10&ndash;7</td><td class="x"></td><td class="" title="RIP Dart vs I Wrote Back: 4&ndash;9">4&ndash;9</td><td class="" title="RIP Dart vs Underground Railroaders: 7&ndash;7; Week 5 2026: 94.92&ndash;59.64">7&ndash;7</td><td class="" title="RIP Dart vs Brick Johnson: 8&ndash;9; Week 4 2026: 165.46&ndash;74.48">8&ndash;9</td><td class="" title="RIP Dart vs Sunday Skaries: 7&ndash;13; Week 2 2026: 99.20&ndash;96.98">7&ndash;13</td><td class="b">51&ndash;63</td></tr>
+<tr><th class="l"><span class="fn">I Wrote Back</span><span class="ab">IWB</span></th><td class="" title="I Wrote Back vs Toolman Allen: 5&ndash;8; Week 3 2026: 112.08&ndash;108.76">5&ndash;8</td><td class="" title="I Wrote Back vs Relegation Bois: 4&ndash;7">4&ndash;7</td><td class="" title="I Wrote Back vs Bakers Trash: 5&ndash;10; Week 2 2026: 101.98&ndash;106.22">5&ndash;10</td><td class="" title="I Wrote Back vs OTM: 6&ndash;8; Week 1 2026: 108.76&ndash;166.52">6&ndash;8</td><td class="" title="I Wrote Back vs Team Soyboys: 8&ndash;9; Week 5 2026: 116.30&ndash;143.54">8&ndash;9</td><td class="lead" title="I Wrote Back vs RIP Dart: 9&ndash;4">9&ndash;4</td><td class="x"></td><td class="" title="I Wrote Back vs Underground Railroaders: 4&ndash;11">4&ndash;11</td><td class="" title="I Wrote Back vs Brick Johnson: 6&ndash;7">6&ndash;7</td><td class="lead" title="I Wrote Back vs Sunday Skaries: 13&ndash;9; Week 4 2026: 112.02&ndash;98.18">13&ndash;9</td><td class="b">50&ndash;64</td></tr>
+<tr><th class="l"><span class="fn">Underground Railroaders</span><span class="ab">RAI</span></th><td class="" title="Underground Railroaders vs Toolman Allen: 3&ndash;5">3&ndash;5</td><td class="lead" title="Underground Railroaders vs Relegation Bois: 12&ndash;7; Week 4 2026: 153.88&ndash;132.28">12&ndash;7</td><td class="" title="Underground Railroaders vs Bakers Trash: 5&ndash;12; Week 3 2026: 98.76&ndash;161.70">5&ndash;12</td><td class="lead" title="Underground Railroaders vs OTM: 9&ndash;6">9&ndash;6</td><td class="" title="Underground Railroaders vs Team Soyboys: 5&ndash;11; Week 1 2026: 80.02&ndash;159.76">5&ndash;11</td><td class="" title="Underground Railroaders vs RIP Dart: 7&ndash;7; Week 5 2026: 59.64&ndash;94.92">7&ndash;7</td><td class="lead" title="Underground Railroaders vs I Wrote Back: 11&ndash;4">11&ndash;4</td><td class="x"></td><td class="" title="Underground Railroaders vs Brick Johnson: 8&ndash;9; Week 2 2026: 149.58&ndash;138.50">8&ndash;9</td><td class="lead" title="Underground Railroaders vs Sunday Skaries: 6&ndash;3">6&ndash;3</td><td class="b">61&ndash;53</td></tr>
+<tr><th class="l"><span class="fn">Brick Johnson</span><span class="ab">BRI</span></th><td class="" title="Brick Johnson vs Toolman Allen: 5&ndash;5">5&ndash;5</td><td class="" title="Brick Johnson vs Relegation Bois: 8&ndash;8; Week 3 2026: 124.64&ndash;159.48">8&ndash;8</td><td class="lead" title="Brick Johnson vs Bakers Trash: 10&ndash;9; Week 1 2026: 96.96&ndash;136.26">10&ndash;9</td><td class="lead" title="Brick Johnson vs OTM: 9&ndash;6; Week 5 2026: 169.08&ndash;103.28">9&ndash;6</td><td class="lead" title="Brick Johnson vs Team Soyboys: 12&ndash;2">12&ndash;2</td><td class="lead" title="Brick Johnson vs RIP Dart: 9&ndash;8; Week 4 2026: 74.48&ndash;165.46">9&ndash;8</td><td class="lead" title="Brick Johnson vs I Wrote Back: 7&ndash;6">7&ndash;6</td><td class="lead" title="Brick Johnson vs Underground Railroaders: 9&ndash;8; Week 2 2026: 138.50&ndash;149.58">9&ndash;8</td><td class="x"></td><td class="" title="Brick Johnson vs Sunday Skaries: 6&ndash;6">6&ndash;6</td><td class="b">64&ndash;50</td></tr>
+<tr><th class="l"><span class="fn">Sunday Skaries</span><span class="ab">SKA</span></th><td class="" title="Sunday Skaries vs Toolman Allen: 1&ndash;9; Week 5 2026: 140.82&ndash;162.40">1&ndash;9</td><td class="" title="Sunday Skaries vs Relegation Bois: 7&ndash;8; Week 1 2026: 111.50&ndash;116.26">7&ndash;8</td><td class="lead" title="Sunday Skaries vs Bakers Trash: 6&ndash;2">6&ndash;2</td><td class="lead" title="Sunday Skaries vs OTM: 10&ndash;8; Week 3 2026: 107.90&ndash;121.92">10&ndash;8</td><td class="" title="Sunday Skaries vs Team Soyboys: 7&ndash;8">7&ndash;8</td><td class="lead" title="Sunday Skaries vs RIP Dart: 13&ndash;7; Week 2 2026: 96.98&ndash;99.20">13&ndash;7</td><td class="" title="Sunday Skaries vs I Wrote Back: 9&ndash;13; Week 4 2026: 98.18&ndash;112.02">9&ndash;13</td><td class="" title="Sunday Skaries vs Underground Railroaders: 3&ndash;6">3&ndash;6</td><td class="" title="Sunday Skaries vs Brick Johnson: 6&ndash;6">6&ndash;6</td><td class="x"></td><td class="b">54&ndash;60</td></tr>
+</table></div>
+</section>
+
+</main>
+<footer><div class="wrap">FF2018 &middot; Week 5 recap &middot; ESPN league data through Week 5; all-time records from league history since 2018.</div></footer>
+</body>
+</html>
