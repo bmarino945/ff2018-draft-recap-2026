@@ -1110,6 +1110,69 @@ ul.tn{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:4px;font-size:1
   table.data.h2h td{font-size:10px}
 }
 
+/* ---- phone: waivers and matchups stack compact, no swipe rows ---- */
+@media (max-width:640px){
+  #moves .mvcs,#next .mus{display:block;overflow:visible;margin:0;padding:0}
+  #moves .mvc,#next .mu{flex:none;padding:7px 0 6px}
+  #moves .mvc header{margin:0 0 2px;display:flex;align-items:baseline;gap:6px}
+  #moves .mvc header b{font-size:14px;display:inline}
+  #moves .mvc header span{font-size:12px;margin:0}
+  #moves .mvc ul{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:10px}
+  #moves .mvc li{grid-template-columns:12px minmax(0,1fr) auto;gap:4px;padding:1px 0;font-size:12.5px}
+  #moves .mvc li i{font-size:13px}
+  #moves .mvc li b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  #moves .mvc li.drop em,#moves .mvc li.drop span{display:none}
+  #moves .mvc li.add em{display:none}
+  #moves .mvc li.drop{grid-template-columns:12px minmax(0,1fr)}
+  #next .mut{gap:8px}
+  #next .mut b{display:inline;font-size:13px}
+  #next .mut span{display:inline;font-size:12px;margin:0 0 0 4px}
+  #next .mup{margin-top:3px}
+  #next .mup em{display:none}
+  #next .mup strong,#next .mu.feat .mup strong{font-size:17px}
+  #next .mup{grid-template-columns:1fr auto}
+  #next .mub{height:5px;margin-top:4px}
+  #next .muw{margin-top:2px;font-size:11.5px}
+  #next .mu p{display:none}
+}
+
+/* ---- phone polish: one scale for headings, even rows, aligned columns ---- */
+@media (max-width:640px){
+  .chap{padding:14px 0;margin-top:14px}
+  .chap h2,.cover h2,.ch h2{font-size:22px;line-height:1.1}
+  .chap .wrap{padding-top:0;padding-bottom:0}
+  .ch{margin-bottom:8px}
+  .ch p.take{font-size:14.5px;line-height:1.35;margin-top:4px;color:var(--ink2)}
+  main .card.wrap{padding:16px 14px 14px;margin-top:10px}
+  .cover .wrap{padding-top:18px;padding-bottom:6px}
+  /* awards: two across */
+  .aws{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 18px}
+  .aws .aw{display:grid;grid-template-columns:minmax(0,1fr);gap:1px;padding:9px 0}
+  .aws .aw>*{grid-column:1!important;grid-row:auto!important}
+  .aws .aw>span{font-size:11.5px}
+  .aws .aw>strong{font-size:20px}
+  .aws .aw>b{display:none}
+  .aws .aw>div{font-size:13.5px;font-weight:800}
+  /* standings: one line per team, columns aligned */
+  .st td.pw i{display:none}
+  .st td.pw b{width:auto}
+  table.data.st th:not(.l),table.data.st td:not(.team){text-align:right}
+  table.data.st td.seed,table.data.st th:first-child{text-align:left}
+  /* buy low: verdict right-aligned, same row height */
+  .bl2 .chip{text-align:right;white-space:nowrap;justify-self:end}
+  /* luck map: corner labels wrap and stay clear of the bottom dots */
+  .quad>em{font-size:10.5px;line-height:1.15;max-width:33%}
+  .quad .q3,.quad .q4{bottom:6px}
+  /* compare: label column narrower, headers one line */
+  .cr{grid-template-columns:minmax(0,1fr) 88px minmax(0,1fr);gap:6px;padding:8px 10px;font-size:14px}
+  .cr i{font-size:10px;letter-spacing:0;line-height:1.15}
+  .cr.hd b{font-size:13px;line-height:1.15}
+}
+@media (max-width:640px){
+  .ch+.tw,.ch+.viz,.ch+.hmw{margin-top:10px}
+  table.data.tr td,table.data.tr th{padding-top:7px;padding-bottom:7px}
+}
+
 [data-t="1"],[data-pick="1"]{--tc:#1F4E9E}[data-t="10"],[data-pick="10"]{--tc:#E8750A}[data-t="2"],[data-pick="2"]{--tc:#12A39A}[data-t="3"],[data-pick="3"]{--tc:#7B3FBE}[data-t="4"],[data-pick="4"]{--tc:#D6336C}[data-t="5"],[data-pick="5"]{--tc:#C99700}[data-t="6"],[data-pick="6"]{--tc:#2E9BE0}[data-t="7"],[data-pick="7"]{--tc:#8A5A3C}[data-t="8"],[data-pick="8"]{--tc:#6F9A1E}[data-t="9"],[data-pick="9"]{--tc:#2F3640}
 </style>
 </head>
