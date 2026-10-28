@@ -1194,6 +1194,19 @@ ul.tn{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:4px;font-size:1
 .sbl .ls{text-align:left;color:var(--ink2);font-weight:700}
 .sbl li em{grid-column:1/-1;font-style:normal;font-size:12px;font-weight:600;color:var(--ink2);margin-top:2px}
 
+/* ---- find your team: a quiet list, not pills ---- */
+.me{padding:22px 0 0}
+.me h2{font-size:20px}
+.me>.wrap>p{display:none}
+.me h2{margin-bottom:10px}
+.me .chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:0 20px;border-top:1px solid var(--line)}
+.me .chips button{width:100%;justify-content:flex-start;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:9px 2px;font-size:14px;font-weight:700;color:var(--ink)}
+.me .chips button::before{width:8px;height:8px;flex:none}
+.me .chips button:hover{background:none;color:var(--green)}
+.me .chips button.on{background:none;color:var(--green);font-weight:800}
+.me .chips button.on::before{box-shadow:0 0 0 3px var(--g3)}
+.me .chips button.on::before{background:var(--tc)}
+
 [data-t="1"],[data-pick="1"]{--tc:#1F4E9E}[data-t="10"],[data-pick="10"]{--tc:#E8750A}[data-t="2"],[data-pick="2"]{--tc:#12A39A}[data-t="3"],[data-pick="3"]{--tc:#7B3FBE}[data-t="4"],[data-pick="4"]{--tc:#D6336C}[data-t="5"],[data-pick="5"]{--tc:#C99700}[data-t="6"],[data-pick="6"]{--tc:#2E9BE0}[data-t="7"],[data-pick="7"]{--tc:#8A5A3C}[data-t="8"],[data-pick="8"]{--tc:#6F9A1E}[data-t="9"],[data-pick="9"]{--tc:#2F3640}
 </style>
 </head>
